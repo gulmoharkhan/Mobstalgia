@@ -1,0 +1,40 @@
+import { escapeHtml, formatCurrency } from '../../utils.js';
+
+export function renderFramesList({ frames }) {
+  const rows = frames
+    .map(
+      (f) => `
+    <tr>
+      <td><img class="admin-thumb" src="${f.images?.[0]?.url || '/img/placeholder.svg'}" alt=""></td>
+      <td>${escapeHtml(f.title)}<div style="color:#8a8a8a;font-size:0.78rem;">${escapeHtml(f.brand)} · ${escapeHtml(f.phone_model)}</div></td>
+      <td style="text-transform:capitalize;">${f.type}</td>
+      <td>${formatCurrency(f.price)}</td>
+      <td>${f.stock}</td>
+      <td><span class="status-pill status-pill--${f.status === 'available' ? 'confirmed' : f.status === 'sold' ? 'cancelled' : 'pending'}">${f.status}</span></td>
+      <td>
+        <div class="admin-row-actions">
+          <a class="link-btn" href="/admin/frames/${f.id}/edit">Edit</a>
+          <form method="POST" action="/admin/frames/${f.id}/delete" onsubmit="return confirm('Delete &quot;${escapeHtml(f.title).replace(/"/g, '&quot;')}&quot;? This cannot be undone.');">
+            <button type="submit" class="link-btn" style="color:#9a2a20;">Delete</button>
+          </form>
+        </div>
+      </td>
+    </tr>`
+    )
+    .join('');
+
+  return `
+  <div class="admin-page-head">
+    <div><h1>Frames</h1><p>Manage the pieces listed in your shop</p></div>
+    <a href="/admin/frames/new" class="btn">+ Add New Frame</a>
+  </div>
+  ${
+    frames.length
+      ? `<div class="admin-table-wrap"><table class="admin-table">
+      <thead><tr><th></th><th>Piece</th><th>Type</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`
+      : `<div class="admin-empty">No frames yet. <a href="/admin/frames/new">Add your first piece</a>.</div>`
+  }
+  `;
+}

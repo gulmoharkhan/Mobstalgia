@@ -1,0 +1,14 @@
+{
+  "name": "teardown-frames",
+  "version": "1.0.0",
+  "description": "Handcrafted phone-teardown art gallery, shop, and admin portal",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node --experimental-sqlite server.js",
+    "seed": "node --experimental-sqlite src/seed.js"
+  },
+  "dependencies": {}
+}
