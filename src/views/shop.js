@@ -1,10 +1,11 @@
-import { escapeHtml, formatCurrency } from '../utils.js';
+import { escapeHtml, formatCurrency, splitTitle } from '../utils.js';
 
-const KIT_LABEL = { novice: 'Casual Kit', expert: 'Meticulous Kit' };
+const KIT_LABEL = { novice: 'Casual Kit', expert: 'Expert Kit' };
 
 function productCard(frame, index = 0) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
   const delay = Math.min(index * 45, 360);
+  const { name, tagline } = splitTitle(frame.title);
   return `
   <a class="product-card" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
     <div class="product-card-media">
@@ -13,8 +14,8 @@ function productCard(frame, index = 0) {
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
       <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
-    <div class="product-card-title">${escapeHtml(frame.title)}</div>
-    <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
+    <div class="product-card-title">${escapeHtml(name)}</div>
+    ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
     <div class="product-card-price">${formatCurrency(frame.price)}</div>
   </a>`;
 }
@@ -60,7 +61,7 @@ export function renderShop({ frames, brands, query }) {
           <select id="type" name="type">
             ${opt('', 'All styles', query.type)}
             ${opt('novice', 'Casual Kit', query.type)}
-            ${opt('expert', 'Meticulous Kit', query.type)}
+            ${opt('expert', 'Expert Kit', query.type)}
           </select>
         </div>
         <div class="filter-field">

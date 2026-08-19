@@ -27,7 +27,7 @@ ${extraHead}
       <img src="/img/logo.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark" width="34" height="34">
       <span class="brand-text">${escapeHtml(SITE_NAME)}</span>
     </a>
-    <nav class="main-nav">
+    <nav class="main-nav" id="main-nav">
       ${navItem('/', 'Home', 'home')}
       ${navItem('/shop', 'Shop', 'shop')}
       ${navItem('/about', 'About', 'about')}
@@ -43,8 +43,12 @@ ${extraHead}
         <span>Cart</span>
         <span class="cart-count" id="cart-count" hidden>0</span>
       </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </div>
+  <div class="nav-backdrop" id="nav-backdrop" hidden></div>
 </header>
 ${flash ? `<div class="flash flash--${flash.type || 'info'}"><div class="container">${escapeHtml(flash.message)}</div></div>` : ''}
 <main class="site-main">

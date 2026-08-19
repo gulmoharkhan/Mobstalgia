@@ -11,7 +11,7 @@ export function renderAbout() {
 
     <h2>How the frame kit works</h2>
     <div class="process-grid">
-      <div class="process-step"><span>01</span><h3>Pick your style</h3><p>Casual to open up the essentials, or Meticulous if you want to chase down every hidden component.</p></div>
+      <div class="process-step"><span>01</span><h3>Pick your style</h3><p>Casual to open the phone and see every component, or Expert if you want to open those components too.</p></div>
       <div class="process-step"><span>02</span><h3>We ship the frame</h3><p>Your kit arrives with the frame, mounting hardware, and a simple guide for taking your device apart safely.</p></div>
       <div class="process-step"><span>03</span><h3>You dismantle it</h3><p>Screw by screw, layer by layer — your phone, in your hands. This is where you get to admire the work of the engineers who actually built it.</p></div>
       <div class="process-step"><span>04</span><h3>You arrange &amp; mount</h3><p>Lay the components into the frame however you like — there's no wrong way to tell your phone's story.</p></div>
@@ -21,9 +21,9 @@ export function renderAbout() {
     <h2>Why frame it yourself?</h2>
     <p>We could tear phones apart for you and ship you a finished piece — plenty of places do exactly that. But taking it apart yourself is the whole point. It's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made, not something you bought pre-made. Next time you spot an old phone lying around, you'll probably see it differently, too.</p>
 
-    <h2>Casual Kit vs. Meticulous Kit</h2>
-    <p><strong>Casual Kit</strong> is your first teardown — case off, main board, battery, and display exposed. A clean, satisfying build with no specialist tools required.</p>
-    <p><strong>Meticulous Kit</strong> is for the ones who don't stop at "good enough." It pushes past the main board into camera modules, vibration motors, Taptic Engines, and the tiny flex cables most owners never even know are there. Bring a set of precision screwdrivers and some patience.</p>
+    <h2>Casual Kit vs. Expert Kit</h2>
+    <p><strong>Casual Kit</strong> is your first teardown — open the phone and see every component laid out whole: main board, battery, display, camera, speaker. A clean, satisfying build with no specialist tools required.</p>
+    <p><strong>Expert Kit</strong> is for the ones who don't stop at "that's a camera module." It opens the components themselves — the camera taken apart into its lens assembly, autofocus system, and image sensor; the Taptic Engine opened to see what's actually inside it. Bring a set of precision screwdrivers and some patience.</p>
 
     <h2>Need inspiration first?</h2>
     <p>Not sure where to start? Browse a few devices we've framed ourselves for inspiration — Nokia bricks, early iPhones, an iPod Classic and more — then order the kit that matches your phone via the <a href="/shop">shop</a>.</p>

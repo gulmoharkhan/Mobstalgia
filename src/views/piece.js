@@ -1,9 +1,9 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-const KIT_LABEL = { novice: 'Casual Kit', expert: 'Meticulous Kit' };
+const KIT_LABEL = { novice: 'Casual Kit', expert: 'Expert Kit' };
 const TIER_COPY = {
-  novice: "Casual build — a clean first teardown. Case off, main board, battery, and display exposed. No specialist tools required.",
-  expert: "Meticulous build — for people who don't stop until every piece has its place. It goes past the main board into camera modules, sensors, and flex cables most owners never see. Bring patience and a small precision driver set.",
+  novice: "Casual build — a clean first teardown. Case off, main board, battery, and display, every component exposed and intact. No specialist tools required.",
+  expert: "Expert build — for people who don't stop at the component level. This one goes inside the parts themselves: open the camera to find its lens assembly and image sensor, open the Taptic Engine to see what makes it tick. Bring patience and a small precision driver set.",
 };
 
 export function renderPiece({ frame, related }) {
@@ -50,10 +50,14 @@ export function renderPiece({ frame, related }) {
   if (isAvailable) {
     ctaHtml = `
       <div class="qty-row">
-        <label for="qty-input">Qty</label>
-        <input type="number" id="qty-input" class="qty-input" min="1" max="${frame.stock}" value="1">
+        <span class="qty-row-label" id="qty-label">Qty</span>
+        <div class="qty-stepper">
+          <button type="button" class="qty-step-btn" id="qty-dec" aria-label="Decrease quantity">−</button>
+          <input type="number" id="qty-input" class="qty-input" aria-labelledby="qty-label" min="1" max="${frame.stock}" value="1" inputmode="numeric">
+          <button type="button" class="qty-step-btn" id="qty-inc" aria-label="Increase quantity">+</button>
+        </div>
       </div>
-      <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add Kit to Cart">Add Kit to Cart</button>`;
+      <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add to Cart">Add to Cart</button>`;
   } else {
     ctaHtml = `<button class="btn btn--block" disabled>${frame.status === 'sold' ? 'Sold Out' : 'Reserved'}</button>`;
   }
@@ -93,7 +97,7 @@ export function renderPiece({ frame, related }) {
       <h1>${escapeHtml(frame.title)}</h1>
       <div class="detail-price">${formatCurrency(frame.price)}</div>
       <p class="detail-desc">${escapeHtml(frame.description)}</p>
-      ${tierNote ? `<div class="detail-tier-note detail-tier-note--${frame.type}"><span class="tier-index tier-index--sm">${frame.type === 'expert' ? '02' : '01'}</span><p>${escapeHtml(tierNote)}</p></div>` : ''}
+      ${tierNote ? `<div class="detail-tier-note detail-tier-note--${frame.type}"><span class="tier-note-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="10.5" x2="12" y2="16"/><circle cx="12" cy="7.3" r="0.6" fill="currentColor" stroke="none"/></svg></span><p>${escapeHtml(tierNote)}</p></div>` : ''}
       ${ctaHtml}
       <div class="detail-meta">
         <dl>

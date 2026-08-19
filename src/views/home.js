@@ -1,17 +1,18 @@
-import { escapeHtml, formatCurrency } from '../utils.js';
+import { escapeHtml, formatCurrency, splitTitle } from '../utils.js';
 
-const KIT_LABEL = { novice: 'Casual Kit', expert: 'Meticulous Kit' };
+const KIT_LABEL = { novice: 'Casual Kit', expert: 'Expert Kit' };
 
 function productCard(frame) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
+  const { name, tagline } = splitTitle(frame.title);
   return `
   <a class="product-card" href="/piece/${frame.id}">
     <div class="product-card-media">
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
-    <div class="product-card-title">${escapeHtml(frame.title)}</div>
-    <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
+    <div class="product-card-title">${escapeHtml(name)}</div>
+    ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
     <div class="product-card-price">${formatCurrency(frame.price)}</div>
   </a>`;
 }
@@ -55,27 +56,27 @@ export function renderHome({ featured }) {
 
   <section class="section container tier-section">
     <div class="section-head" data-reveal>
-      <h2>How meticulous are you?</h2>
-      <p>Every kit reflects how far you go. Casual keeps it simple. Meticulous leaves nothing behind.</p>
+      <h2>How expert are you?</h2>
+      <p>Every kit reflects how far you go. Casual keeps it simple. Expert leaves nothing behind.</p>
     </div>
     <div class="tier-grid">
       <div class="tier-card tier-card--novice" data-reveal style="--reveal-delay:60ms">
         <span class="tier-index">01</span>
         <span class="tier-flag">Just starting out</span>
         <h3>Casual</h3>
-        <p class="tier-tagline">Open the case. Meet the board.</p>
-        <p>For your first teardown. Pull the shell, lift out the main board, battery, and display, and see exactly how the whole device fits together — no specialist tools required.</p>
+        <p class="tier-tagline">Open the phone. Meet every part.</p>
+        <p>For your first teardown. Pull the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
         <span class="tier-chip">Main board · Battery · Display</span>
         <a href="/shop?type=novice" class="link-btn tier-link">Browse Casual kits →</a>
       </div>
       <div class="tier-card tier-card--expert" data-reveal style="--reveal-delay:140ms">
         <span class="tier-index">02</span>
         <span class="tier-flag">Detail-obsessed</span>
-        <h3>Meticulous</h3>
-        <p class="tier-tagline">Go past the board. Find what's hiding.</p>
-        <p>For people who don't stop until every piece has its place. Chase down camera modules, vibration motors, Taptic Engines, and the tiny flex cables most people don't even know are inside their phone.</p>
-        <span class="tier-chip">Camera modules · Taptic Engines · Hidden flex cables</span>
-        <a href="/shop?type=expert" class="link-btn tier-link">Browse Meticulous kits →</a>
+        <h3>Expert</h3>
+        <p class="tier-tagline">Open the parts, not just the phone.</p>
+        <p>For people who don't stop at "that's a camera module." Open the camera itself and find the lens assembly, autofocus system, and image sensor inside. Same with the Taptic Engine — every part with its own hidden layers, taken all the way down.</p>
+        <span class="tier-chip">Lens assembly · Autofocus system · Image sensor</span>
+        <a href="/shop?type=expert" class="link-btn tier-link">Browse Expert kits →</a>
       </div>
     </div>
   </section>
