@@ -1,5 +1,5 @@
 export const SITE_NAME = 'Mobstalgia';
-export const SITE_TAGLINE = 'Handcrafted art, reclaimed from premium phones';
+export const SITE_TAGLINE = 'Frame kits for the phone still in your drawer';
 export const CURRENCY_SYMBOL = '₹';
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/mobstalgia?igsh=c2w4eW0xbXd5OW1w';
