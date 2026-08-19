@@ -1,4 +1,4 @@
-import { escapeHtml, formatCurrency } from '../utils.js';
+import { escapeHtml, formatCurrency, splitTitle } from '../utils.js';
 
 const KIT_LABEL = { novice: 'Casual Kit', expert: 'Expert Kit' };
 const TIER_COPY = {
@@ -45,19 +45,22 @@ export function renderPiece({ frame, related }) {
 
   const kitLabel = KIT_LABEL[frame.type] || 'Frame Kit';
   const tierNote = TIER_COPY[frame.type];
+  const { name, tagline } = splitTitle(frame.title);
 
   let ctaHtml;
   if (isAvailable) {
     ctaHtml = `
-      <div class="qty-row">
+      <div class="detail-cta">
         <span class="qty-row-label" id="qty-label">Qty</span>
-        <div class="qty-stepper">
-          <button type="button" class="qty-step-btn" id="qty-dec" aria-label="Decrease quantity">−</button>
-          <input type="number" id="qty-input" class="qty-input" aria-labelledby="qty-label" min="1" max="${frame.stock}" value="1" inputmode="numeric">
-          <button type="button" class="qty-step-btn" id="qty-inc" aria-label="Increase quantity">+</button>
+        <div class="detail-cta-row">
+          <div class="qty-stepper">
+            <button type="button" class="qty-step-btn" id="qty-dec" aria-label="Decrease quantity">−</button>
+            <input type="number" id="qty-input" class="qty-input" aria-labelledby="qty-label" min="1" max="${frame.stock}" value="1" inputmode="numeric">
+            <button type="button" class="qty-step-btn" id="qty-inc" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add to Cart">Add to Cart</button>
         </div>
-      </div>
-      <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add to Cart">Add to Cart</button>`;
+      </div>`;
   } else {
     ctaHtml = `<button class="btn btn--block" disabled>${frame.status === 'sold' ? 'Sold Out' : 'Reserved'}</button>`;
   }
@@ -68,15 +71,21 @@ export function renderPiece({ frame, related }) {
       <div class="section-head"><h2>You may also like</h2></div>
       <div class="product-grid">
         ${related
-          .map(
-            (r) => `
+          .map((r) => {
+            const rTitle = splitTitle(r.title);
+            return `
           <a class="product-card" href="/piece/${r.id}">
-            <div class="product-card-media"><img src="${r.images?.[0]?.url || '/img/placeholder.svg'}" alt="${escapeHtml(r.title)}"></div>
-            <div class="product-card-title">${escapeHtml(r.title)}</div>
-            <div class="product-card-sub">${escapeHtml(r.brand)} · ${escapeHtml(r.phone_model)}</div>
+            <div class="product-card-media">
+              <img src="${r.images?.[0]?.url || '/img/placeholder.svg'}" alt="${escapeHtml(r.title)}">
+              ${r.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
+              ${r.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
+              <span class="badge badge--type${r.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[r.type] || 'Frame Kit'}</span>
+            </div>
+            <div class="product-card-title">${escapeHtml(rTitle.name)}</div>
+            ${rTitle.tagline ? `<div class="product-card-sub">${escapeHtml(rTitle.tagline)}</div>` : ''}
             <div class="product-card-price">${formatCurrency(r.price)}</div>
-          </a>`
-          )
+          </a>`;
+          })
           .join('')}
       </div>
     </section>`
@@ -93,8 +102,13 @@ export function renderPiece({ frame, related }) {
       <div class="gallery-thumbs">${thumbs}</div>
     </div>
     <div>
-      <div class="detail-eyebrow">${escapeHtml(frame.brand)} · ${kitLabel}</div>
-      <h1>${escapeHtml(frame.title)}</h1>
+      <div class="detail-eyebrow">
+        <span>${escapeHtml(frame.brand)}</span>
+        <span class="detail-eyebrow-sep">·</span>
+        <span class="detail-kit-tag detail-kit-tag--${frame.type}">${kitLabel}</span>
+      </div>
+      <h1>${escapeHtml(name)}</h1>
+      ${tagline ? `<p class="detail-tagline">${escapeHtml(tagline)}</p>` : ''}
       <div class="detail-price">${formatCurrency(frame.price)}</div>
       <p class="detail-desc">${escapeHtml(frame.description)}</p>
       ${tierNote ? `<div class="detail-tier-note detail-tier-note--${frame.type}"><span class="tier-note-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="10.5" x2="12" y2="16"/><circle cx="12" cy="7.3" r="0.6" fill="currentColor" stroke="none"/></svg></span><p>${escapeHtml(tierNote)}</p></div>` : ''}
