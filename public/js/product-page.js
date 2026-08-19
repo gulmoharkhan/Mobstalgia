@@ -90,6 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Quantity stepper
+  const qtyInputEl = document.getElementById('qty-input');
+  const qtyDecBtn = document.getElementById('qty-dec');
+  const qtyIncBtn = document.getElementById('qty-inc');
+  if (qtyInputEl && qtyDecBtn && qtyIncBtn) {
+    const min = parseInt(qtyInputEl.min, 10) || 1;
+    const max = parseInt(qtyInputEl.max, 10) || Infinity;
+    const clamp = (n) => Math.min(max, Math.max(min, n));
+    const setQty = (n) => {
+      qtyInputEl.value = clamp(n);
+      qtyDecBtn.disabled = clamp(n) <= min;
+      qtyIncBtn.disabled = clamp(n) >= max;
+    };
+    setQty(parseInt(qtyInputEl.value, 10) || min);
+    qtyDecBtn.addEventListener('click', () => setQty((parseInt(qtyInputEl.value, 10) || min) - 1));
+    qtyIncBtn.addEventListener('click', () => setQty((parseInt(qtyInputEl.value, 10) || min) + 1));
+    qtyInputEl.addEventListener('change', () => setQty(parseInt(qtyInputEl.value, 10) || min));
+  }
+
   // Add to cart
   const addBtn = document.getElementById('add-to-cart-btn');
   if (addBtn) {

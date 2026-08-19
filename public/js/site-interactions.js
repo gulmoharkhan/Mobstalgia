@@ -42,4 +42,35 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Mobile nav: hamburger toggle opens the nav as a dropdown panel under the header.
+  const navToggle = document.getElementById('nav-toggle');
+  const mainNav = document.getElementById('main-nav');
+  const navBackdrop = document.getElementById('nav-backdrop');
+  if (navToggle && mainNav && navBackdrop) {
+    const closeNav = () => {
+      mainNav.classList.remove('is-open');
+      navBackdrop.classList.remove('is-open');
+      navBackdrop.hidden = true;
+      navToggle.setAttribute('aria-expanded', 'false');
+    };
+    const openNav = () => {
+      mainNav.classList.add('is-open');
+      navBackdrop.hidden = false;
+      navBackdrop.classList.add('is-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+    };
+    navToggle.addEventListener('click', () => {
+      if (mainNav.classList.contains('is-open')) closeNav();
+      else openNav();
+    });
+    navBackdrop.addEventListener('click', closeNav);
+    mainNav.querySelectorAll('.nav-link').forEach((link) => link.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mainNav.classList.contains('is-open')) closeNav();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeNav();
+    });
+  }
 });
