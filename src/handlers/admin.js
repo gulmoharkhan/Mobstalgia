@@ -160,6 +160,18 @@ export async function frameDeletePost(ctx) {
   redirect(ctx.res, '/admin/frames');
 }
 
+export async function frameBulkDeleteApi(ctx) {
+  try {
+    const rawIds = Array.isArray(ctx.json?.ids) ? ctx.json.ids : [];
+    const ids = [...new Set(rawIds.map(Number).filter(Number.isInteger))];
+    if (!ids.length) throw new Error('No frames selected.');
+    for (const id of ids) models.deleteFrame(id);
+    sendJson(ctx.res, 200, { deleted: ids.length });
+  } catch (err) {
+    sendJson(ctx.res, 400, { error: err.message });
+  }
+}
+
 /* ---------------------------- Orders ---------------------------- */
 
 export async function ordersListPage(ctx) {
