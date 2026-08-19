@@ -203,19 +203,23 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ---------- Home: teardown tier challenge ---------- */
-.tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.tier-card { position: relative; padding: 32px 30px; border-radius: var(--radius); background: #fff; box-shadow: var(--shadow-sm); transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
-.tier-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.tier-index { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; font-weight: 600; color: var(--ink-soft); opacity: 0.55; display: block; margin-bottom: 16px; }
-.tier-flag { display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 5px 12px; border-radius: var(--radius-full); margin-bottom: 14px; background: var(--sky); color: var(--sky-ink); }
-.tier-card h3 { margin-bottom: 4px; }
-.tier-tagline { font-weight: 600; color: var(--ink); margin: 0 0 14px; font-size: 0.98rem; }
-.tier-card > p:not(.tier-tagline) { color: var(--ink-soft); margin: 0 0 20px; max-width: 42ch; text-wrap: pretty; }
-.tier-chip { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.02em; padding: 7px 14px; border-radius: var(--radius-full); background: var(--paper-soft); color: var(--ink-soft); margin-bottom: 18px; }
-.tier-link { display: block; font-weight: 600; }
-.tier-card--expert .tier-flag { background: var(--amber); color: var(--amber-ink); }
+.tier-split { display: grid; grid-template-columns: 1fr 1fr; }
+.tier-panel { position: relative; padding: 8px 48px 8px 0; }
+.tier-panel--expert { padding: 8px 0 8px 48px; border-left: 1px solid var(--line); }
+.tier-flag { display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sky-ink); margin-bottom: 18px; }
+.tier-flag::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sky-ink); margin-right: 8px; }
+.tier-panel--expert .tier-flag { color: var(--amber-ink); }
+.tier-panel--expert .tier-flag::before { background: var(--amber-ink); }
+.tier-name { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 4.4rem); line-height: 1; margin: 0 0 14px; }
+.tier-tagline { font-family: var(--font-display); font-weight: 600; color: var(--ink); margin: 0 0 16px; font-size: 1.15rem; }
+.tier-desc { color: var(--ink-soft); margin: 0 0 22px; max-width: 42ch; text-wrap: pretty; }
+.tier-chip { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.01em; color: var(--ink-soft); margin: 0 0 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.tier-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 1.02rem; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 2px; transition: gap .2s var(--ease-out), opacity .2s; }
+.tier-link:hover { gap: 12px; opacity: 0.75; }
 @media (max-width: 720px) {
-  .tier-grid { grid-template-columns: 1fr; }
+  .tier-split { grid-template-columns: 1fr; row-gap: 40px; }
+  .tier-panel, .tier-panel--expert { padding: 0; border-left: none; }
+  .tier-panel--expert { padding-top: 36px; border-top: 1px solid var(--line); }
 }
 
 /* ---------- Home: FOMO story ---------- */
@@ -256,9 +260,9 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ---------- Product grid ---------- */
-.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 36px 28px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 26px 24px; }
 .product-card { display: block; }
-.product-card-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper-deep); border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 16px; transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out); }
+.product-card-media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--paper-deep); border-radius: 22px; box-shadow: var(--shadow-sm); margin-bottom: 10px; transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out); }
 .product-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease-out); }
 .product-card:hover .product-card-media { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .product-card:hover .product-card-media img { transform: scale(1.06); }
@@ -267,9 +271,9 @@ button { font-family: inherit; cursor: pointer; }
 .badge--reserved { background: var(--amber); color: var(--amber-ink); }
 .badge--type { left: auto; right: 12px; background: var(--sky); color: var(--sky-ink); }
 .badge--type--expert { background: var(--amber); color: var(--amber-ink); }
-.product-card-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 3px; transition: color .15s; }
+.product-card-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 2px; transition: color .15s; }
 .product-card:hover .product-card-title { color: var(--accent-strong); }
-.product-card-sub { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 7px; }
+.product-card-sub { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 4px; }
 .product-card-price { font-size: 1.02rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
 @media (prefers-reduced-motion: reduce) {
   .product-card:hover .product-card-media { transform: none; }
@@ -371,7 +375,7 @@ button { font-family: inherit; cursor: pointer; }
 .detail-kit-tag--expert { background: var(--amber); color: var(--amber-ink); }
 .detail-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.15rem, 1.6vw, 1.4rem); color: var(--ink-soft); margin: 0 0 0.5em; line-height: 1.2; }
 .detail-price { font-size: 1.5rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; margin: 14px 0 20px; }
-.detail-desc { color: var(--ink-soft); margin-bottom: 26px; max-width: 46ch; text-wrap: pretty; }
+.detail-desc { color: var(--ink-soft); margin-bottom: 26px; text-wrap: pretty; }
 .detail-tier-note { display: flex; align-items: flex-start; gap: 10px; border-radius: var(--radius-sm); padding: 14px 16px; margin: 0 0 26px; background: var(--sky); }
 .detail-tier-note p { margin: 0; font-size: 0.8rem; line-height: 1.55; color: var(--sky-ink); }
 .detail-tier-note .tier-note-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; color: var(--sky-ink); opacity: 0.8; }
@@ -443,7 +447,7 @@ button { font-family: inherit; cursor: pointer; }
 .about-body { max-width: 720px; }
 .about-body h2 { margin-top: 2em; }
 
-.about-lede-wrap { max-width: 760px; padding: 30px 28px 10px; }
+.about-lede-wrap { max-width: 760px; padding: 30px 0 10px; }
 .about-lede { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.4; color: var(--ink); margin: 0 0 26px; text-wrap: balance; }
 .about-lede-support p { color: var(--ink-soft); max-width: 62ch; }
 
