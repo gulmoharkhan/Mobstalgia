@@ -12,7 +12,7 @@ function attachImages(frame) {
   return { ...frame, images };
 }
 
-export function listFrames({ type, brand, status, q, sort = 'newest', featuredOnly = false } = {}) {
+export function listFrames({ type, brand, status, q, sort = 'newest', featuredOnly = false, availableFirst = false } = {}) {
   const clauses = [];
   const params = [];
   if (type) {
@@ -44,8 +44,13 @@ export function listFrames({ type, brand, status, q, sort = 'newest', featuredOn
       price_desc: 'price DESC',
       title_asc: 'title ASC',
     }[sort] || 'created_at DESC';
+  // Available pieces surface first (then reserved, then sold), with the chosen
+  // sort applied as the tiebreaker within each group.
+  const fullOrderBy = availableFirst
+    ? `CASE status WHEN 'available' THEN 0 WHEN 'reserved' THEN 1 ELSE 2 END, ${orderBy}`
+    : orderBy;
 
-  const frames = db.prepare(`SELECT * FROM frames ${where} ORDER BY ${orderBy}`).all(...params);
+  const frames = db.prepare(`SELECT * FROM frames ${where} ORDER BY ${fullOrderBy}`).all(...params);
   const ids = frames.map((f) => f.id);
   if (ids.length === 0) return [];
   const placeholders = ids.map(() => '?').join(',');
