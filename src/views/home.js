@@ -33,7 +33,7 @@ export function renderHome({ featured }) {
   <section class="hero hero--onliner">
     <div class="container">
       <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>DIY teardown art kits</div>
-      <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">That old phone in your drawer?<br><span class="weight-bold">It deserves a wall, not a drawer.</span></h1>
+      <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">That old phone in your drawer?<br><span class="text-italic">It deserves a wall, not a drawer.</span></h1>
       <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
         <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
         <a href="/about" class="btn btn--outline">How it works</a>
@@ -41,28 +41,37 @@ export function renderHome({ featured }) {
     </div>
   </section>
 
-  <section class="section container" style="padding-top:8px;">
+  <section class="section container" style="padding-top:20px;">
     <div class="section-head" data-reveal>
       <h2>A few phones worth framing</h2>
-      <p>Real teardowns, for inspiration — send us any phone's story, or start with yours.</p>
+      <p>A handful of teardowns to spark ideas — pick an era, or bring your own.</p>
     </div>
     <div class="masonry-scroll" data-reveal>
       <div class="masonry-scroll-track">
-        ${featured.map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
+        ${featured.slice(0, 5).map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
         ${ctaTile()}
       </div>
     </div>
   </section>
 
   <section class="fomo-story">
-    <div class="container fomo-story-inner">
-      <div class="hero-eyebrow" data-reveal>Why frame it</div>
-      <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Your phone was never just a device.<br>It's a reflection of your choices.</h2>
-      <div class="fomo-story-body" data-reveal style="--reveal-delay:120ms">
-        <p>Every phone you've owned has a character — a shape, a story, a version of you that carried it everywhere. The one sitting in your drawer right now still has that character. It just doesn't need to be hidden anymore.</p>
-        <p>Take it apart. Admire the work of the engineers and designers who built it. Arrange what's inside, mount it, and give it a second life as a piece of inspiration on your wall or your desk — a small, honest reminder of where you've been.</p>
+    <div class="container fomo-story-grid">
+      <div class="fomo-collage" data-reveal aria-hidden="true">
+        <img class="fomo-photo fomo-photo--a" src="/img/seed/nokia-n73-2.jpg" alt="" loading="lazy">
+        <img class="fomo-photo fomo-photo--b" src="/img/seed/iphone-4s-1.jpg" alt="" loading="lazy">
+        <img class="fomo-photo fomo-photo--c" src="/img/seed/apple-watch-series-3-3.jpg" alt="" loading="lazy">
+        <span class="fomo-tape fomo-tape--a"></span>
+        <span class="fomo-tape fomo-tape--b"></span>
       </div>
-      <a href="/about" class="link-btn" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
+      <div class="fomo-story-copy">
+        <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>Why frame it</div>
+        <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Every phone was a chapter.<br><span class="text-italic">This one's still being written.</span></h2>
+        <div class="fomo-story-body" data-reveal style="--reveal-delay:120ms">
+          <p>You remember the exact click of its buttons. The crack in the corner from the fall you still tell people about. The sticker you half-peeled off and gave up on. That phone isn't just old — it's evidence.</p>
+          <p>Take it apart. Study the board like a tiny city map. Arrange what's inside however tells your version of the story, mount it, and hang it somewhere you'll actually see it — not a drawer you open twice a year.</p>
+        </div>
+        <a href="/about" class="link-btn" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
+      </div>
     </div>
   </section>
   `;
