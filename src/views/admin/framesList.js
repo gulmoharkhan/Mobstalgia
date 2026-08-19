@@ -5,6 +5,7 @@ export function renderFramesList({ frames }) {
     .map(
       (f) => `
     <tr>
+      <td><input type="checkbox" class="frame-select" value="${f.id}" aria-label="Select ${escapeHtml(f.title)}"></td>
       <td><img class="admin-thumb" src="${f.images?.[0]?.url || '/img/placeholder.svg'}" alt=""></td>
       <td>${escapeHtml(f.title)}<div style="color:#8a8a8a;font-size:0.78rem;">${escapeHtml(f.brand)} · ${escapeHtml(f.phone_model)}</div></td>
       <td style="text-transform:capitalize;">${f.type}</td>
@@ -30,10 +31,18 @@ export function renderFramesList({ frames }) {
   </div>
   ${
     frames.length
-      ? `<div class="admin-table-wrap"><table class="admin-table">
-      <thead><tr><th></th><th>Piece</th><th>Type</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead>
+      ? `
+    <div class="admin-bulk-bar" id="bulk-bar" hidden>
+      <span id="bulk-count">0 selected</span>
+      <button type="button" class="btn btn--danger btn--sm" id="bulk-delete-btn">Delete Selected</button>
+      <button type="button" class="link-btn" id="bulk-clear-btn">Clear selection</button>
+    </div>
+    <div class="admin-table-wrap"><table class="admin-table" id="frames-table">
+      <thead><tr><th><input type="checkbox" id="select-all-frames" aria-label="Select all frames"></th><th></th><th>Piece</th><th>Type</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead>
       <tbody>${rows}</tbody>
-    </table></div>`
+    </table></div>
+    <script src="/js/admin-frames-list.js"></script>
+    `
       : `<div class="admin-empty">No frames yet. <a href="/admin/frames/new">Add your first piece</a>.</div>`
   }
   `;
