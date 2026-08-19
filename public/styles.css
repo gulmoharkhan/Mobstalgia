@@ -159,19 +159,11 @@ button { font-family: inherit; cursor: pointer; }
   pointer-events: none;
 }
 .hero .container { position: relative; }
-.hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.74rem; font-weight: 700; color: var(--accent-strong); background: none; border: none; border-radius: 0; padding: 0; margin-bottom: 22px; font-family: 'JetBrains Mono', monospace; box-shadow: none; }
-.hero-eyebrow .status-dot { width: 7px; height: 7px; border-radius: 2px; background: var(--accent-glow); box-shadow: none; transform: rotate(45deg); flex-shrink: 0; animation: pulse-dot 2.2s ease-in-out infinite; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 11px; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.74rem; font-weight: 700; color: var(--ink-soft); background: none; border: none; border-radius: 0; padding: 0; margin-bottom: 22px; font-family: 'JetBrains Mono', monospace; box-shadow: none; }
+.hero-eyebrow .status-dot { width: 22px; height: 2px; border-radius: 1px; background: var(--accent); flex-shrink: 0; }
 .hero h1 { max-width: 780px; margin: 0 auto 22px; }
 .hero p.lead { max-width: 560px; margin: 0 auto 34px; font-size: 1.08rem; font-weight: 400; color: var(--ink-soft); }
 .hero-actions { display: flex; gap: 14px; justify-content: center; }
-
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.35); }
-  50% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.2); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-eyebrow .status-dot { animation: none; }
-}
 
 .section { padding-top: 64px; padding-bottom: 64px; }
 .section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 34px; }
