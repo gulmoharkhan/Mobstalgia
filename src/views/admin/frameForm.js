@@ -50,8 +50,8 @@ export function renderFrameForm({ frame, mode }) {
       </div>
       <div class="form-grid">
         <div class="form-field">
-          <label for="type">Type</label>
-          <select id="type" name="type">${opt(FRAME_TYPES, frame?.type || 'handcrafted')}</select>
+          <label for="type">Difficulty</label>
+          <select id="type" name="type">${opt(FRAME_TYPES, frame?.type || 'novice')}</select>
         </div>
         <div class="form-field">
           <label for="status">Status</label>
