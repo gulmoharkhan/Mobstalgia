@@ -372,12 +372,13 @@ button { font-family: inherit; cursor: pointer; }
 .detail-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.15rem, 1.6vw, 1.4rem); color: var(--ink-soft); margin: 0 0 0.5em; line-height: 1.2; }
 .detail-price { font-size: 1.5rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; margin: 14px 0 20px; }
 .detail-desc { color: var(--ink-soft); margin-bottom: 26px; max-width: 46ch; text-wrap: pretty; }
-.detail-tier-note { display: flex; align-items: flex-start; gap: 12px; border-radius: var(--radius-sm); padding: 16px 18px; margin: 0 0 26px; max-width: 46ch; background: var(--sky); }
-.detail-tier-note p { margin: 0; font-size: 0.9rem; color: var(--sky-ink); }
-.detail-tier-note .tier-note-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; color: var(--sky-ink); opacity: 0.8; }
-.detail-tier-note--expert { background: var(--ink); }
-.detail-tier-note--expert p { color: #fff; }
-.detail-tier-note--expert .tier-note-icon { color: var(--amber); opacity: 1; }
+.detail-tier-note { display: flex; align-items: flex-start; gap: 10px; border-radius: var(--radius-sm); padding: 14px 16px; margin: 0 0 26px; background: var(--sky); }
+.detail-tier-note p { margin: 0; font-size: 0.8rem; line-height: 1.55; color: var(--sky-ink); }
+.detail-tier-note .tier-note-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; color: var(--sky-ink); opacity: 0.8; }
+.detail-tier-note .tier-note-icon svg { width: 14px; height: 14px; }
+.detail-tier-note--expert { background: var(--amber); }
+.detail-tier-note--expert p { color: var(--amber-ink); }
+.detail-tier-note--expert .tier-note-icon { color: var(--amber-ink); }
 .detail-meta { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 24px; font-size: 0.85rem; color: var(--ink-soft); }
 .detail-meta dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; }
 .detail-meta dt { color: var(--ink-soft); opacity: 0.7; }
