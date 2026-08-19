@@ -7,11 +7,13 @@ export function renderAbout() {
     <h1>Your phone still has a story. We just help you frame it.</h1>
   </div>
 
-  <div class="container about-lede-wrap">
-    <p class="about-lede" data-reveal>Somewhere in a drawer, a bag, or the back of a cupboard, there's an old phone you haven't turned on in years.</p>
-    <div class="about-lede-support" data-reveal style="--reveal-delay:80ms">
-      <p>It isn't doing much there. But it holds a real part of your story — the calls, the photos, the years you carried it everywhere. That phone was never just a device. It's a reflection of the choices you made, with a character all its own.</p>
-      <p>That phone doesn't need to stay hidden. ${SITE_NAME} gives it a second life — as a piece you see every day, on a wall or a desk, instead of a device gathering dust in a box.</p>
+  <div class="container">
+    <div class="about-lede-wrap">
+      <p class="about-lede" data-reveal>Somewhere in a drawer, a bag, or the back of a cupboard, there's an old phone you haven't turned on in years.</p>
+      <div class="about-lede-support" data-reveal style="--reveal-delay:80ms">
+        <p>It isn't doing much there. But it holds a real part of your story — the calls, the photos, the years you carried it everywhere. That phone was never just a device. It's a reflection of the choices you made, with a character all its own.</p>
+        <p>That phone doesn't need to stay hidden. ${SITE_NAME} gives it a second life — as a piece you see every day, on a wall or a desk, instead of a device gathering dust in a box.</p>
+      </div>
     </div>
   </div>
 
@@ -42,9 +44,11 @@ export function renderAbout() {
   </section>
 
   <section class="about-manifesto">
-    <div class="container about-manifesto-inner" data-reveal>
-      <p class="about-manifesto-lead">We could tear phones apart for you and ship you a finished piece — plenty of places do exactly that.</p>
-      <p class="about-manifesto-body">But taking it apart yourself is the whole point. It's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made, not something you bought pre-made. Next time you spot an old phone lying around, you'll probably see it differently, too.</p>
+    <div class="container">
+      <div class="about-manifesto-inner" data-reveal>
+        <p class="about-manifesto-lead">We could tear phones apart for you and ship you a finished piece — plenty of places do exactly that.</p>
+        <p class="about-manifesto-body">But taking it apart yourself is the whole point. It's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made, not something you bought pre-made. Next time you spot an old phone lying around, you'll probably see it differently, too.</p>
+      </div>
     </div>
   </section>
 
