@@ -364,8 +364,12 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 640px) {
   .gallery-nav, .gallery-zoom-hint { opacity: 1; }
 }
-.product-detail h1 { font-size: clamp(2rem, 3vw, 2.7rem); line-height: 1.14; }
-.detail-eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.76rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; }
+.product-detail h1 { font-size: clamp(2rem, 3vw, 2.7rem); line-height: 1.14; margin-bottom: 0.15em; }
+.detail-eyebrow { display: flex; align-items: center; gap: 9px; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.76rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
+.detail-eyebrow-sep { opacity: 0.45; }
+.detail-kit-tag { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: var(--radius-full); background: var(--sky); color: var(--sky-ink); font-size: 0.7rem; letter-spacing: 0.06em; }
+.detail-kit-tag--expert { background: var(--amber); color: var(--amber-ink); }
+.detail-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.15rem, 1.6vw, 1.4rem); color: var(--ink-soft); margin: 0 0 0.5em; line-height: 1.2; }
 .detail-price { font-size: 1.5rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; margin: 14px 0 20px; }
 .detail-desc { color: var(--ink-soft); margin-bottom: 26px; max-width: 46ch; text-wrap: pretty; }
 .detail-tier-note { display: flex; align-items: flex-start; gap: 12px; border-radius: var(--radius-sm); padding: 16px 18px; margin: 0 0 26px; max-width: 46ch; background: var(--sky); }
@@ -378,8 +382,11 @@ button { font-family: inherit; cursor: pointer; }
 .detail-meta dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; }
 .detail-meta dt { color: var(--ink-soft); opacity: 0.7; }
 .detail-meta dd { color: var(--ink); font-weight: 500; }
-.qty-row { display: flex; align-items: center; gap: 14px; margin: 26px 0 22px; }
-.qty-row-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); }
+.detail-cta { margin: 28px 0 24px; }
+.qty-row-label { display: block; margin: 0 0 10px 4px; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); }
+.detail-cta-row { display: flex; align-items: center; gap: 12px; }
+.detail-cta-row .qty-stepper { flex-shrink: 0; height: 52px; }
+.detail-cta-row .btn--block { flex: 1; width: auto; height: 52px; padding-top: 0; padding-bottom: 0; }
 .qty-stepper { display: inline-flex; align-items: stretch; height: 40px; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--paper-soft); overflow: hidden; transition: box-shadow .15s, border-color .15s; }
 .qty-stepper:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .qty-step-btn { width: 38px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; color: var(--ink); font-size: 1.05rem; font-weight: 600; line-height: 1; cursor: pointer; transition: background .15s; }
