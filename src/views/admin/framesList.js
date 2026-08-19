@@ -1,6 +1,6 @@
 import { escapeHtml, formatCurrency } from '../../utils.js';
 
-const FRAME_TYPE_LABELS = { novice: 'Casual', expert: 'Meticulous' };
+const FRAME_TYPE_LABELS = { novice: 'Casual', expert: 'Expert' };
 
 export function renderFramesList({ frames }) {
   const rows = frames

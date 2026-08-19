@@ -3,7 +3,7 @@ import { FRAME_TYPES, FRAME_STATUSES } from '../../config.js';
 
 // Customer-facing names for the "type" tier — kept distinct from the internal
 // 'novice' / 'expert' values stored in the database.
-const FRAME_TYPE_LABELS = { novice: 'Casual', expert: 'Meticulous' };
+const FRAME_TYPE_LABELS = { novice: 'Casual', expert: 'Expert' };
 
 export function renderFrameForm({ frame, mode }) {
   const isEdit = mode === 'edit';
