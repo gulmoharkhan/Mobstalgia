@@ -1,6 +1,6 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-const KIT_LABEL = { handcrafted: 'Classic Kit', printed: 'Compact Kit' };
+const KIT_LABEL = { novice: 'Novice Kit', expert: 'Expert Kit' };
 
 function productCard(frame) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
@@ -8,7 +8,7 @@ function productCard(frame) {
   <a class="product-card" href="/piece/${frame.id}">
     <div class="product-card-media">
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
-      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
+      <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
     <div class="product-card-title">${escapeHtml(frame.title)}</div>
     <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
@@ -41,7 +41,7 @@ export function renderHome({ featured }) {
     </div>
   </section>
 
-  <section class="section container" style="padding-top:20px;">
+  <section class="section container">
     <div class="section-head" data-reveal>
       <h2>A few phones worth framing</h2>
       <p>A handful of teardowns to spark ideas — pick an era, or bring your own.</p>
@@ -50,6 +50,33 @@ export function renderHome({ featured }) {
       <div class="masonry-scroll-track">
         ${featured.slice(0, 5).map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
         ${ctaTile()}
+      </div>
+    </div>
+  </section>
+
+  <section class="section container tier-section">
+    <div class="section-head" data-reveal>
+      <h2>Pick your teardown level</h2>
+      <p>Every kit is rated by how deep it goes. Some open with a screwdriver. Others dare you to find the parts most owners never see.</p>
+    </div>
+    <div class="tier-grid">
+      <div class="tier-card tier-card--novice" data-reveal style="--reveal-delay:60ms">
+        <span class="tier-index">01</span>
+        <span class="tier-flag">Start here</span>
+        <h3>Novice</h3>
+        <p class="tier-tagline">Open the case. Meet the board.</p>
+        <p>Your first teardown. Pull the shell, lift out the main board, battery, and display, and see exactly how the whole device fits together — no specialist tools required.</p>
+        <span class="tier-chip">Main board · Battery · Display</span>
+        <a href="/shop?type=novice" class="link-btn tier-link">Browse Novice kits →</a>
+      </div>
+      <div class="tier-card tier-card--expert" data-reveal style="--reveal-delay:140ms">
+        <span class="tier-index">02</span>
+        <span class="tier-flag">Bring tools</span>
+        <h3>Expert</h3>
+        <p class="tier-tagline">Go past the board. Find what's hiding.</p>
+        <p>The real challenge. Chase down camera modules, vibration motors, Taptic Engines, and the tiny flex cables most people don't even know are inside their phone.</p>
+        <span class="tier-chip">Camera modules · Taptic Engines · Hidden flex cables</span>
+        <a href="/shop?type=expert" class="link-btn tier-link">Browse Expert kits →</a>
       </div>
     </div>
   </section>

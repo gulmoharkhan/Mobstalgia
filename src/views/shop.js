@@ -1,6 +1,6 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-const KIT_LABEL = { handcrafted: 'Classic Kit', printed: 'Compact Kit' };
+const KIT_LABEL = { novice: 'Novice Kit', expert: 'Expert Kit' };
 
 function productCard(frame, index = 0) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
@@ -11,7 +11,7 @@ function productCard(frame, index = 0) {
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
-      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
+      <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
     <div class="product-card-title">${escapeHtml(frame.title)}</div>
     <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
@@ -42,11 +42,11 @@ export function renderShop({ frames, brands, query }) {
         </select>
       </div>
       <div class="filter-field">
-        <label for="type">Kit size</label>
+        <label for="type">Difficulty</label>
         <select id="type" name="type">
-          ${opt('', 'All sizes', query.type)}
-          ${opt('handcrafted', 'Classic Kit', query.type)}
-          ${opt('printed', 'Compact Kit', query.type)}
+          ${opt('', 'All levels', query.type)}
+          ${opt('novice', 'Novice Kit', query.type)}
+          ${opt('expert', 'Expert Kit', query.type)}
         </select>
       </div>
       <div class="filter-field">

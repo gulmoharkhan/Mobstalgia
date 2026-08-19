@@ -1,6 +1,10 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-const KIT_LABEL = { handcrafted: 'Classic Kit', printed: 'Compact Kit' };
+const KIT_LABEL = { novice: 'Novice Kit', expert: 'Expert Kit' };
+const TIER_COPY = {
+  novice: "Novice tier — a clean first teardown. Case off, main board, battery, and display exposed. No specialist tools required.",
+  expert: "Expert tier — the real challenge. It goes past the main board into camera modules, sensors, and flex cables most owners never see. Bring patience and a small precision driver set.",
+};
 
 export function renderPiece({ frame, related }) {
   const images = frame.images.length ? frame.images : [{ url: '/img/placeholder.svg' }];
@@ -40,6 +44,7 @@ export function renderPiece({ frame, related }) {
     </div>`;
 
   const kitLabel = KIT_LABEL[frame.type] || 'Frame Kit';
+  const tierNote = TIER_COPY[frame.type];
 
   let ctaHtml;
   if (isAvailable) {
@@ -88,11 +93,12 @@ export function renderPiece({ frame, related }) {
       <h1>${escapeHtml(frame.title)}</h1>
       <div class="detail-price">${formatCurrency(frame.price)}</div>
       <p class="detail-desc">${escapeHtml(frame.description)}</p>
+      ${tierNote ? `<div class="detail-tier-note detail-tier-note--${frame.type}"><span class="tier-index tier-index--sm">${frame.type === 'expert' ? '02' : '01'}</span><p>${escapeHtml(tierNote)}</p></div>` : ''}
       ${ctaHtml}
       <div class="detail-meta">
         <dl>
           <dt>Inspired by</dt><dd>${escapeHtml(frame.phone_model)}</dd>
-          <dt>Kit size</dt><dd>${kitLabel}</dd>
+          <dt>Difficulty</dt><dd>${kitLabel}</dd>
         </dl>
       </div>
     </div>

@@ -12,7 +12,7 @@ export function renderAbout() {
 
     <h2>How the frame kit works</h2>
     <div class="process-grid">
-      <div class="process-step"><span>01</span><h3>Choose your kit</h3><p>Pick the size that fits your device — Compact for watches and small devices, Classic for phones and up.</p></div>
+      <div class="process-step"><span>01</span><h3>Pick your level</h3><p>Novice to open up the essentials, or Expert if you want to chase down every hidden component.</p></div>
       <div class="process-step"><span>02</span><h3>We ship the frame</h3><p>Your kit arrives with the frame, mounting hardware, and a simple guide for taking your device apart safely.</p></div>
       <div class="process-step"><span>03</span><h3>You dismantle it</h3><p>Screw by screw, layer by layer — your phone, in your hands. This is where you get to admire the work of the engineers who actually built it.</p></div>
       <div class="process-step"><span>04</span><h3>You arrange &amp; mount</h3><p>Lay the components into the frame however tells your phone's story best. There's no wrong way to do it.</p></div>
@@ -22,9 +22,9 @@ export function renderAbout() {
     <h2>Why frame it yourself?</h2>
     <p>We could tear phones apart for you and ship you a finished piece. Plenty of places do exactly that. But taking it apart yourself is the whole point — it's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made, not something you bought pre-made. It should inspire you to look at the next old phone in your drawer differently, too.</p>
 
-    <h2>Compact Kit vs. Classic Kit</h2>
-    <p><strong>Compact Kit</strong> is sized for smaller, denser devices like the Apple Watch — built for the tight internal layouts these tend to pack in.</p>
-    <p><strong>Classic Kit</strong> is sized for phones and larger devices, from iPod Classics to modern flagships, with room to lay a full board and camera module out properly.</p>
+    <h2>Novice Kit vs. Expert Kit</h2>
+    <p><strong>Novice Kit</strong> is your first teardown — case off, main board, battery, and display exposed. A clean, satisfying build with no specialist tools required.</p>
+    <p><strong>Expert Kit</strong> is for the ones who want the real challenge. It pushes past the main board into camera modules, vibration motors, Taptic Engines, and the tiny flex cables most owners never even know are there. Bring a set of precision screwdrivers and some patience.</p>
 
     <h2>Need inspiration first?</h2>
     <p>Not sure where to start? Browse a few devices we've framed ourselves for inspiration — Nokia bricks, early iPhones, an iPod Classic and more — then order the kit sized for your own phone via the <a href="/shop">shop</a>.</p>
