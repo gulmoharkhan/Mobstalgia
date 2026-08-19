@@ -2,11 +2,19 @@ services:
   - type: web
     name: mobstalgia
     runtime: node
-    plan: free
+    plan: starter
     buildCommand: ""
     startCommand: "node --experimental-sqlite server.js"
+    disk:
+      name: mobstalgia-data
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
       - key: NODE_VERSION
         value: 22.11.0
+      - key: DATA_DIR
+        value: /var/data/db
+      - key: UPLOADS_DIR
+        value: /var/data/uploads
