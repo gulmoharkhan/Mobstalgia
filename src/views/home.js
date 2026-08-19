@@ -1,6 +1,6 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-const KIT_LABEL = { novice: 'Novice Kit', expert: 'Expert Kit' };
+const KIT_LABEL = { novice: 'Casual Kit', expert: 'Meticulous Kit' };
 
 function productCard(frame) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
@@ -32,8 +32,7 @@ export function renderHome({ featured }) {
   return `
   <section class="hero hero--onliner">
     <div class="container">
-      <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>DIY teardown art kits</div>
-      <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">That old phone in your drawer?<br><span class="text-italic">It deserves a wall, not a drawer.</span></h1>
+      <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
       <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
         <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
         <a href="/about" class="btn btn--outline">How it works</a>
@@ -56,27 +55,27 @@ export function renderHome({ featured }) {
 
   <section class="section container tier-section">
     <div class="section-head" data-reveal>
-      <h2>Pick your teardown level</h2>
-      <p>Every kit is rated by how deep it goes. Some open with a screwdriver. Others dare you to find the parts most owners never see.</p>
+      <h2>How meticulous are you?</h2>
+      <p>Every kit reflects how far you go. Casual keeps it simple. Meticulous leaves nothing behind.</p>
     </div>
     <div class="tier-grid">
       <div class="tier-card tier-card--novice" data-reveal style="--reveal-delay:60ms">
         <span class="tier-index">01</span>
-        <span class="tier-flag">Start here</span>
-        <h3>Novice</h3>
+        <span class="tier-flag">Just starting out</span>
+        <h3>Casual</h3>
         <p class="tier-tagline">Open the case. Meet the board.</p>
-        <p>Your first teardown. Pull the shell, lift out the main board, battery, and display, and see exactly how the whole device fits together — no specialist tools required.</p>
+        <p>For your first teardown. Pull the shell, lift out the main board, battery, and display, and see exactly how the whole device fits together — no specialist tools required.</p>
         <span class="tier-chip">Main board · Battery · Display</span>
-        <a href="/shop?type=novice" class="link-btn tier-link">Browse Novice kits →</a>
+        <a href="/shop?type=novice" class="link-btn tier-link">Browse Casual kits →</a>
       </div>
       <div class="tier-card tier-card--expert" data-reveal style="--reveal-delay:140ms">
         <span class="tier-index">02</span>
-        <span class="tier-flag">Bring tools</span>
-        <h3>Expert</h3>
+        <span class="tier-flag">Detail-obsessed</span>
+        <h3>Meticulous</h3>
         <p class="tier-tagline">Go past the board. Find what's hiding.</p>
-        <p>The real challenge. Chase down camera modules, vibration motors, Taptic Engines, and the tiny flex cables most people don't even know are inside their phone.</p>
+        <p>For people who don't stop until every piece has its place. Chase down camera modules, vibration motors, Taptic Engines, and the tiny flex cables most people don't even know are inside their phone.</p>
         <span class="tier-chip">Camera modules · Taptic Engines · Hidden flex cables</span>
-        <a href="/shop?type=expert" class="link-btn tier-link">Browse Expert kits →</a>
+        <a href="/shop?type=expert" class="link-btn tier-link">Browse Meticulous kits →</a>
       </div>
     </div>
   </section>
@@ -91,11 +90,10 @@ export function renderHome({ featured }) {
         <span class="fomo-tape fomo-tape--b"></span>
       </div>
       <div class="fomo-story-copy">
-        <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>Why frame it</div>
         <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Every phone was a chapter.<br><span class="text-italic">This one's still being written.</span></h2>
         <div class="fomo-story-body" data-reveal style="--reveal-delay:120ms">
           <p>You remember the exact click of its buttons. The crack in the corner from the fall you still tell people about. The sticker you half-peeled off and gave up on. That phone isn't just old — it's evidence.</p>
-          <p>Take it apart. Study the board like a tiny city map. Arrange what's inside however tells your version of the story, mount it, and hang it somewhere you'll actually see it — not a drawer you open twice a year.</p>
+          <p>Take it apart. Study the board like a tiny city map. Arrange the pieces however you like, mount it, and hang it somewhere you'll actually see it — not a drawer you open twice a year.</p>
         </div>
         <a href="/about" class="link-btn" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
       </div>

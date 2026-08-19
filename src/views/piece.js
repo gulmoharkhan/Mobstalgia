@@ -1,9 +1,9 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-const KIT_LABEL = { novice: 'Novice Kit', expert: 'Expert Kit' };
+const KIT_LABEL = { novice: 'Casual Kit', expert: 'Meticulous Kit' };
 const TIER_COPY = {
-  novice: "Novice tier — a clean first teardown. Case off, main board, battery, and display exposed. No specialist tools required.",
-  expert: "Expert tier — the real challenge. It goes past the main board into camera modules, sensors, and flex cables most owners never see. Bring patience and a small precision driver set.",
+  novice: "Casual build — a clean first teardown. Case off, main board, battery, and display exposed. No specialist tools required.",
+  expert: "Meticulous build — for people who don't stop until every piece has its place. It goes past the main board into camera modules, sensors, and flex cables most owners never see. Bring patience and a small precision driver set.",
 };
 
 export function renderPiece({ frame, related }) {
@@ -98,7 +98,7 @@ export function renderPiece({ frame, related }) {
       <div class="detail-meta">
         <dl>
           <dt>Inspired by</dt><dd>${escapeHtml(frame.phone_model)}</dd>
-          <dt>Difficulty</dt><dd>${kitLabel}</dd>
+          <dt>Style</dt><dd>${kitLabel}</dd>
         </dl>
       </div>
     </div>
