@@ -28,7 +28,6 @@ export function renderShop({ frames, brands, query }) {
   <div class="container">
     <div class="section-head" style="padding-top:44px;" data-reveal>
       <h1>Frame Kits</h1>
-      <p class="mono">${frames.length} kit${frames.length === 1 ? '' : 's'}</p>
     </div>
 
     <form class="filters-bar" method="GET" action="/shop" id="filters-form">
@@ -88,7 +87,7 @@ export function renderShop({ frames, brands, query }) {
         </div>
       </div>
 
-      <button class="btn btn--outline filters-apply-inline" type="submit">Apply</button>
+      <button class="btn filters-apply-inline" type="submit">Apply</button>
       ${hasFilters ? '<a href="/shop" class="link-btn filters-clear-inline">Clear</a>' : ''}
     </form>
     <div class="filters-backdrop" id="filters-backdrop" hidden></div>
