@@ -48,6 +48,15 @@ export function renderShop({ frames, brands, query }) {
         </select>
       </div>
       <div class="filter-field">
+        <label for="availability">Availability</label>
+        <select id="availability" name="availability">
+          ${opt('', 'All', query.availability)}
+          ${opt('available', 'Available only', query.availability)}
+          ${opt('reserved', 'Reserved', query.availability)}
+          ${opt('sold', 'Sold', query.availability)}
+        </select>
+      </div>
+      <div class="filter-field">
         <label for="sort">Sort by</label>
         <select id="sort" name="sort">
           ${opt('newest', 'Newest', query.sort)}
@@ -57,7 +66,7 @@ export function renderShop({ frames, brands, query }) {
         </select>
       </div>
       <button class="btn btn--outline" type="submit">Apply</button>
-      ${query.q || query.brand || query.type ? '<a href="/shop" class="link-btn" style="align-self:center;">Clear</a>' : ''}
+      ${query.q || query.brand || query.type || query.availability ? '<a href="/shop" class="link-btn" style="align-self:center;">Clear</a>' : ''}
     </form>
 
     <div class="product-grid" style="padding-bottom:70px;">
