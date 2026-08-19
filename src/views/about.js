@@ -3,29 +3,34 @@ import { SITE_NAME, INSTAGRAM_URL } from '../config.js';
 export function renderAbout() {
   return `
   <div class="about-hero container">
-    <div class="hero-eyebrow">The craft behind the frames</div>
-    <h1>Turning premium phones into permanent art</h1>
+    <div class="hero-eyebrow">The story behind the frame</div>
+    <h1>Your phone still has a story. We just help you frame it.</h1>
   </div>
   <div class="container about-body">
-    <p>${SITE_NAME} started as a hobby: taking apart phones just to see what was inside, and realizing that the inside is often more beautiful than the outside. A logic board is a tiny city. A camera module looks like a jewel. A battery pack, laid open, has a strange industrial elegance to it.</p>
-    <p>Every piece here begins with a real, working (or once-working) premium phone — a full teardown, screw by screw, layer by layer. Nothing is a replica unless it's explicitly listed as a printed piece.</p>
+    <p>Somewhere in a drawer, a bag, or the back of a cupboard, you have an old phone. It isn't doing anything there. But it represents a real part of your journey — the calls, the photos, the years you carried it everywhere. Your phone was never just a device. It was a reflection of the choices you made, and it has a character all its own.</p>
+    <p>That phone doesn't need to stay hidden. ${SITE_NAME} exists to give it a second life — as a piece you actually see every day, on a wall or a desk, instead of a device you forgot in a drawer.</p>
 
-    <h2>How each handcrafted piece is made</h2>
+    <h2>How the frame kit works</h2>
     <div class="process-grid">
-      <div class="process-step"><span>01</span><h3>Teardown</h3><p>The phone is fully disassembled by hand — display, board, battery, cameras, speakers, and chassis are separated and cleaned.</p></div>
-      <div class="process-step"><span>02</span><h3>Composition</h3><p>Components are arranged to tell the story of the phone's engineering, balancing symmetry with the phone's actual internal layout.</p></div>
-      <div class="process-step"><span>03</span><h3>Mounting</h3><p>Each part is secured into a gallery-ready frame, photographed from multiple angles, and checked for durability before listing.</p></div>
+      <div class="process-step"><span>01</span><h3>Choose your kit</h3><p>Pick the size that fits your device — Compact for watches and small devices, Classic for phones and up.</p></div>
+      <div class="process-step"><span>02</span><h3>We ship the frame</h3><p>Your kit arrives with the frame, mounting hardware, and a simple guide for taking your device apart safely.</p></div>
+      <div class="process-step"><span>03</span><h3>You dismantle it</h3><p>Screw by screw, layer by layer — your phone, in your hands. This is where you get to admire the work of the engineers who actually built it.</p></div>
+      <div class="process-step"><span>04</span><h3>You arrange &amp; mount</h3><p>Lay the components into the frame however tells your phone's story best. There's no wrong way to do it.</p></div>
+      <div class="process-step"><span>05</span><h3>Hang it up</h3><p>What used to sit in a drawer now sits on your wall — a small, honest piece of inspiration instead of forgotten history.</p></div>
     </div>
 
-    <h2>Handcrafted vs. printed</h2>
-    <p><strong>Handcrafted</strong> pieces use the real, physical components from a torn-down phone — every piece is one of a kind, and once it's sold, it's gone for good.</p>
-    <p><strong>Printed</strong> pieces are high-resolution photographic reproductions of a teardown, offered when a particular phone or composition is popular enough to make available to more than one collector.</p>
+    <h2>Why frame it yourself?</h2>
+    <p>We could tear phones apart for you and ship you a finished piece. Plenty of places do exactly that. But taking it apart yourself is the whole point — it's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made, not something you bought pre-made. It should inspire you to look at the next old phone in your drawer differently, too.</p>
 
-    <h2>Sourcing</h2>
-    <p>Phones are sourced individually — some retired daily-drivers, some purchased specifically for teardown. Premium and flagship models are prioritized for their internal design quality, but requests for specific phones are always welcome via the <a href="/feedback">contact page</a>.</p>
+    <h2>Compact Kit vs. Classic Kit</h2>
+    <p><strong>Compact Kit</strong> is sized for smaller, denser devices like the Apple Watch — built for the tight internal layouts these tend to pack in.</p>
+    <p><strong>Classic Kit</strong> is sized for phones and larger devices, from iPod Classics to modern flagships, with room to lay a full board and camera module out properly.</p>
+
+    <h2>Need inspiration first?</h2>
+    <p>Not sure where to start? Browse a few devices we've framed ourselves for inspiration — Nokia bricks, early iPhones, an iPod Classic and more — then order the kit sized for your own phone via the <a href="/shop">shop</a>.</p>
 
     <h2>Follow along</h2>
-    <p>New pieces, in-progress teardowns, and behind-the-scenes shots go up on Instagram first — <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer">@mobstalgia</a>.</p>
+    <p>New kits, in-progress teardowns from our own collection, and behind-the-scenes shots go up on Instagram first — <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer">@mobstalgia</a>.</p>
   </div>
   `;
 }

@@ -1,5 +1,7 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
+const KIT_LABEL = { handcrafted: 'Classic Kit', printed: 'Compact Kit' };
+
 export function renderPiece({ frame, related }) {
   const images = frame.images.length ? frame.images : [{ url: '/img/placeholder.svg' }];
   const isAvailable = frame.status === 'available' && frame.stock > 0;
@@ -37,22 +39,23 @@ export function renderPiece({ frame, related }) {
       <img id="lightbox-img" src="" alt="${escapeHtml(frame.title)}">
     </div>`;
 
+  const kitLabel = KIT_LABEL[frame.type] || 'Frame Kit';
+
   let ctaHtml;
   if (isAvailable) {
     ctaHtml = `
       <div class="qty-row">
-        <label for="qty-input" style="font-size:0.82rem;color:#6a6a6a;">Qty</label>
+        <label for="qty-input">Qty</label>
         <input type="number" id="qty-input" class="qty-input" min="1" max="${frame.stock}" value="1">
-        <span style="font-size:0.8rem;color:#8a8a8a;">${frame.stock} in stock</span>
       </div>
-      <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add to Cart">Add to Cart</button>`;
+      <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add Kit to Cart">Add Kit to Cart</button>`;
   } else {
     ctaHtml = `<button class="btn btn--block" disabled>${frame.status === 'sold' ? 'Sold Out' : 'Reserved'}</button>`;
   }
 
   const relatedHtml = related.length
     ? `
-    <section class="section container" style="border-top:1px solid #ececea;">
+    <section class="section container" style="border-top:1px solid var(--line);">
       <div class="section-head"><h2>You may also like</h2></div>
       <div class="product-grid">
         ${related
@@ -81,16 +84,15 @@ export function renderPiece({ frame, related }) {
       <div class="gallery-thumbs">${thumbs}</div>
     </div>
     <div>
-      <div class="detail-eyebrow">${escapeHtml(frame.brand)} · ${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'} piece</div>
+      <div class="detail-eyebrow">${escapeHtml(frame.brand)} · ${kitLabel}</div>
       <h1>${escapeHtml(frame.title)}</h1>
       <div class="detail-price">${formatCurrency(frame.price)}</div>
-      <div class="detail-desc">${escapeHtml(frame.description)}</div>
+      <p class="detail-desc">${escapeHtml(frame.description)}</p>
       ${ctaHtml}
       <div class="detail-meta">
         <dl>
-          <dt>Source phone</dt><dd>${escapeHtml(frame.phone_model)}</dd>
-          <dt>Technique</dt><dd>${frame.type === 'handcrafted' ? 'Fully handcrafted, one of a kind' : 'Printed reproduction'}</dd>
-          <dt>Status</dt><dd style="text-transform:capitalize;">${frame.status}</dd>
+          <dt>Inspired by</dt><dd>${escapeHtml(frame.phone_model)}</dd>
+          <dt>Kit size</dt><dd>${kitLabel}</dd>
         </dl>
       </div>
     </div>

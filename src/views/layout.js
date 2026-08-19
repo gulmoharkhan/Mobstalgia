@@ -24,7 +24,7 @@ ${extraHead}
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="brand">
-      <span class="brand-mark" aria-hidden="true"></span>
+      <img src="/img/logo.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark" width="34" height="34">
       <span class="brand-text">${escapeHtml(SITE_NAME)}</span>
     </a>
     <nav class="main-nav">
@@ -53,7 +53,10 @@ ${bodyHtml}
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <div class="brand-text">${escapeHtml(SITE_NAME)}</div>
+      <div class="footer-brand">
+        <img src="/img/logo.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark brand-mark--footer" width="30" height="30">
+        <span class="brand-text">${escapeHtml(SITE_NAME)}</span>
+      </div>
       <p class="footer-tagline">${escapeHtml(SITE_TAGLINE)}</p>
     </div>
     <div class="footer-links">

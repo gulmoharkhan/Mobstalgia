@@ -1,5 +1,7 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
+const KIT_LABEL = { handcrafted: 'Classic Kit', printed: 'Compact Kit' };
+
 function productCard(frame, index = 0) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
   const delay = Math.min(index * 45, 360);
@@ -9,7 +11,7 @@ function productCard(frame, index = 0) {
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
-      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'}</span>
+      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
     <div class="product-card-title">${escapeHtml(frame.title)}</div>
     <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
@@ -23,14 +25,14 @@ export function renderShop({ frames, brands, query }) {
   return `
   <div class="container">
     <div class="section-head" style="padding-top:44px;" data-reveal>
-      <h1>Shop the Collection</h1>
-      <p class="mono">${frames.length} piece${frames.length === 1 ? '' : 's'}</p>
+      <h1>Frame Kits</h1>
+      <p class="mono">${frames.length} kit${frames.length === 1 ? '' : 's'}</p>
     </div>
 
     <form class="filters-bar" method="GET" action="/shop">
       <div class="filter-field">
         <label for="q">Search</label>
-        <input type="text" id="q" name="q" placeholder="iPhone, Galaxy, Pixel…" value="${escapeHtml(query.q || '')}">
+        <input type="text" id="q" name="q" placeholder="iPhone, Nokia, iPod…" value="${escapeHtml(query.q || '')}">
       </div>
       <div class="filter-field">
         <label for="brand">Brand</label>
@@ -40,11 +42,11 @@ export function renderShop({ frames, brands, query }) {
         </select>
       </div>
       <div class="filter-field">
-        <label for="type">Type</label>
+        <label for="type">Kit size</label>
         <select id="type" name="type">
-          ${opt('', 'All types', query.type)}
-          ${opt('handcrafted', 'Handcrafted', query.type)}
-          ${opt('printed', 'Printed', query.type)}
+          ${opt('', 'All sizes', query.type)}
+          ${opt('handcrafted', 'Classic Kit', query.type)}
+          ${opt('printed', 'Compact Kit', query.type)}
         </select>
       </div>
       <div class="filter-field">
@@ -70,7 +72,7 @@ export function renderShop({ frames, brands, query }) {
     </form>
 
     <div class="product-grid" style="padding-bottom:70px;">
-      ${frames.map((f, i) => productCard(f, i)).join('') || '<p style="grid-column:1/-1;text-align:center;padding:60px 0;color:#8a8a8a;">No pieces match those filters.</p>'}
+      ${frames.map((f, i) => productCard(f, i)).join('') || '<p style="grid-column:1/-1;text-align:center;padding:60px 0;color:#8a8a8a;">No kits match those filters.</p>'}
     </div>
   </div>
   `;

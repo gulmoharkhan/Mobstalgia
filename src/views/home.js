@@ -1,16 +1,14 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
-import { SITE_TAGLINE } from '../config.js';
 
-function productCard(frame, index = 0) {
+const KIT_LABEL = { handcrafted: 'Classic Kit', printed: 'Compact Kit' };
+
+function productCard(frame) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
-  const delay = Math.min(index * 45, 360);
   return `
-  <a class="product-card" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
+  <a class="product-card" href="/piece/${frame.id}">
     <div class="product-card-media">
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
-      ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
-      ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
-      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'}</span>
+      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
     <div class="product-card-title">${escapeHtml(frame.title)}</div>
     <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
@@ -18,58 +16,53 @@ function productCard(frame, index = 0) {
   </a>`;
 }
 
-export function renderHome({ featured, recent, stats }) {
+function ctaTile() {
   return `
-  <section class="hero">
+  <a class="product-card product-card--cta" href="/shop">
+    <div class="product-card-cta-inner">
+      <span class="product-card-cta-arrow" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+      <span class="product-card-cta-text">Browse all frames</span>
+    </div>
+  </a>`;
+}
+
+export function renderHome({ featured }) {
+  return `
+  <section class="hero hero--onliner">
     <div class="container">
-      <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>One-of-a-kind wall art from real phone teardowns</div>
-      <h1 data-reveal style="--reveal-delay:70ms">Every flagship phone has a beautiful skeleton.<br><span class="weight-bold">We frame it.</span></h1>
-      <p class="lead" data-reveal style="--reveal-delay:140ms">${escapeHtml(SITE_TAGLINE)}. Each piece is built by hand from a real, fully disassembled premium phone — circuit boards, camera modules, batteries and all — arranged and mounted as gallery-ready art.</p>
+      <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>DIY teardown art kits</div>
+      <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">That old phone in your drawer?<br><span class="weight-bold">It deserves a wall, not a drawer.</span></h1>
       <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
-        <a href="/shop" class="btn" data-magnetic>Browse the Collection</a>
-        <a href="/about" class="btn btn--outline">How it's made</a>
+        <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
+        <a href="/about" class="btn btn--outline">How it works</a>
       </div>
     </div>
   </section>
 
-  <div class="container">
-    <div class="stat-strip">
-      <div class="stat-card" data-reveal>
-        <span class="stat-icon stat-icon--mint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 15l4-4 3 3 5-5 4 4"/></svg></span>
-        <strong class="mono">${stats.totalFrames}</strong><span>Pieces created</span>
-      </div>
-      <div class="stat-card" data-reveal style="--reveal-delay:50ms">
-        <span class="stat-icon stat-icon--lavender" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <strong class="mono">${stats.available}</strong><span>Available now</span>
-      </div>
-      <div class="stat-card" data-reveal style="--reveal-delay:100ms">
-        <span class="stat-icon stat-icon--sky" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
-        <strong class="mono">100%</strong><span>Hand-teardown sourced</span>
-      </div>
-      <div class="stat-card" data-reveal style="--reveal-delay:150ms">
-        <span class="stat-icon stat-icon--amber" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
-        <strong class="mono">2</strong><span>Finishes: handcrafted &amp; printed</span>
-      </div>
-    </div>
-  </div>
-
-  <section class="section container">
+  <section class="section container" style="padding-top:8px;">
     <div class="section-head" data-reveal>
-      <h2>Featured pieces</h2>
-      <p>A few of the current standouts</p>
+      <h2>A few phones worth framing</h2>
+      <p>Real teardowns, for inspiration — send us any phone's story, or start with yours.</p>
     </div>
-    <div class="product-grid">
-      ${featured.map((f, i) => productCard(f, i)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
+    <div class="masonry-scroll" data-reveal>
+      <div class="masonry-scroll-track">
+        ${featured.map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
+        ${ctaTile()}
+      </div>
     </div>
   </section>
 
-  <section class="section container" style="padding-top:0;">
-    <div class="section-head" data-reveal>
-      <h2>Latest additions</h2>
-      <a href="/shop" class="link-btn">View all →</a>
-    </div>
-    <div class="product-grid">
-      ${recent.map((f, i) => productCard(f, i)).join('') || '<p>No pieces listed yet.</p>'}
+  <section class="fomo-story">
+    <div class="container fomo-story-inner">
+      <div class="hero-eyebrow" data-reveal>Why frame it</div>
+      <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Your phone was never just a device.<br>It's a reflection of your choices.</h2>
+      <div class="fomo-story-body" data-reveal style="--reveal-delay:120ms">
+        <p>Every phone you've owned has a character — a shape, a story, a version of you that carried it everywhere. The one sitting in your drawer right now still has that character. It just doesn't need to be hidden anymore.</p>
+        <p>Take it apart. Admire the work of the engineers and designers who built it. Arrange what's inside, mount it, and give it a second life as a piece of inspiration on your wall or your desk — a small, honest reminder of where you've been.</p>
+      </div>
+      <a href="/about" class="link-btn" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
     </div>
   </section>
   `;
