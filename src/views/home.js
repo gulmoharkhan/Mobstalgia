@@ -10,7 +10,7 @@ function productCard(frame, index = 0) {
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
-      <span class="badge badge--type">${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'}</span>
+      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'}</span>
     </div>
     <div class="product-card-title">${escapeHtml(frame.title)}</div>
     <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
@@ -23,7 +23,7 @@ export function renderHome({ featured, recent, stats }) {
   <section class="hero">
     <div class="container">
       <div class="hero-eyebrow" data-reveal><span class="status-dot" aria-hidden="true"></span>One-of-a-kind wall art from real phone teardowns</div>
-      <h1 data-reveal style="--reveal-delay:70ms">Every flagship phone has a beautiful skeleton. We frame it.</h1>
+      <h1 data-reveal style="--reveal-delay:70ms">Every flagship phone has a beautiful skeleton.<br><span class="weight-bold">We frame it.</span></h1>
       <p class="lead" data-reveal style="--reveal-delay:140ms">${escapeHtml(SITE_TAGLINE)}. Each piece is built by hand from a real, fully disassembled premium phone — circuit boards, camera modules, batteries and all — arranged and mounted as gallery-ready art.</p>
       <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
         <a href="/shop" class="btn" data-magnetic>Browse the Collection</a>
@@ -32,11 +32,25 @@ export function renderHome({ featured, recent, stats }) {
     </div>
   </section>
 
-  <div class="stat-strip">
-    <div data-reveal><strong class="mono">${stats.totalFrames}</strong><span>Pieces created</span></div>
-    <div data-reveal style="--reveal-delay:50ms"><strong class="mono">${stats.available}</strong><span>Available now</span></div>
-    <div data-reveal style="--reveal-delay:100ms"><strong class="mono">100%</strong><span>Hand-teardown sourced</span></div>
-    <div data-reveal style="--reveal-delay:150ms"><strong class="mono">2</strong><span>Finishes: handcrafted &amp; printed</span></div>
+  <div class="container">
+    <div class="stat-strip">
+      <div class="stat-card" data-reveal>
+        <span class="stat-icon stat-icon--mint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 15l4-4 3 3 5-5 4 4"/></svg></span>
+        <strong class="mono">${stats.totalFrames}</strong><span>Pieces created</span>
+      </div>
+      <div class="stat-card" data-reveal style="--reveal-delay:50ms">
+        <span class="stat-icon stat-icon--lavender" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <strong class="mono">${stats.available}</strong><span>Available now</span>
+      </div>
+      <div class="stat-card" data-reveal style="--reveal-delay:100ms">
+        <span class="stat-icon stat-icon--sky" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
+        <strong class="mono">100%</strong><span>Hand-teardown sourced</span>
+      </div>
+      <div class="stat-card" data-reveal style="--reveal-delay:150ms">
+        <span class="stat-icon stat-icon--amber" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
+        <strong class="mono">2</strong><span>Finishes: handcrafted &amp; printed</span>
+      </div>
+    </div>
   </div>
 
   <section class="section container">

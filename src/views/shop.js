@@ -9,7 +9,7 @@ function productCard(frame, index = 0) {
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
-      <span class="badge badge--type">${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'}</span>
+      <span class="badge badge--type${frame.type === 'printed' ? ' badge--type--printed' : ''}">${frame.type === 'handcrafted' ? 'Handcrafted' : 'Printed'}</span>
     </div>
     <div class="product-card-title">${escapeHtml(frame.title)}</div>
     <div class="product-card-sub">${escapeHtml(frame.brand)} · ${escapeHtml(frame.phone_model)}</div>
