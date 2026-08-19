@@ -1,5 +1,7 @@
 import { escapeHtml, formatCurrency } from '../../utils.js';
 
+const FRAME_TYPE_LABELS = { novice: 'Casual', expert: 'Meticulous' };
+
 export function renderFramesList({ frames }) {
   const rows = frames
     .map(
@@ -8,7 +10,7 @@ export function renderFramesList({ frames }) {
       <td><input type="checkbox" class="frame-select" value="${f.id}" aria-label="Select ${escapeHtml(f.title)}"></td>
       <td><img class="admin-thumb" src="${f.images?.[0]?.url || '/img/placeholder.svg'}" alt=""></td>
       <td>${escapeHtml(f.title)}<div style="color:#8a8a8a;font-size:0.78rem;">${escapeHtml(f.brand)} · ${escapeHtml(f.phone_model)}</div></td>
-      <td style="text-transform:capitalize;">${f.type}</td>
+      <td>${FRAME_TYPE_LABELS[f.type] || f.type}</td>
       <td>${formatCurrency(f.price)}</td>
       <td>${f.stock}</td>
       <td><span class="status-pill status-pill--${f.status === 'available' ? 'confirmed' : f.status === 'sold' ? 'cancelled' : 'pending'}">${f.status}</span></td>
@@ -38,7 +40,7 @@ export function renderFramesList({ frames }) {
       <button type="button" class="link-btn" id="bulk-clear-btn">Clear selection</button>
     </div>
     <div class="admin-table-wrap"><table class="admin-table" id="frames-table">
-      <thead><tr><th><input type="checkbox" id="select-all-frames" aria-label="Select all frames"></th><th></th><th>Piece</th><th>Type</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead>
+      <thead><tr><th><input type="checkbox" id="select-all-frames" aria-label="Select all frames"></th><th></th><th>Piece</th><th>Style</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>
     <script src="/js/admin-frames-list.js"></script>

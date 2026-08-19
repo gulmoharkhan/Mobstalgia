@@ -1,6 +1,10 @@
 import { escapeHtml } from '../../utils.js';
 import { FRAME_TYPES, FRAME_STATUSES } from '../../config.js';
 
+// Customer-facing names for the "type" tier — kept distinct from the internal
+// 'novice' / 'expert' values stored in the database.
+const FRAME_TYPE_LABELS = { novice: 'Casual', expert: 'Meticulous' };
+
 export function renderFrameForm({ frame, mode }) {
   const isEdit = mode === 'edit';
   const endpoint = isEdit ? `/admin/api/frames/${frame.id}` : '/admin/api/frames';
@@ -9,6 +13,8 @@ export function renderFrameForm({ frame, mode }) {
 
   const opt = (options, current) =>
     options.map((o) => `<option value="${o}" ${o === current ? 'selected' : ''}>${o[0].toUpperCase() + o.slice(1)}</option>`).join('');
+  const optLabeled = (options, labels, current) =>
+    options.map((o) => `<option value="${o}" ${o === current ? 'selected' : ''}>${labels[o] || o}</option>`).join('');
 
   return `
   <div class="admin-page-head">
@@ -50,8 +56,8 @@ export function renderFrameForm({ frame, mode }) {
       </div>
       <div class="form-grid">
         <div class="form-field">
-          <label for="type">Difficulty</label>
-          <select id="type" name="type">${opt(FRAME_TYPES, frame?.type || 'novice')}</select>
+          <label for="type">Style</label>
+          <select id="type" name="type">${optLabeled(FRAME_TYPES, FRAME_TYPE_LABELS, frame?.type || 'novice')}</select>
         </div>
         <div class="form-field">
           <label for="status">Status</label>
