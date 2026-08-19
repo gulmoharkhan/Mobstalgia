@@ -15,7 +15,7 @@ export const PAYMENT_INSTRUCTIONS = [
 
 export const ORDER_STATUSES = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
 export const PAYMENT_STATUSES = ['unpaid', 'paid'];
-export const FRAME_TYPES = ['handcrafted', 'printed'];
+export const FRAME_TYPES = ['novice', 'expert'];
 export const FRAME_STATUSES = ['available', 'reserved', 'sold'];
 
 export const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;

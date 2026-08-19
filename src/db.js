@@ -23,7 +23,7 @@ db.exec(`
     phone_model TEXT NOT NULL,
     description TEXT NOT NULL,
     price INTEGER NOT NULL,               -- stored in smallest currency unit (paise)
-    type TEXT NOT NULL DEFAULT 'handcrafted', -- 'handcrafted' | 'printed'
+    type TEXT NOT NULL DEFAULT 'novice', -- 'novice' | 'expert' (teardown-difficulty tier)
     status TEXT NOT NULL DEFAULT 'available',  -- 'available' | 'reserved' | 'sold'
     stock INTEGER NOT NULL DEFAULT 1,
     featured INTEGER NOT NULL DEFAULT 0,
@@ -92,5 +92,17 @@ db.exec(`
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 `);
+
+// One-time data migration: the "type" column used to encode a kit-size tier
+// ('handcrafted' = Classic Kit, 'printed' = Compact Kit). It now encodes a
+// teardown-difficulty tier instead ('novice' = main board & battery,
+// 'expert' = hidden components like camera modules and Taptic Engines).
+// Runs on every boot; it's a no-op once every row has been migrated.
+const EXPERT_TITLE_PREFIXES = ['Apple Watch Series 3', 'iPhone 5S', 'iPhone 4S', 'Nokia N73'];
+const legacyTypedFrames = db.prepare("SELECT id, title FROM frames WHERE type IN ('handcrafted', 'printed')").all();
+for (const row of legacyTypedFrames) {
+  const newType = EXPERT_TITLE_PREFIXES.some((prefix) => row.title.startsWith(prefix)) ? 'expert' : 'novice';
+  db.prepare('UPDATE frames SET type = ? WHERE id = ?').run(newType, row.id);
+}
 
 export default db;
