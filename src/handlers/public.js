@@ -12,17 +12,11 @@ import { sendHtml, redirect } from '../utils.js';
 import * as models from '../models.js';
 
 export async function home(ctx) {
-  const featured = models.listFrames({ status: 'available', featuredOnly: true, sort: 'newest' }).slice(0, 4);
-  let recent = models.listFrames({ status: 'available', sort: 'newest' }).slice(0, 8);
-  if (featured.length === 0) recent = models.listFrames({ sort: 'newest', availableFirst: true }).slice(0, 8);
-  const allFrames = models.listFrames();
-  const stats = {
-    totalFrames: allFrames.length,
-    available: allFrames.filter((f) => f.status === 'available').length,
-  };
+  let featured = models.listFrames({ status: 'available', featuredOnly: true, sort: 'newest' });
+  if (featured.length === 0) featured = models.listFrames({ sort: 'newest', availableFirst: true }).slice(0, 8);
   const html = renderLayout({
     activeNav: 'home',
-    bodyHtml: renderHome({ featured, recent, stats }),
+    bodyHtml: renderHome({ featured }),
   });
   sendHtml(ctx.res, 200, html);
 }
