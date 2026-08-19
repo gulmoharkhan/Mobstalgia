@@ -273,9 +273,13 @@ button { font-family: inherit; cursor: pointer; }
 .filters-bar { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; padding: 20px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 40px; }
 .filter-field { display: flex; flex-direction: column; gap: 6px; }
 .filter-field label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
-.filter-field select, .filter-field input { border: 1px solid var(--line); padding: 9px 14px; font-size: 0.87rem; font-weight: 500; border-radius: var(--radius-full); background: var(--paper-soft); min-width: 150px; transition: box-shadow .15s, border-color .15s; }
+.filter-field select, .filter-field input { border: 1px solid var(--line); padding: 10px 14px; font-size: 0.87rem; font-weight: 500; border-radius: var(--radius-full); background: var(--paper-soft); min-width: 150px; height: 40px; box-sizing: border-box; transition: box-shadow .15s, border-color .15s; }
+.filter-field select { appearance: none; -webkit-appearance: none; padding-right: 34px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b6d76' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
 .filter-field select:focus, .filter-field input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); outline: none; }
-.filters-bar .btn { align-self: flex-end; }
+.filters-bar .filters-apply-inline, .filters-bar .filters-clear-inline { align-self: flex-end; height: 40px; }
+.filters-apply-inline.btn { padding: 0 22px; font-size: 0.85rem; font-weight: 600; border-radius: var(--radius-full); border: 1px solid var(--ink); background: var(--ink); box-shadow: none; }
+.filters-apply-inline.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: none; box-shadow: none; }
+.filters-clear-inline.link-btn { align-self: center; margin-bottom: 2px; }
 
 /* Mobile filter sheet chrome — hidden/inert on desktop, where the fields
    inside .filters-sheet simply flow inline as part of .filters-bar. */
