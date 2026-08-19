@@ -50,6 +50,7 @@ router.get('/admin/frames', admin.framesListPage);
 router.get('/admin/frames/new', admin.frameNewPage);
 router.get('/admin/frames/:id/edit', admin.frameEditPage);
 router.post('/admin/api/frames', admin.frameCreateApi);
+router.post('/admin/api/frames/bulk-delete', admin.frameBulkDeleteApi);
 router.post('/admin/api/frames/:id', admin.frameUpdateApi);
 router.post('/admin/frames/:id/delete', admin.frameDeletePost);
 router.get('/admin/orders', admin.ordersListPage);
