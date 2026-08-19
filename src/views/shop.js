@@ -1,9 +1,10 @@
 import { escapeHtml, formatCurrency } from '../utils.js';
 
-function productCard(frame) {
+function productCard(frame, index = 0) {
   const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
+  const delay = Math.min(index * 45, 360);
   return `
-  <a class="product-card" href="/piece/${frame.id}">
+  <a class="product-card" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
     <div class="product-card-media">
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
@@ -21,9 +22,9 @@ export function renderShop({ frames, brands, query }) {
 
   return `
   <div class="container">
-    <div class="section-head" style="padding-top:44px;">
+    <div class="section-head" style="padding-top:44px;" data-reveal>
       <h1>Shop the Collection</h1>
-      <p>${frames.length} piece${frames.length === 1 ? '' : 's'}</p>
+      <p class="mono">${frames.length} piece${frames.length === 1 ? '' : 's'}</p>
     </div>
 
     <form class="filters-bar" method="GET" action="/shop">
@@ -60,7 +61,7 @@ export function renderShop({ frames, brands, query }) {
     </form>
 
     <div class="product-grid" style="padding-bottom:70px;">
-      ${frames.map(productCard).join('') || '<p style="grid-column:1/-1;text-align:center;padding:60px 0;color:#8a8a8a;">No pieces match those filters.</p>'}
+      ${frames.map((f, i) => productCard(f, i)).join('') || '<p style="grid-column:1/-1;text-align:center;padding:60px 0;color:#8a8a8a;">No pieces match those filters.</p>'}
     </div>
   </div>
   `;
