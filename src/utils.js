@@ -87,6 +87,15 @@ export function genOrderNumber() {
   return `TDF-${ymd}-${rand}`;
 }
 
+// Frame titles are authored as "Device Name — Tagline" (e.g. "iPhone 5S — Where
+// Touch ID Began"). Splits that into the device name (shown as the card title)
+// and the tagline (shown as the subtext, replacing the old brand/storage line).
+export function splitTitle(title) {
+  const parts = String(title || '').split(' — ');
+  if (parts.length < 2) return { name: title || '', tagline: '' };
+  return { name: parts[0], tagline: parts.slice(1).join(' — ') };
+}
+
 export function slugify(str) {
   return String(str)
     .toLowerCase()

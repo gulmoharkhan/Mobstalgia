@@ -18,7 +18,7 @@ const SAMPLE_FRAMES = [
     brand: 'Apple',
     phoneModel: 'Apple Watch Series 3, 38mm / 42mm, GPS or Cellular',
     description:
-      "Inside a case smaller than a coin sits a complete computer — S3 chip, Taptic Engine, and a battery curved to fit your wrist. This is a Meticulous-tier build: every part is tiny, dense, and easy to lose, and getting to the Taptic Engine is the real test. If yours has been sitting in a drawer since the Series 4 came out, it's ready for a second life on your wall.",
+      "Inside a case smaller than a coin sits a complete computer — S3 chip, Taptic Engine, and a battery curved to fit your wrist. This is an Expert-tier build: every part is tiny, dense, and easy to lose, and getting to the Taptic Engine is the real test. If yours has been sitting in a drawer since the Series 4 came out, it's ready for a second life on your wall.",
     price: 149900,
     type: 'expert',
     status: 'available',
@@ -44,7 +44,7 @@ const SAMPLE_FRAMES = [
     brand: 'Nokia',
     phoneModel: 'Nokia N73, Music Edition / Classic',
     description:
-      'The N73 made a 3.2-megapixel Carl Zeiss lens something to brag about. Open it up and the board is a study in symmetry — camera module, keypad flex, and speaker sitting in near-perfect balance. Meticulous-tier challenge: freeing that camera module intact, without snapping its ribbon, is the whole game. This was the phone a whole generation carried everywhere; taking it apart now feels like opening a time capsule.',
+      'The N73 made a 3.2-megapixel Carl Zeiss lens something to brag about. Open it up and the board is a study in symmetry — camera module, keypad flex, and speaker sitting in near-perfect balance. Expert-tier challenge: freeing that camera module intact, without snapping its ribbon, is the whole game. This was the phone a whole generation carried everywhere; taking it apart now feels like opening a time capsule.',
     price: 199900,
     type: 'expert',
     status: 'available',
@@ -70,7 +70,7 @@ const SAMPLE_FRAMES = [
     brand: 'Apple',
     phoneModel: 'iPhone 5S, 16GB / 32GB / 64GB',
     description:
-      "The 5S introduced Touch ID and the A7 chip, the first 64-bit processor to ship in a phone — a genuine turning point. Its logic board is compact but purposeful, with the fingerprint sensor's flex cable standing as a small piece of history in itself. Meticulous-tier challenge: extracting the Touch ID sensor without wrecking that cable is the part most people never even attempt. If this was your first 'real' iPhone, you already know why it deserves a frame.",
+      "The 5S introduced Touch ID and the A7 chip, the first 64-bit processor to ship in a phone — a genuine turning point. Its logic board is compact but purposeful, with the fingerprint sensor's flex cable standing as a small piece of history in itself. Expert-tier challenge: extracting the Touch ID sensor without wrecking that cable is the part most people never even attempt. If this was your first 'real' iPhone, you already know why it deserves a frame.",
     price: 269900,
     type: 'expert',
     status: 'available',
@@ -83,7 +83,7 @@ const SAMPLE_FRAMES = [
     brand: 'Apple',
     phoneModel: 'iPhone 4S, 16GB / 32GB / 64GB',
     description:
-      "Glass front, glass back, and Siri talking to you for the first time — the 4S is the phone a lot of us fell for smartphones on. Inside, its glass-and-steel sandwich opens to reveal one of the most tightly engineered boards Apple ever shipped, plus a camera assembly and vibration motor packed in tighter than you'd expect. Meticulous tier, and a genuinely satisfying one to take apart.",
+      "Glass front, glass back, and Siri talking to you for the first time — the 4S is the phone a lot of us fell for smartphones on. Inside, its glass-and-steel sandwich opens to reveal one of the most tightly engineered boards Apple ever shipped, plus a camera assembly and vibration motor packed in tighter than you'd expect. Expert tier, and a genuinely satisfying one to take apart.",
     price: 249900,
     type: 'expert',
     status: 'available',
