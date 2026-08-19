@@ -14,7 +14,7 @@ import * as models from '../models.js';
 export async function home(ctx) {
   const featured = models.listFrames({ status: 'available', featuredOnly: true, sort: 'newest' }).slice(0, 4);
   let recent = models.listFrames({ status: 'available', sort: 'newest' }).slice(0, 8);
-  if (featured.length === 0) recent = models.listFrames({ sort: 'newest' }).slice(0, 8);
+  if (featured.length === 0) recent = models.listFrames({ sort: 'newest', availableFirst: true }).slice(0, 8);
   const allFrames = models.listFrames();
   const stats = {
     totalFrames: allFrames.length,
@@ -28,13 +28,16 @@ export async function home(ctx) {
 }
 
 export async function shop(ctx) {
-  const { q, brand, type, sort } = ctx.query;
-  const frames = models.listFrames({ q, brand, type, sort });
+  const { q, brand, type, sort, availability } = ctx.query;
+  // "availability" is the user-facing filter (all / available / reserved / sold);
+  // it maps straight onto the frame's `status` column.
+  const status = availability && availability !== 'all' ? availability : undefined;
+  const frames = models.listFrames({ q, brand, type, sort, status, availableFirst: true });
   const brands = models.listBrands();
   const html = renderLayout({
     title: 'Shop',
     activeNav: 'shop',
-    bodyHtml: renderShop({ frames, brands, query: { q, brand, type, sort } }),
+    bodyHtml: renderShop({ frames, brands, query: { q, brand, type, sort, availability } }),
   });
   sendHtml(ctx.res, 200, html);
 }
