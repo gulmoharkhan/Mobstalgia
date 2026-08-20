@@ -204,8 +204,9 @@ button { font-family: inherit; cursor: pointer; }
 .hero-orbit-ring { position: absolute; border-radius: 50%; border: 1px solid var(--line); }
 .hero-orbit-ring--1 { width: 640px; height: 640px; }
 .hero-orbit-ring--2 { width: 900px; height: 900px; }
-.hero-orbit-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-orbit-node { position: absolute; top: var(--ny); left: var(--nx); transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.hero-orbit-connectors { position: absolute; inset: 0; pointer-events: none; }
+.hero-orbit-connector { position: absolute; top: 50%; left: 50%; width: var(--len); height: 0; border-top: 1px dashed var(--line); transform-origin: 0 50%; transform: rotate(var(--rot)); }
+.hero-orbit-node { position: absolute; top: calc(50% + var(--ty)); left: calc(50% + var(--tx)); transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; z-index: 1; }
 .hero-orbit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 480px; text-align: center; padding: 0 20px; }
 .hero-orbit-kicker { justify-content: center; color: var(--accent-strong); margin-bottom: 16px; }
 .hero-orbit-frame .hero-oneliner { font-size: clamp(1.9rem, 3.2vw, 2.5rem); max-width: none; margin: 0 0 16px; }
@@ -217,7 +218,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 @media (max-width: 640px) {
   .hero-orbit-frame { height: 480px; }
-  .hero-orbit-ring--1, .hero-orbit-ring--2, .hero-orbit-lines { display: none; }
+  .hero-orbit-ring--1, .hero-orbit-ring--2, .hero-orbit-connectors { display: none; }
   .hero-orbit-node { width: 36px; height: 36px; font-size: 0.9rem; }
   .hero-orbit-node--5, .hero-orbit-node--6 { display: none; }
   .hero-orbit-frame .hero-oneliner { font-size: 1.6rem; }
