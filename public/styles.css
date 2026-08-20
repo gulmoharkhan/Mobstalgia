@@ -256,18 +256,14 @@ button { font-family: inherit; cursor: pointer; }
 .fomo-story-body p { font-size: 1.06rem; color: var(--ink-soft); margin: 0 0 1.3em; text-wrap: pretty; }
 .fomo-story-copy .link-btn { display: inline-block; margin-top: 8px; font-size: 0.92rem; }
 
-/* Photo collage — scattered, taped-up teardown snapshots */
+/* Photo collage — clean layered teardown snapshots */
 .fomo-collage { position: relative; height: 440px; }
-.fomo-photo { position: absolute; width: 168px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; border: 6px solid #fff; box-shadow: var(--shadow-lg); transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-standard), z-index 0s; cursor: default; }
-.fomo-photo--a { top: 4px; left: 6px; transform: rotate(-8deg); z-index: 1; }
-.fomo-photo--b { top: 78px; left: 168px; transform: rotate(6deg); z-index: 2; }
-.fomo-photo--c { top: 214px; left: 44px; transform: rotate(-4deg); z-index: 3; }
-.fomo-photo--a:hover { transform: rotate(-2deg) translateY(-10px) scale(1.06); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.03); z-index: 5; }
-.fomo-photo--b:hover { transform: rotate(3deg) translateY(-10px) scale(1.06); z-index: 5; }
-.fomo-photo--c:hover { transform: rotate(0deg) translateY(-10px) scale(1.06); z-index: 5; }
-.fomo-tape { position: absolute; width: 62px; height: 22px; opacity: 0.85; box-shadow: var(--shadow-sm); pointer-events: none; }
-.fomo-tape--a { top: -8px; left: 44px; transform: rotate(-10deg); background: var(--sky); z-index: 4; }
-.fomo-tape--b { top: 62px; left: 246px; transform: rotate(12deg); background: var(--amber); z-index: 4; }
+.fomo-collage::before { content: ""; position: absolute; top: 24px; left: 24px; right: 48px; bottom: 48px; border-radius: var(--radius); background: var(--sky); z-index: 0; }
+.fomo-photo { position: absolute; width: 200px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-md); transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), z-index 0s; cursor: default; }
+.fomo-photo--a { top: 0; left: 0; z-index: 1; }
+.fomo-photo--b { top: 96px; left: 172px; z-index: 2; }
+.fomo-photo--c { top: 208px; left: 40px; width: 156px; z-index: 3; box-shadow: var(--shadow-lg); }
+.fomo-photo--a:hover, .fomo-photo--b:hover, .fomo-photo--c:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); z-index: 5; }
 @media (prefers-reduced-motion: reduce) {
   .fomo-photo { transition: none; }
 }
@@ -277,11 +273,10 @@ button { font-family: inherit; cursor: pointer; }
   .fomo-collage { width: 100%; height: 460px; max-width: 380px; margin-left: auto; margin-right: auto; margin-bottom: 8px; }
 }
 @media (max-width: 480px) {
-  .fomo-photo { width: 132px; }
+  .fomo-photo { width: 160px; }
   .fomo-collage { height: 360px; }
-  .fomo-photo--b { left: 130px; top: 60px; }
-  .fomo-photo--c { top: 168px; left: 30px; }
-  .fomo-tape--b { left: 190px; }
+  .fomo-photo--b { left: 130px; top: 80px; }
+  .fomo-photo--c { top: 176px; left: 30px; width: 130px; }
 }
 
 /* ---------- Product grid ---------- */
