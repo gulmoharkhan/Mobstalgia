@@ -78,20 +78,30 @@ export function renderHome({ featured }) {
     </div>
     <div class="tier-split">
       <div class="tier-panel tier-panel--novice" data-reveal style="--reveal-delay:60ms">
-        <span class="tier-flag">Just starting out</span>
-        <h3 class="tier-name">Casual</h3>
-        <p class="tier-tagline">Open the phone. Meet every part.</p>
-        <p class="tier-desc">For your first teardown. Pull the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
-        <span class="tier-chip">Main board · Battery · Display</span>
-        <a href="/shop?type=novice" class="link-btn link-btn--lg">Browse Casual kits →</a>
+        <div class="tier-media">
+          <img src="/img/seed/iphone-4-1.jpg" alt="" loading="lazy">
+        </div>
+        <div class="tier-content">
+          <span class="tier-flag">Just starting out</span>
+          <h3 class="tier-name">Casual</h3>
+          <p class="tier-tagline">Open the phone. Meet every part.</p>
+          <p class="tier-desc">For your first teardown. Pull the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
+          <span class="tier-chip">Main board · Battery · Display</span>
+          <a href="/shop?type=novice" class="btn btn--sm">Browse Casual kits →</a>
+        </div>
       </div>
       <div class="tier-panel tier-panel--expert" data-reveal style="--reveal-delay:140ms">
-        <span class="tier-flag">Detail-obsessed</span>
-        <h3 class="tier-name">Expert</h3>
-        <p class="tier-tagline">Open the parts, not just the phone.</p>
-        <p class="tier-desc">For people who don't stop at "that's a camera module." Open the camera itself and find the lens assembly, autofocus system, and image sensor inside. Same with the Taptic Engine — every part with its own hidden layers, taken all the way down.</p>
-        <span class="tier-chip">Lens assembly · Autofocus system · Image sensor</span>
-        <a href="/shop?type=expert" class="link-btn link-btn--lg">Browse Expert kits →</a>
+        <div class="tier-media">
+          <img src="/img/seed/apple-watch-series-3-2.jpg" alt="" loading="lazy">
+        </div>
+        <div class="tier-content">
+          <span class="tier-flag">Detail-obsessed</span>
+          <h3 class="tier-name">Expert</h3>
+          <p class="tier-tagline">Open the parts, not just the phone.</p>
+          <p class="tier-desc">For people who don't stop at "that's a camera module." Open the camera itself and find the lens assembly, autofocus system, and image sensor inside. Same with the Taptic Engine — every part with its own hidden layers, taken all the way down.</p>
+          <span class="tier-chip">Lens assembly · Autofocus system · Image sensor</span>
+          <a href="/shop?type=expert" class="btn btn--sm">Browse Expert kits →</a>
+        </div>
       </div>
     </div>
   </section>
