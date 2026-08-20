@@ -173,16 +173,25 @@ button { font-family: inherit; cursor: pointer; }
   .hero-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 300px; margin: 0 auto; }
 }
 
-.section { padding-top: 64px; padding-bottom: 64px; }
-.section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 34px; }
+.section { padding-top: 96px; padding-bottom: 96px; position: relative; }
+.section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 44px; }
 .section-head h1, .section-head h2 { margin-bottom: 0; }
 .section-head p { margin: 0; max-width: 100ch; color: #7a7a7a; font-size: 1.02rem; text-wrap: balance; }
+
+/* ---------- Editorial kicker / numbered tags ---------- */
+.kicker { display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; font-weight: 600; color: var(--ink-soft); font-family: 'JetBrains Mono', monospace; }
+.section-tag { position: absolute; top: 96px; right: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--ink-soft); opacity: 0.5; letter-spacing: 0.04em; }
+@media (max-width: 720px) {
+  .section { padding-top: 64px; padding-bottom: 64px; }
+  .section-tag { display: none; }
+}
 @media (max-width: 720px) {
   .section-head p { max-width: 52ch; }
 }
 
 /* ---------- Home: one-liner hero ---------- */
 .hero--onliner { padding: 104px 0; }
+.hero--onliner .kicker { margin-bottom: 22px; }
 .hero-oneliner { max-width: 760px; margin: 0 auto 30px; font-weight: 400; text-wrap: balance; }
 .hero-oneliner .text-italic { display: inline-block; margin-top: 0.12em; color: var(--accent-strong); }
 
@@ -220,6 +229,22 @@ button { font-family: inherit; cursor: pointer; }
   .tier-split { grid-template-columns: 1fr; row-gap: 40px; }
   .tier-panel, .tier-panel--expert { padding: 0; border-left: none; }
   .tier-panel--expert { padding-top: 36px; border-top: 1px solid var(--line); }
+}
+
+/* ---------- Home: no-shortcuts promise ---------- */
+.promise-section { border-top: 1px solid var(--line); }
+.promise-grid { display: grid; grid-template-columns: 0.95fr 1fr; gap: 72px; align-items: start; }
+.promise-lead .kicker { margin-bottom: 18px; display: inline-flex; }
+.promise-lead h2 { margin-bottom: 22px; }
+.promise-body { color: var(--ink-soft); max-width: 46ch; margin: 0 0 26px; text-wrap: pretty; }
+.promise-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.promise-item { display: grid; grid-template-columns: 28px 1fr; gap: 16px; padding: 22px 0; border-top: 1px solid var(--line); }
+.promise-item:last-child { border-bottom: 1px solid var(--line); }
+.promise-item-mark { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 0.7rem; flex-shrink: 0; }
+.promise-item-name { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; margin-bottom: 4px; }
+.promise-item p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; max-width: 46ch; }
+@media (max-width: 860px) {
+  .promise-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
 /* ---------- Home: FOMO story ---------- */
