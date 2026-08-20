@@ -199,12 +199,14 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- Home: orbit hero ---------- */
 .hero-orbit-outer { background: var(--paper-soft); }
-.hero-orbit-frame { position: relative; width: 100%; height: 620px; background: var(--paper); overflow: hidden; }
-.hero-orbit-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.hero-orbit-frame { position: relative; width: 100%; height: 760px; background: var(--paper); overflow: hidden; }
+.hero-orbit-decor { position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: radial-gradient(circle at center, #000 0%, #000 30%, transparent 72%); mask-image: radial-gradient(circle at center, #000 0%, #000 30%, transparent 72%); }
+.hero-orbit-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .hero-orbit-ring { position: absolute; border-radius: 50%; border: 1px solid var(--line); }
-.hero-orbit-ring--1 { width: 640px; height: 640px; }
-.hero-orbit-ring--2 { width: 900px; height: 900px; }
-.hero-orbit-connectors { position: absolute; inset: 0; pointer-events: none; }
+.hero-orbit-ring--1 { width: 440px; height: 440px; }
+.hero-orbit-ring--2 { width: 640px; height: 640px; }
+.hero-orbit-ring--3 { width: 900px; height: 900px; }
+.hero-orbit-connectors { position: absolute; inset: 0; }
 .hero-orbit-connector { position: absolute; top: 50%; left: 50%; width: var(--len); height: 0; border-top: 1px dashed var(--line); transform-origin: 0 50%; transform: rotate(var(--rot)); }
 .hero-orbit-node { position: absolute; top: calc(50% + var(--ty)); left: calc(50% + var(--tx)); transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; z-index: 1; }
 .hero-orbit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 480px; text-align: center; padding: 0 20px; }
@@ -213,12 +215,12 @@ button { font-family: inherit; cursor: pointer; }
 .hero-orbit-sub { color: var(--ink-soft); margin: 0 0 26px; text-wrap: balance; }
 .hero-orbit-frame .hero-actions { display: flex; align-items: center; justify-content: center; gap: 20px; }
 @media (max-width: 900px) {
-  .hero-orbit-frame { height: 560px; }
+  .hero-orbit-frame { height: 700px; }
   .hero-orbit-node { width: 42px; height: 42px; font-size: 1.05rem; }
 }
 @media (max-width: 640px) {
   .hero-orbit-frame { height: 480px; }
-  .hero-orbit-ring--1, .hero-orbit-ring--2, .hero-orbit-connectors { display: none; }
+  .hero-orbit-decor { display: none; }
   .hero-orbit-node { width: 36px; height: 36px; font-size: 0.9rem; }
   .hero-orbit-node--5, .hero-orbit-node--6 { display: none; }
   .hero-orbit-frame .hero-oneliner { font-size: 1.6rem; }
