@@ -61,11 +61,6 @@ export function renderHome({ featured }) {
         </div>
       </div>
     </div>
-    <div class="hero-orbit-chrome">
-      <span class="hero-orbit-chrome-dot"></span>
-      <span class="hero-orbit-chrome-path">mobstalgia / iphone-5s</span>
-      <span class="hero-orbit-chrome-tabs">Overview · Components · Frame layout</span>
-    </div>
   </section>
 
   <section class="section container">
