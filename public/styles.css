@@ -240,20 +240,28 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- Home: teardown tier challenge ---------- */
 .tier-split { display: grid; grid-template-columns: 1fr 1fr; }
-.tier-panel { position: relative; padding: 8px 48px 8px 0; }
+.tier-panel { position: relative; display: flex; gap: 32px; padding: 8px 48px 8px 0; }
 .tier-panel--expert { padding: 8px 0 8px 48px; border-left: 1px solid var(--line); }
+.tier-media { flex-shrink: 0; width: 132px; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper-deep); }
+.tier-media img { width: 100%; height: 100%; object-fit: cover; }
+.tier-content { min-width: 0; flex: 1; }
 .tier-flag { display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sky-ink); margin-bottom: 18px; }
 .tier-flag::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sky-ink); margin-right: 8px; }
 .tier-panel--expert .tier-flag { color: var(--amber-ink); }
 .tier-panel--expert .tier-flag::before { background: var(--amber-ink); }
-.tier-name { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 4.4rem); line-height: 1; margin: 0 0 14px; }
-.tier-tagline { font-family: var(--font-display); font-weight: 600; color: var(--ink); margin: 0 0 16px; font-size: 1.15rem; }
+.tier-name { font-family: var(--font-serif); font-size: clamp(2.6rem, 4vw, 3.6rem); line-height: 1; margin: 0 0 14px; }
+.tier-tagline { font-family: var(--font-display); font-weight: 600; color: var(--ink); margin: 0 0 16px; font-size: 1.1rem; }
 .tier-desc { color: var(--ink-soft); margin: 0 0 22px; max-width: 42ch; text-wrap: pretty; }
 .tier-chip { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.01em; color: var(--ink-soft); margin: 0 0 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+@media (max-width: 900px) {
+  .tier-media { width: 110px; }
+  .tier-name { font-size: 2.2rem; }
+}
 @media (max-width: 720px) {
   .tier-split { grid-template-columns: 1fr; row-gap: 40px; }
   .tier-panel, .tier-panel--expert { padding: 0; border-left: none; }
   .tier-panel--expert { padding-top: 36px; border-top: 1px solid var(--line); }
+  .tier-media { width: 96px; }
 }
 
 /* ---------- Home: no-shortcuts promise ---------- */
