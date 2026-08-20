@@ -33,7 +33,6 @@ export function renderHome({ featured }) {
   return `
   <section class="hero hero--onliner">
     <div class="container">
-      <span class="kicker" data-reveal>1.0 · Mobstalgia</span>
       <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
       <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
         <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
@@ -71,7 +70,7 @@ export function renderHome({ featured }) {
         <p class="tier-tagline">Open the phone. Meet every part.</p>
         <p class="tier-desc">For your first teardown. Pull the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
         <span class="tier-chip">Main board · Battery · Display</span>
-        <a href="/shop?type=novice" class="tier-link">Browse Casual kits →</a>
+        <a href="/shop?type=novice" class="link-btn link-btn--lg">Browse Casual kits →</a>
       </div>
       <div class="tier-panel tier-panel--expert" data-reveal style="--reveal-delay:140ms">
         <span class="tier-flag">Detail-obsessed</span>
@@ -79,7 +78,7 @@ export function renderHome({ featured }) {
         <p class="tier-tagline">Open the parts, not just the phone.</p>
         <p class="tier-desc">For people who don't stop at "that's a camera module." Open the camera itself and find the lens assembly, autofocus system, and image sensor inside. Same with the Taptic Engine — every part with its own hidden layers, taken all the way down.</p>
         <span class="tier-chip">Lens assembly · Autofocus system · Image sensor</span>
-        <a href="/shop?type=expert" class="tier-link">Browse Expert kits →</a>
+        <a href="/shop?type=expert" class="link-btn link-btn--lg">Browse Expert kits →</a>
       </div>
     </div>
   </section>
@@ -91,7 +90,7 @@ export function renderHome({ featured }) {
         <span class="kicker">Our promise</span>
         <h2>We don't cut corners.<br><span class="text-italic">Literally.</span></h2>
         <p class="promise-body">Most teardown frames quietly leave things out — a flex cable with nowhere tidy to go, a bottom board that's "basically just contacts." We don't. Every functional component gets a place on the frame, positioned with the same proximity and connectivity it had inside the phone. Nothing is skipped because it was hard to mount.</p>
-        <a href="/about" class="tier-link">See how we lay it out →</a>
+        <a href="/about" class="link-btn link-btn--lg">See how we lay it out →</a>
       </div>
       <ul class="promise-list" data-reveal style="--reveal-delay:100ms">
         <li class="promise-item">
@@ -127,7 +126,7 @@ export function renderHome({ featured }) {
           <p>You remember the exact click of its buttons. The crack in the corner from the fall you still tell people about. The sticker you half-peeled off and gave up on. That phone isn't just old — it's evidence.</p>
           <p>Take it apart. Study the board like a tiny city map. Arrange the pieces however you like, mount it, and hang it somewhere you'll actually see it — not a drawer you open twice a year.</p>
         </div>
-        <a href="/about" class="link-btn" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
+        <a href="/about" class="link-btn link-btn--lg" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
       </div>
     </div>
   </section>
