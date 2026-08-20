@@ -33,17 +33,20 @@ export function renderHome({ featured }) {
   return `
   <section class="hero-orbit-outer">
     <div class="hero-orbit-frame" data-reveal>
-      <div class="hero-orbit-rings" aria-hidden="true">
-        <span class="hero-orbit-ring hero-orbit-ring--1"></span>
-        <span class="hero-orbit-ring hero-orbit-ring--2"></span>
-      </div>
-      <div class="hero-orbit-connectors" aria-hidden="true">
-        <span class="hero-orbit-connector" style="--rot:210deg; --len:320px;"></span>
-        <span class="hero-orbit-connector" style="--rot:150deg; --len:320px;"></span>
-        <span class="hero-orbit-connector" style="--rot:-30deg; --len:320px;"></span>
-        <span class="hero-orbit-connector" style="--rot:30deg; --len:320px;"></span>
-        <span class="hero-orbit-connector" style="--rot:-90deg; --len:320px;"></span>
-        <span class="hero-orbit-connector" style="--rot:90deg; --len:320px;"></span>
+      <div class="hero-orbit-decor" aria-hidden="true">
+        <div class="hero-orbit-rings">
+          <span class="hero-orbit-ring hero-orbit-ring--1"></span>
+          <span class="hero-orbit-ring hero-orbit-ring--2"></span>
+          <span class="hero-orbit-ring hero-orbit-ring--3"></span>
+        </div>
+        <div class="hero-orbit-connectors">
+          <span class="hero-orbit-connector" style="--rot:210deg; --len:320px;"></span>
+          <span class="hero-orbit-connector" style="--rot:150deg; --len:320px;"></span>
+          <span class="hero-orbit-connector" style="--rot:-30deg; --len:320px;"></span>
+          <span class="hero-orbit-connector" style="--rot:30deg; --len:320px;"></span>
+          <span class="hero-orbit-connector" style="--rot:-90deg; --len:320px;"></span>
+          <span class="hero-orbit-connector" style="--rot:90deg; --len:320px;"></span>
+        </div>
       </div>
       <span class="hero-orbit-node hero-orbit-node--1" style="--tx:-277px; --ty:-160px;">🔩</span>
       <span class="hero-orbit-node hero-orbit-node--2" style="--tx:-277px; --ty:160px;">🔋</span>
