@@ -121,8 +121,10 @@ button { font-family: inherit; cursor: pointer; }
 .btn--danger:hover { background: #b3392c; color: #fff; border-color: #b3392c; transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(179, 57, 44, 0.45); }
 .btn--block { width: 100%; }
 .btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-.link-btn { background: none; border: none; padding: 0; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; font-size: 0.85rem; font-weight: 500; transition: color .15s; }
+.link-btn { display: inline-flex; align-items: center; gap: 4px; background: none; border: none; padding: 0; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; font-size: 0.85rem; font-weight: 500; transition: color .15s, gap .2s var(--ease-out); }
 .link-btn:hover { color: var(--accent-strong); }
+.link-btn--lg { gap: 6px; text-decoration: none; font-weight: 600; font-size: 1.02rem; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+.link-btn--lg:hover { gap: 12px; color: var(--ink); opacity: 0.75; }
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: background .2s, color .2s; }
   .btn:hover, .btn:active { transform: none; }
@@ -223,8 +225,6 @@ button { font-family: inherit; cursor: pointer; }
 .tier-tagline { font-family: var(--font-display); font-weight: 600; color: var(--ink); margin: 0 0 16px; font-size: 1.15rem; }
 .tier-desc { color: var(--ink-soft); margin: 0 0 22px; max-width: 42ch; text-wrap: pretty; }
 .tier-chip { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.01em; color: var(--ink-soft); margin: 0 0 26px; padding-top: 18px; border-top: 1px solid var(--line); }
-.tier-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 1.02rem; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 2px; transition: gap .2s var(--ease-out), opacity .2s; }
-.tier-link:hover { gap: 12px; opacity: 0.75; }
 @media (max-width: 720px) {
   .tier-split { grid-template-columns: 1fr; row-gap: 40px; }
   .tier-panel, .tier-panel--expert { padding: 0; border-left: none; }
