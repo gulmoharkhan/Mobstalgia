@@ -39,14 +39,6 @@ export function renderHome({ featured }) {
           <span class="hero-orbit-ring hero-orbit-ring--2"></span>
           <span class="hero-orbit-ring hero-orbit-ring--3"></span>
         </div>
-        <div class="hero-orbit-connectors">
-          <span class="hero-orbit-connector" style="--rot:210deg; --len:320px;"></span>
-          <span class="hero-orbit-connector" style="--rot:150deg; --len:320px;"></span>
-          <span class="hero-orbit-connector" style="--rot:-30deg; --len:320px;"></span>
-          <span class="hero-orbit-connector" style="--rot:30deg; --len:320px;"></span>
-          <span class="hero-orbit-connector" style="--rot:-90deg; --len:320px;"></span>
-          <span class="hero-orbit-connector" style="--rot:90deg; --len:320px;"></span>
-        </div>
       </div>
       <span class="hero-orbit-node hero-orbit-node--1" style="--tx:-277px; --ty:-160px;">🔩</span>
       <span class="hero-orbit-node hero-orbit-node--2" style="--tx:-277px; --ty:160px;">🔋</span>
@@ -55,9 +47,7 @@ export function renderHome({ featured }) {
       <span class="hero-orbit-node hero-orbit-node--5" style="--tx:0px; --ty:-320px;">📱</span>
       <span class="hero-orbit-node hero-orbit-node--6" style="--tx:0px; --ty:320px;">⚙️</span>
       <div class="hero-orbit-center">
-        <span class="kicker hero-orbit-kicker">The teardown frame kit</span>
         <h1 class="hero-oneliner">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
-        <p class="hero-orbit-sub">Every screw, cable and sensor — laid out and framed, not hidden in a drawer.</p>
         <div class="hero-actions">
           <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
           <a href="/about" class="link-btn link-btn--lg">How it works →</a>
