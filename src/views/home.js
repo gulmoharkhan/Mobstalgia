@@ -31,13 +31,40 @@ function ctaTile() {
 
 export function renderHome({ featured }) {
   return `
-  <section class="hero hero--onliner">
-    <div class="container">
-      <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
-      <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
-        <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
-        <a href="/about" class="btn btn--outline">How it works</a>
+  <section class="hero-orbit-outer">
+    <div class="hero-orbit-frame" data-reveal>
+      <div class="hero-orbit-rings" aria-hidden="true">
+        <span class="hero-orbit-ring hero-orbit-ring--1"></span>
+        <span class="hero-orbit-ring hero-orbit-ring--2"></span>
       </div>
+      <svg class="hero-orbit-lines" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" aria-hidden="true">
+        <path d="M13.3,24.2 C29,24.2 33,37 48,42" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
+        <path d="M13.3,75.8 C29,75.8 33,63 48,58" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
+        <path d="M86.7,24.2 C71,24.2 67,37 52,42" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
+        <path d="M86.7,75.8 C71,75.8 67,63 52,58" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
+        <path d="M50,9.7 C50,25 50,30 50,40" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
+        <path d="M50,90.3 C50,75 50,70 50,60" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <span class="hero-orbit-node hero-orbit-node--1" style="--nx:13.3%; --ny:24.2%;">🔩</span>
+      <span class="hero-orbit-node hero-orbit-node--2" style="--nx:13.3%; --ny:75.8%;">🔋</span>
+      <span class="hero-orbit-node hero-orbit-node--3" style="--nx:86.7%; --ny:24.2%;">📷</span>
+      <span class="hero-orbit-node hero-orbit-node--4" style="--nx:86.7%; --ny:75.8%;">🔌</span>
+      <span class="hero-orbit-node hero-orbit-node--5" style="--nx:50%; --ny:9.7%;">📱</span>
+      <span class="hero-orbit-node hero-orbit-node--6" style="--nx:50%; --ny:90.3%;">⚙️</span>
+      <div class="hero-orbit-center">
+        <span class="kicker hero-orbit-kicker">The teardown frame kit</span>
+        <h1 class="hero-oneliner">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
+        <p class="hero-orbit-sub">Every screw, cable and sensor — laid out and framed, not hidden in a drawer.</p>
+        <div class="hero-actions">
+          <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
+          <a href="/about" class="link-btn link-btn--lg">How it works →</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-orbit-chrome">
+      <span class="hero-orbit-chrome-dot"></span>
+      <span class="hero-orbit-chrome-path">mobstalgia / iphone-5s</span>
+      <span class="hero-orbit-chrome-tabs">Overview · Components · Frame layout</span>
     </div>
   </section>
 
@@ -48,11 +75,9 @@ export function renderHome({ featured }) {
       <h2>A few phones worth framing</h2>
       <p>A handful of teardowns to spark ideas — pick an era, or bring your own.</p>
     </div>
-    <div class="masonry-scroll" data-reveal>
-      <div class="masonry-scroll-track">
-        ${featured.slice(0, 5).map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
-        ${ctaTile()}
-      </div>
+    <div class="home-grid" data-reveal>
+      ${featured.slice(0, 7).map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
+      ${ctaTile()}
     </div>
   </section>
 
