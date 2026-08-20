@@ -120,8 +120,6 @@ export function renderHome({ featured }) {
         <img class="fomo-photo fomo-photo--a" src="/img/seed/nokia-n73-2.jpg" alt="" loading="lazy">
         <img class="fomo-photo fomo-photo--b" src="/img/seed/iphone-4s-1.jpg" alt="" loading="lazy">
         <img class="fomo-photo fomo-photo--c" src="/img/seed/apple-watch-series-3-3.jpg" alt="" loading="lazy">
-        <span class="fomo-tape fomo-tape--a"></span>
-        <span class="fomo-tape fomo-tape--b"></span>
       </div>
       <div class="fomo-story-copy">
         <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Every phone was a chapter.<br><span class="text-italic">This one's still being written.</span></h2>
