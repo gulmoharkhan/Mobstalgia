@@ -37,20 +37,20 @@ export function renderHome({ featured }) {
         <span class="hero-orbit-ring hero-orbit-ring--1"></span>
         <span class="hero-orbit-ring hero-orbit-ring--2"></span>
       </div>
-      <svg class="hero-orbit-lines" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" aria-hidden="true">
-        <path d="M13.3,24.2 C29,24.2 33,37 48,42" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
-        <path d="M13.3,75.8 C29,75.8 33,63 48,58" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
-        <path d="M86.7,24.2 C71,24.2 67,37 52,42" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
-        <path d="M86.7,75.8 C71,75.8 67,63 52,58" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
-        <path d="M50,9.7 C50,25 50,30 50,40" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
-        <path d="M50,90.3 C50,75 50,70 50,60" stroke="var(--line)" stroke-width="0.2" stroke-dasharray="0.6 0.9" vector-effect="non-scaling-stroke"/>
-      </svg>
-      <span class="hero-orbit-node hero-orbit-node--1" style="--nx:13.3%; --ny:24.2%;">🔩</span>
-      <span class="hero-orbit-node hero-orbit-node--2" style="--nx:13.3%; --ny:75.8%;">🔋</span>
-      <span class="hero-orbit-node hero-orbit-node--3" style="--nx:86.7%; --ny:24.2%;">📷</span>
-      <span class="hero-orbit-node hero-orbit-node--4" style="--nx:86.7%; --ny:75.8%;">🔌</span>
-      <span class="hero-orbit-node hero-orbit-node--5" style="--nx:50%; --ny:9.7%;">📱</span>
-      <span class="hero-orbit-node hero-orbit-node--6" style="--nx:50%; --ny:90.3%;">⚙️</span>
+      <div class="hero-orbit-connectors" aria-hidden="true">
+        <span class="hero-orbit-connector" style="--rot:210deg; --len:320px;"></span>
+        <span class="hero-orbit-connector" style="--rot:150deg; --len:320px;"></span>
+        <span class="hero-orbit-connector" style="--rot:-30deg; --len:320px;"></span>
+        <span class="hero-orbit-connector" style="--rot:30deg; --len:320px;"></span>
+        <span class="hero-orbit-connector" style="--rot:-90deg; --len:320px;"></span>
+        <span class="hero-orbit-connector" style="--rot:90deg; --len:320px;"></span>
+      </div>
+      <span class="hero-orbit-node hero-orbit-node--1" style="--tx:-277px; --ty:-160px;">🔩</span>
+      <span class="hero-orbit-node hero-orbit-node--2" style="--tx:-277px; --ty:160px;">🔋</span>
+      <span class="hero-orbit-node hero-orbit-node--3" style="--tx:277px; --ty:-160px;">📷</span>
+      <span class="hero-orbit-node hero-orbit-node--4" style="--tx:277px; --ty:160px;">🔌</span>
+      <span class="hero-orbit-node hero-orbit-node--5" style="--tx:0px; --ty:-320px;">📱</span>
+      <span class="hero-orbit-node hero-orbit-node--6" style="--tx:0px; --ty:320px;">⚙️</span>
       <div class="hero-orbit-center">
         <span class="kicker hero-orbit-kicker">The teardown frame kit</span>
         <h1 class="hero-oneliner">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
