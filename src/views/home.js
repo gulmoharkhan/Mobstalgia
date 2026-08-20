@@ -33,6 +33,7 @@ export function renderHome({ featured }) {
   return `
   <section class="hero hero--onliner">
     <div class="container">
+      <span class="kicker" data-reveal>1.0 · Mobstalgia</span>
       <h1 class="hero-oneliner" data-reveal style="--reveal-delay:70ms">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
       <div class="hero-actions" data-reveal style="--reveal-delay:210ms">
         <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
@@ -42,7 +43,9 @@ export function renderHome({ featured }) {
   </section>
 
   <section class="section container">
+    <span class="section-tag">1.1</span>
     <div class="section-head" data-reveal>
+      <span class="kicker">Pick an era</span>
       <h2>A few phones worth framing</h2>
       <p>A handful of teardowns to spark ideas — pick an era, or bring your own.</p>
     </div>
@@ -55,7 +58,9 @@ export function renderHome({ featured }) {
   </section>
 
   <section class="section container tier-section">
+    <span class="section-tag">1.2</span>
     <div class="section-head" data-reveal>
+      <span class="kicker">Choose your depth</span>
       <h2>How expert are you?</h2>
       <p>Every kit reflects how far you go. Casual keeps it simple. Expert leaves nothing behind.</p>
     </div>
@@ -76,6 +81,36 @@ export function renderHome({ featured }) {
         <span class="tier-chip">Lens assembly · Autofocus system · Image sensor</span>
         <a href="/shop?type=expert" class="tier-link">Browse Expert kits →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="section container promise-section">
+    <span class="section-tag">1.3</span>
+    <div class="promise-grid">
+      <div class="promise-lead" data-reveal>
+        <span class="kicker">Our promise</span>
+        <h2>We don't cut corners.<br><span class="text-italic">Literally.</span></h2>
+        <p class="promise-body">Most teardown frames quietly leave things out — a flex cable with nowhere tidy to go, a bottom board that's "basically just contacts." We don't. Every functional component gets a place on the frame, positioned with the same proximity and connectivity it had inside the phone. Nothing is skipped because it was hard to mount.</p>
+        <a href="/about" class="tier-link">See how we lay it out →</a>
+      </div>
+      <ul class="promise-list" data-reveal style="--reveal-delay:100ms">
+        <li class="promise-item">
+          <span class="promise-item-mark">✓</span>
+          <div><span class="promise-item-name">Flex cables</span><p>The connector every other kit skips because it doesn't sit flat — ours gets its own bracket.</p></div>
+        </li>
+        <li class="promise-item">
+          <span class="promise-item-mark">✓</span>
+          <div><span class="promise-item-name">Bottom board</span><p>Charging port, mic, speaker terminals — mounted in place, not boxed off to the side.</p></div>
+        </li>
+        <li class="promise-item">
+          <span class="promise-item-mark">✓</span>
+          <div><span class="promise-item-name">Camera module internals</span><p>Lens assembly, autofocus coil, sensor — kept adjacent, the way they sat in the housing.</p></div>
+        </li>
+        <li class="promise-item">
+          <span class="promise-item-mark">✓</span>
+          <div><span class="promise-item-name">Every last screw</span><p>Even the fasteners get a marked spot. If it came out of the phone, it goes on the frame.</p></div>
+        </li>
+      </ul>
     </div>
   </section>
 
