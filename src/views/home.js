@@ -138,10 +138,12 @@ export function renderHome({ featured }) {
 
   <section class="fomo-story">
     <div class="container fomo-story-grid">
-      <div class="fomo-collage" data-reveal aria-hidden="true">
-        <img class="fomo-photo fomo-photo--a" src="/img/seed/nokia-n73-2.jpg" alt="" loading="lazy">
-        <img class="fomo-photo fomo-photo--b" src="/img/seed/iphone-4s-1.jpg" alt="" loading="lazy">
-        <img class="fomo-photo fomo-photo--c" src="/img/seed/apple-watch-series-3-3.jpg" alt="" loading="lazy">
+      <div class="fomo-fan" data-reveal aria-hidden="true">
+        <img class="fomo-fan-photo" src="/img/seed/nokia-n73-1.jpg" alt="" loading="lazy">
+        <img class="fomo-fan-photo" src="/img/seed/iphone-3gs-1.jpg" alt="" loading="lazy">
+        <img class="fomo-fan-photo" src="/img/seed/iphone-4s-1.jpg" alt="" loading="lazy">
+        <img class="fomo-fan-photo" src="/img/seed/apple-watch-series-3-3.jpg" alt="" loading="lazy">
+        <img class="fomo-fan-photo" src="/img/seed/ipod-classic-2nd-gen-1.jpg" alt="" loading="lazy">
       </div>
       <div class="fomo-story-copy">
         <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Every phone was a chapter.<br><span class="text-italic">This one's still being written.</span></h2>
