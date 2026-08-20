@@ -40,12 +40,12 @@ export function renderHome({ featured }) {
           <span class="hero-orbit-ring hero-orbit-ring--3"></span>
         </div>
       </div>
-      <span class="hero-orbit-node hero-orbit-node--1" style="--tx:-277px; --ty:-160px;">🔩</span>
-      <span class="hero-orbit-node hero-orbit-node--2" style="--tx:-277px; --ty:160px;">🔋</span>
-      <span class="hero-orbit-node hero-orbit-node--3" style="--tx:277px; --ty:-160px;">📷</span>
-      <span class="hero-orbit-node hero-orbit-node--4" style="--tx:277px; --ty:160px;">🔌</span>
-      <span class="hero-orbit-node hero-orbit-node--5" style="--tx:0px; --ty:-320px;">📱</span>
-      <span class="hero-orbit-node hero-orbit-node--6" style="--tx:0px; --ty:320px;">⚙️</span>
+      <span class="hero-orbit-node hero-orbit-node--1" style="--tx:-400px; --ty:-190px;">🔩</span>
+      <span class="hero-orbit-node hero-orbit-node--2" style="--tx:-400px; --ty:190px;">🔋</span>
+      <span class="hero-orbit-node hero-orbit-node--3" style="--tx:400px; --ty:-190px;">📷</span>
+      <span class="hero-orbit-node hero-orbit-node--4" style="--tx:400px; --ty:190px;">🔌</span>
+      <span class="hero-orbit-node hero-orbit-node--5" style="--tx:0px; --ty:-360px;">📱</span>
+      <span class="hero-orbit-node hero-orbit-node--6" style="--tx:0px; --ty:360px;">⚙️</span>
       <div class="hero-orbit-center">
         <h1 class="hero-oneliner">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
         <div class="hero-actions">
