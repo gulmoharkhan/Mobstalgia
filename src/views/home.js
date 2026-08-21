@@ -29,29 +29,20 @@ function ctaTile() {
   </a>`;
 }
 
+function checkIcon() {
+  return `<span class="why-choose-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>`;
+}
+
 export function renderHome({ featured }) {
   return `
-  <section class="hero-orbit-outer">
-    <div class="hero-orbit-frame" data-reveal>
-      <div class="hero-orbit-decor" aria-hidden="true">
-        <div class="hero-orbit-rings">
-          <span class="hero-orbit-ring hero-orbit-ring--1"></span>
-          <span class="hero-orbit-ring hero-orbit-ring--2"></span>
-          <span class="hero-orbit-ring hero-orbit-ring--3"></span>
-        </div>
-      </div>
-      <span class="hero-orbit-node hero-orbit-node--1" style="--tx:-400px; --ty:-190px;">🔩</span>
-      <span class="hero-orbit-node hero-orbit-node--2" style="--tx:-400px; --ty:190px;">🔋</span>
-      <span class="hero-orbit-node hero-orbit-node--3" style="--tx:400px; --ty:-190px;">📷</span>
-      <span class="hero-orbit-node hero-orbit-node--4" style="--tx:400px; --ty:190px;">🔌</span>
-      <span class="hero-orbit-node hero-orbit-node--5" style="--tx:0px; --ty:-360px;">📱</span>
-      <span class="hero-orbit-node hero-orbit-node--6" style="--tx:0px; --ty:360px;">⚙️</span>
-      <div class="hero-orbit-center">
-        <h1 class="hero-oneliner">Still holding onto that old phone?<br><span class="text-italic">Give it a wall, not a drawer.</span></h1>
-        <div class="hero-actions">
-          <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
-          <a href="/about" class="link-btn link-btn--lg">How it works →</a>
-        </div>
+  <section class="home-hero" data-reveal>
+    <img class="home-hero-bg" src="/img/figma/hero-desk.jpg" alt="" loading="eager">
+    <div class="container home-hero-inner">
+      <span class="home-hero-eyebrow">Mobstalgia</span>
+      <h1>Still holding onto that old phone?<br>Give it a wall, not a drawer.</h1>
+      <div class="home-hero-actions">
+        <a href="/shop" class="btn" data-magnetic>Get the Frame Kit</a>
+        <a href="/about" class="btn btn--outline-light">How it works</a>
       </div>
     </div>
   </section>
@@ -60,7 +51,7 @@ export function renderHome({ featured }) {
     <span class="section-tag">1.1</span>
     <div class="section-head" data-reveal>
       <span class="kicker">Pick an era</span>
-      <h2>A few phones worth framing</h2>
+      <h2>Which one defined you back then?</h2>
       <p>A handful of teardowns to spark ideas — pick an era, or bring your own.</p>
     </div>
     <div class="home-grid" data-reveal>
@@ -73,85 +64,43 @@ export function renderHome({ featured }) {
     <span class="section-tag">1.2</span>
     <div class="section-head" data-reveal>
       <span class="kicker">Choose your depth</span>
-      <h2>How expert are you?</h2>
+      <h2>Up for the challenge?</h2>
       <p>Every kit reflects how far you go. Casual keeps it simple. Expert leaves nothing behind.</p>
     </div>
-    <div class="tier-split">
-      <div class="tier-panel tier-panel--novice" data-reveal style="--reveal-delay:60ms">
-        <div class="tier-media">
-          <img src="/img/seed/iphone-4-1.jpg" alt="" loading="lazy">
-        </div>
-        <div class="tier-content">
-          <span class="tier-flag">Just starting out</span>
-          <h3 class="tier-name">Casual</h3>
-          <p class="tier-tagline">Open the phone. Meet every part.</p>
-          <p class="tier-desc">For your first teardown. Pull the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
-          <span class="tier-chip">Main board · Battery · Display</span>
-          <a href="/shop?type=novice" class="btn btn--sm">Browse Casual kits →</a>
-        </div>
+    <div class="tier-challenge-split">
+      <div class="tier-challenge-panel" data-reveal style="--reveal-delay:60ms">
+        <span class="tier-challenge-emoji" aria-hidden="true">🤓</span>
+        <h3>Welcome starters</h3>
+        <p>Open the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
+        <a href="/shop?type=novice" class="btn btn--sm">Browse Casual kits →</a>
       </div>
-      <div class="tier-panel tier-panel--expert" data-reveal style="--reveal-delay:140ms">
-        <div class="tier-media">
-          <img src="/img/seed/apple-watch-series-3-2.jpg" alt="" loading="lazy">
-        </div>
-        <div class="tier-content">
-          <span class="tier-flag">Detail-obsessed</span>
-          <h3 class="tier-name">Expert</h3>
-          <p class="tier-tagline">Open the parts, not just the phone.</p>
-          <p class="tier-desc">For people who don't stop at "that's a camera module." Open the camera itself and find the lens assembly, autofocus system, and image sensor inside. Same with the Taptic Engine — every part with its own hidden layers, taken all the way down.</p>
-          <span class="tier-chip">Lens assembly · Autofocus system · Image sensor</span>
-          <a href="/shop?type=expert" class="btn btn--sm">Browse Expert kits →</a>
-        </div>
+      <div class="tier-challenge-panel" data-reveal style="--reveal-delay:140ms">
+        <span class="tier-challenge-emoji" aria-hidden="true">😈</span>
+        <h3>Wassup experts</h3>
+        <p>For people who don't stop at "that's a camera module." Open the camera itself, the Taptic Engine, and every part with its own hidden layers — taken all the way down.</p>
+        <a href="/shop?type=expert" class="btn btn--sm">Browse Expert kits →</a>
       </div>
     </div>
   </section>
 
-  <section class="section container promise-section">
+  <section class="section container why-choose-section">
     <span class="section-tag">1.3</span>
-    <div class="promise-grid">
-      <div class="promise-lead" data-reveal>
+    <div class="why-choose-grid">
+      <div class="why-choose-media" data-reveal>
+        <img src="/img/figma/workbench-teardown.jpg" alt="Phone teardown parts laid out on a workbench">
+      </div>
+      <div class="why-choose-copy" data-reveal style="--reveal-delay:100ms">
         <span class="kicker">Our promise</span>
-        <h2>We don't cut corners.<br><span class="text-italic">Literally.</span></h2>
-        <p class="promise-body">Most teardown frames quietly leave things out — a flex cable with nowhere tidy to go, a bottom board that's "basically just contacts." We don't. Every functional component gets a place on the frame, positioned with the same proximity and connectivity it had inside the phone. Nothing is skipped because it was hard to mount.</p>
-        <a href="/about" class="link-btn link-btn--lg">See how we lay it out →</a>
-      </div>
-      <ul class="promise-list" data-reveal style="--reveal-delay:100ms">
-        <li class="promise-item">
-          <span class="promise-item-mark">✓</span>
-          <div><span class="promise-item-name">Flex cables</span><p>The connector every other kit skips because it doesn't sit flat — ours gets its own bracket.</p></div>
-        </li>
-        <li class="promise-item">
-          <span class="promise-item-mark">✓</span>
-          <div><span class="promise-item-name">Bottom board</span><p>Charging port, mic, speaker terminals — mounted in place, not boxed off to the side.</p></div>
-        </li>
-        <li class="promise-item">
-          <span class="promise-item-mark">✓</span>
-          <div><span class="promise-item-name">Camera module internals</span><p>Lens assembly, autofocus coil, sensor — kept adjacent, the way they sat in the housing.</p></div>
-        </li>
-        <li class="promise-item">
-          <span class="promise-item-mark">✓</span>
-          <div><span class="promise-item-name">Every last screw</span><p>Even the fasteners get a marked spot. If it came out of the phone, it goes on the frame.</p></div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="fomo-story">
-    <div class="container fomo-story-grid">
-      <div class="fomo-fan" data-reveal aria-hidden="true">
-        <img class="fomo-fan-photo" src="/img/seed/nokia-n73-1.jpg" alt="" loading="lazy">
-        <img class="fomo-fan-photo" src="/img/seed/iphone-3gs-1.jpg" alt="" loading="lazy">
-        <img class="fomo-fan-photo" src="/img/seed/iphone-4s-1.jpg" alt="" loading="lazy">
-        <img class="fomo-fan-photo" src="/img/seed/apple-watch-series-3-3.jpg" alt="" loading="lazy">
-        <img class="fomo-fan-photo" src="/img/seed/ipod-classic-2nd-gen-1.jpg" alt="" loading="lazy">
-      </div>
-      <div class="fomo-story-copy">
-        <h2 class="fomo-story-lead" data-reveal style="--reveal-delay:60ms">Every phone was a chapter.<br><span class="text-italic">This one's still being written.</span></h2>
-        <div class="fomo-story-body" data-reveal style="--reveal-delay:120ms">
-          <p>You remember the exact click of its buttons. The crack in the corner from the fall you still tell people about. The sticker you half-peeled off and gave up on. That phone isn't just old — it's evidence.</p>
-          <p>Take it apart. Study the board like a tiny city map. Arrange the pieces however you like, mount it, and hang it somewhere you'll actually see it — not a drawer you open twice a year.</p>
-        </div>
-        <a href="/about" class="link-btn link-btn--lg" data-reveal style="--reveal-delay:180ms">See how the frame kit works →</a>
+        <h2>Why choose Mobstalgia?</h2>
+        <p>Most teardown frames quietly leave things out — a flex cable with nowhere tidy to go, a bottom board that's "basically just contacts." We don't. Every functional component gets a place on the frame, positioned with the same proximity and connectivity it had inside the phone.</p>
+        <p>Your phone is an engineering and design marvel that reflects not just you but the pinnacle of what was possible at that time. Nothing is skipped because it was hard to mount.</p>
+        <p>We ship every kit with a numbered layout guide, so putting it together feels like a second teardown — this time, one you get to keep.</p>
+        <ul class="why-choose-list">
+          <li>${checkIcon()}Flex cables included</li>
+          <li>${checkIcon()}Bottom board mounted</li>
+          <li>${checkIcon()}Camera internals kept</li>
+          <li>${checkIcon()}Every last screw</li>
+        </ul>
       </div>
     </div>
   </section>

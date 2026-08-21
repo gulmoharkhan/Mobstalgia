@@ -7,16 +7,18 @@ function productCard(frame, index = 0) {
   const delay = Math.min(index * 45, 360);
   const { name, tagline } = splitTitle(frame.title);
   return `
-  <a class="product-card" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
+  <a class="product-card product-card--shop" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
     <div class="product-card-media">
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
       <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
-    <div class="product-card-title">${escapeHtml(name)}</div>
+    <div class="product-card-row">
+      <span class="product-card-title">${escapeHtml(name)}</span>
+      <span class="product-card-price">${formatCurrency(frame.price)}</span>
+    </div>
     ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
-    <div class="product-card-price">${formatCurrency(frame.price)}</div>
   </a>`;
 }
 
@@ -28,10 +30,11 @@ export function renderShop({ frames, brands, query }) {
   return `
   <div class="container">
     <div class="section-head" style="padding-top:44px;" data-reveal>
-      <h1>Frame Kits</h1>
+      <h1>Browse frames</h1>
+      <p>Every teardown we've framed, in one place — filter by brand, kit, or availability.</p>
     </div>
 
-    <form class="filters-bar" method="GET" action="/shop" id="filters-form">
+    <form class="filters-bar filters-bar--chip" method="GET" action="/shop" id="filters-form">
       <div class="filter-field filter-field--search">
         <label for="q">Search</label>
         <input type="text" id="q" name="q" placeholder="iPhone, Nokia, iPod…" value="${escapeHtml(query.q || '')}">
