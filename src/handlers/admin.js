@@ -228,11 +228,24 @@ export async function feedbackMarkReadPost(ctx) {
 /* ---------------------------- Settings ---------------------------- */
 
 export async function settingsPage(ctx) {
+  const coverImage = models.getSetting('cover_image_url', '/img/figma2/hero-bg.jpg');
   sendHtml(
     ctx.res,
     200,
-    renderAdminLayout({ title: 'Settings', activeNav: 'settings', adminEmail: ctx.admin.email, bodyHtml: renderSettings({ adminEmail: ctx.admin.email }) })
+    renderAdminLayout({ title: 'Settings', activeNav: 'settings', adminEmail: ctx.admin.email, bodyHtml: renderSettings({ adminEmail: ctx.admin.email, coverImage }) })
   );
+}
+
+export async function settingsCoverImageApi(ctx) {
+  try {
+    const body = ctx.json;
+    if (!body?.dataBase64) throw new Error('No image provided.');
+    const url = saveBase64Image(body.dataBase64, body.filename || 'cover');
+    models.setSetting('cover_image_url', url);
+    sendJson(ctx.res, 200, { url });
+  } catch (err) {
+    sendJson(ctx.res, 400, { error: err.message });
+  }
 }
 
 export async function settingsPasswordPost(ctx) {

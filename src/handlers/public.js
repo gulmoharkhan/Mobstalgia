@@ -14,9 +14,10 @@ import * as models from '../models.js';
 export async function home(ctx) {
   let featured = models.listFrames({ status: 'available', featuredOnly: true, sort: 'newest' });
   if (featured.length === 0) featured = models.listFrames({ sort: 'newest', availableFirst: true }).slice(0, 8);
+  const coverImage = models.getSetting('cover_image_url', '/img/figma2/hero-bg.jpg');
   const html = renderLayout({
     activeNav: 'home',
-    bodyHtml: renderHome({ featured }),
+    bodyHtml: renderHome({ featured, coverImage }),
   });
   sendHtml(ctx.res, 200, html);
 }
