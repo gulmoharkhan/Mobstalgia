@@ -9,10 +9,10 @@ function productCard(frame) {
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
     </div>
     <div class="product-card-row">
-      <span class="product-card-title">${escapeHtml(name)}</span>
-      <span class="product-card-price">${formatCurrency(frame.price)}</span>
+      <div class="product-card-title">${escapeHtml(name)}</div>
+      ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
+      <div class="product-card-price">${formatCurrency(frame.price)}</div>
     </div>
-    ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
   </a>`;
 }
 

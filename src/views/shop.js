@@ -15,10 +15,10 @@ function productCard(frame, index = 0) {
       <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
     <div class="product-card-row">
-      <span class="product-card-title">${escapeHtml(name)}</span>
-      <span class="product-card-price">${formatCurrency(frame.price)}</span>
+      <div class="product-card-title">${escapeHtml(name)}</div>
+      ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
+      <div class="product-card-price">${formatCurrency(frame.price)}</div>
     </div>
-    ${tagline ? `<div class="product-card-sub">${escapeHtml(tagline)}</div>` : ''}
   </a>`;
 }
 
