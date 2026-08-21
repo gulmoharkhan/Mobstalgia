@@ -10,10 +10,10 @@ const STRIP_PHOTOS = [
   '/img/figma2/about-photo-7.jpg',
 ];
 
-function storyBlock({ headlinePre, headlineStrong, headlineSuf, body }) {
+function storyBlock({ headlineLead, headlinePre, headlineStrong, headlineSuf, body }) {
   return `
   <div class="about-story-block" data-reveal>
-    <h2 class="about-story-headline">${headlinePre}${headlineStrong ? `<span class="text-blue">${headlineStrong}</span>` : ''}${headlineSuf || ''}</h2>
+    <h2 class="about-story-headline">${headlineLead ? `${headlineLead}<br>` : ''}${headlinePre}${headlineStrong ? `<span class="text-blue">${headlineStrong}</span>` : ''}${headlineSuf || ''}</h2>
     <p class="about-story-body">${body}</p>
   </div>`;
 }
@@ -34,9 +34,10 @@ export function renderAbout() {
       body: "At Mobstalgia we truly believe that phones are personal devices and a reflection of someone's financial position, character, and choices at different points in their lives. Think deeply and you will feel that phones are extension of a person's identity and choices.",
     })}
     ${storyBlock({
-      headlinePre: 'And... why should such an important part of your past sit inside that drawer',
+      headlineLead: 'And...',
+      headlinePre: 'Why should such an important part of your past sit inside that drawer',
       headlineSuf: '?',
-      body: 'We wanted to give these phones an opportunity to rekindle those memories from the past within you. Your phone is an engineering and design marvel that reflects not just you but the pinnacle of what was possible at that time.',
+      body: 'We wanted to to give these phones an opportunity to rekindle those memories from the past within you. Your phone is an engineering and design marvel that reflects not just you but the pinnacle of what was possible at that time.',
     })}
     ${storyBlock({
       headlinePre: 'Mobstalgia frames honour your deeply personal devices',

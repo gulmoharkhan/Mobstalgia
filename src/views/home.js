@@ -17,7 +17,7 @@ function productCard(frame) {
 }
 
 function checkIcon() {
-  return `<span class="why-choose-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>`;
+  return `<img class="why-choose-check" src="/img/figma2/icon-check.png" alt="" aria-hidden="true">`;
 }
 
 export function renderHome({ featured }) {
@@ -25,7 +25,7 @@ export function renderHome({ featured }) {
   <section class="home-hero" data-reveal>
     <img class="home-hero-bg" src="/img/figma2/hero-bg.jpg" alt="" loading="eager">
     <div class="container home-hero-inner">
-      <h1>Still holding onto that old phone?<br>Give it a wall, not a drawer.</h1>
+      <h1><span class="line-ink">Still holding onto that old phone?</span><span class="line-accent">Give it a wall, not a drawer</span></h1>
       <div class="home-hero-actions">
         <a href="/shop" class="btn" data-magnetic>Browse frames</a>
         <a href="/about" class="btn btn--outline-light">Learn more</a>
@@ -41,7 +41,7 @@ export function renderHome({ featured }) {
       ${featured.slice(0, 8).map((f) => productCard(f)).join('') || '<p>New pieces are on the way — check back soon.</p>'}
     </div>
     <div class="home-grid-footer" data-reveal>
-      <a href="/shop" class="btn">Browse all frames</a>
+      <a href="/shop" class="btn btn--outline-light">Browse all frames</a>
     </div>
   </section>
 
@@ -52,13 +52,13 @@ export function renderHome({ featured }) {
     <div class="tier-challenge-split">
       <div class="tier-challenge-panel" data-reveal style="--reveal-delay:60ms">
         <h3><span class="tier-challenge-emoji" aria-hidden="true">🤓</span>Welcome starters</h3>
-        <p>Open the shell off and lay out the whole device — main board, battery, display, camera, speaker — every component, intact and exactly where the engineers put it. No specialist tools required.</p>
-        <a href="/shop?type=novice" class="btn btn--sm">Browse Casual kits →</a>
+        <p>Don't have experience with opening tech toys? Fear not. There's always a first time. The starter kits are for first timers. Basic teardown and then mounting on the frame. Cakewalk!</p>
+        <a href="/shop?type=novice" class="btn btn--sm">Browse starter kits</a>
       </div>
       <div class="tier-challenge-panel" data-reveal style="--reveal-delay:140ms">
-        <h3><span class="tier-challenge-emoji" aria-hidden="true">😈</span>Wassup experts</h3>
-        <p>For people who don't stop at "that's a camera module." Open the camera itself, the Taptic Engine, and every part with its own hidden layers — taken all the way down.</p>
-        <a href="/shop?type=expert" class="btn btn--sm">Browse Expert kits →</a>
+        <h3><span class="tier-challenge-emoji" aria-hidden="true">😈</span>Wassup experts!</h3>
+        <p>Think you are good? Try our one of a kind, super detailed kits. They show magnets &amp; coils buried inside taptic engines, sensors &amp; lenses inside the camera. Not for the faint hearted!</p>
+        <a href="/shop?type=expert" class="btn btn--sm">Browse expert kits</a>
       </div>
     </div>
   </section>
@@ -70,14 +70,13 @@ export function renderHome({ featured }) {
       </div>
       <div class="why-choose-copy" data-reveal style="--reveal-delay:100ms">
         <h2>Why choose Mobstalgia?</h2>
-        <p>Most teardown frames quietly leave things out — a flex cable with nowhere tidy to go, a bottom board that's "basically just contacts." We don't. Every functional component gets a place on the frame, positioned with the same proximity and connectivity it had inside the phone.</p>
-        <p>Your phone is an engineering and design marvel that reflects not just you but the pinnacle of what was possible at that time. Nothing is skipped because it was hard to mount.</p>
-        <p>We ship every kit with a numbered layout guide, so putting it together feels like a second teardown — this time, one you get to keep.</p>
+        <p>Check out other frame providers. No one does as meticulous teardown as us. Not even YouTubers!</p>
+        <p>At Mobstalgia we don't cut corners for aesthetics. Every functional part finds a way into the frame. Every frame is crafted after tedious rearrangements to find the best possible composition showing connection between parts while looking cool as hell.</p>
         <ul class="why-choose-list">
-          <li>${checkIcon()}Flex cables included</li>
-          <li>${checkIcon()}Bottom board mounted</li>
-          <li>${checkIcon()}Camera internals kept</li>
-          <li>${checkIcon()}Every last screw</li>
+          <li>${checkIcon()}All functional components are shown</li>
+          <li>${checkIcon()}Composition showing connections</li>
+          <li>${checkIcon()}Top tier aesthetics</li>
+          <li>${checkIcon()}Hand crafted pieces-truly one-of-a-kind</li>
         </ul>
       </div>
     </div>

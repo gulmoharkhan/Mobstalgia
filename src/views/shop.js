@@ -59,20 +59,20 @@ export function renderShop({ frames, brands, query }) {
           </select>
         </div>
         <div class="filter-field">
-          <label for="type">Skill level</label>
-          <select id="type" name="type">
-            ${opt('', 'All levels', query.type)}
-            ${opt('novice', 'Casual Kit', query.type)}
-            ${opt('expert', 'Expert Kit', query.type)}
-          </select>
-        </div>
-        <div class="filter-field">
           <label for="availability">Availability</label>
           <select id="availability" name="availability">
             ${opt('', 'All', query.availability)}
             ${opt('available', 'Available only', query.availability)}
             ${opt('reserved', 'Reserved', query.availability)}
             ${opt('sold', 'Sold', query.availability)}
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="type">Skill level</label>
+          <select id="type" name="type">
+            ${opt('', 'All levels', query.type)}
+            ${opt('novice', 'Casual Kit', query.type)}
+            ${opt('expert', 'Expert Kit', query.type)}
           </select>
         </div>
         <div class="filter-field">
