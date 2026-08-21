@@ -17,7 +17,10 @@ function productCard(frame) {
 }
 
 function checkIcon() {
-  return `<img class="why-choose-check" src="/img/figma2/icon-check.png" alt="" aria-hidden="true">`;
+  return `<svg class="why-choose-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="12" fill="#000"></circle>
+    <path d="M7 12.5L10.2 15.7L17 8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>`;
 }
 
 export function renderHome({ featured, coverImage }) {
