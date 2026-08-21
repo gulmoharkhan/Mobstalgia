@@ -120,13 +120,13 @@ button { font-family: inherit; cursor: pointer; }
 .admin-content .flash { border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; }
 
 /* ---------- Buttons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 36px; border-radius: var(--radius-full); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.01em; border: 2px solid var(--ink); background: var(--ink); color: #fff; box-shadow: 0 14px 30px -10px rgba(17, 18, 22, 0.4); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-standard), border-color .2s var(--ease-standard), color .2s var(--ease-standard); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 36px; border-radius: 10px; font-size: 1rem; font-weight: 400; font-family: var(--font-sans); letter-spacing: 0; border: 2px solid var(--ink); background: var(--ink); color: #fff; box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.15); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-standard), border-color .2s var(--ease-standard), color .2s var(--ease-standard); }
 .btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-2px); box-shadow: 0 18px 36px -10px rgba(22, 59, 207, 0.5); }
 .btn:active { transform: translateY(0); box-shadow: 0 8px 18px -8px rgba(17, 18, 22, 0.4); }
 .btn--outline { background: transparent; color: var(--ink); border: 2px solid var(--ink); box-shadow: none; }
 .btn--outline:hover { background: var(--ink); color: #fff; box-shadow: 0 14px 30px -10px rgba(17, 18, 22, 0.3); transform: translateY(-2px); }
 .btn--outline:active { transform: translateY(0); box-shadow: none; }
-.btn--sm { padding: 10px 20px; font-size: 0.8rem; }
+.btn--sm { padding: 18px 36px; font-size: 1rem; }
 .btn--danger { background: #fff; color: #b3392c; border-color: #f3d4d1; box-shadow: var(--shadow-sm); }
 .btn--danger:hover { background: #b3392c; color: #fff; border-color: #b3392c; transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(179, 57, 44, 0.45); }
 .btn--block { width: 100%; }
@@ -207,7 +207,7 @@ button { font-family: inherit; cursor: pointer; }
 .home-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(17px); transform: scale(1.1); z-index: 0; }
 .home-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--surface-gray) 0%, rgba(255,255,255,0.6) 36%, rgba(255,255,255,0) 75%); z-index: 1; }
 .home-hero-inner { position: relative; z-index: 2; padding: 64px 24px 76px; max-width: 780px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.home-hero h1 { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.15; margin: 0 0 30px; text-wrap: balance; }
+.home-hero h1 { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.836rem); line-height: 1.15; margin: 0 0 30px; text-wrap: balance; }
 .home-hero h1 .line-ink { color: var(--ink); display: block; }
 .home-hero h1 .line-accent { color: var(--blue); display: block; }
 .home-hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
@@ -235,15 +235,16 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ---------- Home: "Up for the challenge?" tier panels (Figma) ---------- */
-.tier-challenge-split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.tier-challenge-panel { background: var(--surface-gray); border-radius: 20px; padding: 48px 44px; display: flex; flex-direction: column; align-items: flex-start; }
-.tier-challenge-emoji { font-size: 0.85em; margin-right: 8px; vertical-align: -0.05em; }
+.tier-challenge-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.tier-challenge-panel { background: var(--surface-gray); border-radius: 0; padding: 60px 88px 60px 120px; display: flex; flex-direction: column; align-items: flex-start; }
+.tier-challenge-split .tier-challenge-panel:last-child { padding-left: 44px; }
+.tier-challenge-emoji { font-size: 0.85em; margin-left: 8px; vertical-align: -0.05em; }
 .tier-challenge-panel h3 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2rem, 3.4vw, 3rem); margin: 0 0 16px; }
 .tier-challenge-panel p { color: var(--ink-soft); font-size: 1.25rem; line-height: 1.6; margin: 0 0 30px; max-width: 46ch; text-wrap: pretty; }
 .tier-challenge-panel .btn { margin-top: auto; }
 @media (max-width: 720px) {
-  .tier-challenge-split { grid-template-columns: 1fr; }
-  .tier-challenge-panel { padding: 36px 30px; }
+  .tier-challenge-split { grid-template-columns: 1fr; gap: 4px; }
+  .tier-challenge-panel, .tier-challenge-split .tier-challenge-panel:last-child { padding: 36px 30px; }
 }
 
 /* ---------- Home: "Why choose Mobstalgia?" ---------- */
@@ -272,9 +273,10 @@ button { font-family: inherit; cursor: pointer; }
   .home-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
 }
 .product-card { display: block; color: var(--ink); }
-.product-card-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface-gray); border-radius: 0; padding: 14%; box-shadow: var(--shadow-sm); margin-bottom: 10px; transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out); }
-.product-card-media img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25)); transition: transform .5s var(--ease-out); }
-.product-card:hover .product-card-media { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.product-card-media { position: relative; aspect-ratio: 252.5 / 312; overflow: hidden; background: var(--surface-gray); border-radius: 0; margin-bottom: 10px; }
+.product-card-media-inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 41%; height: 70%; overflow: hidden; box-shadow: 0 4px 6.2px rgba(0, 0, 0, 0.25); transition: transform .35s var(--ease-out), box-shadow .25s var(--ease-out); }
+.product-card-media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease-out); }
+.product-card:hover .product-card-media-inner { transform: translate(-50%, -50%) translateY(-4px); box-shadow: var(--shadow-lg); }
 .product-card:hover .product-card-media img { transform: scale(1.06); }
 .badge { position: absolute; top: 12px; left: 12px; padding: 5px 12px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em; border-radius: var(--radius-full); font-family: 'JetBrains Mono', monospace; z-index: 2; box-shadow: var(--shadow-sm); }
 .badge--sold { background: var(--ink); color: #fff; }
