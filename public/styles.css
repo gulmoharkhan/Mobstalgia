@@ -121,10 +121,10 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- Buttons ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 36px; border-radius: 10px; font-size: 1rem; font-weight: 400; font-family: var(--font-sans); letter-spacing: 0; border: 2px solid var(--ink); background: var(--ink); color: #fff; box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.15); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-standard), border-color .2s var(--ease-standard), color .2s var(--ease-standard); }
-.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-2px); box-shadow: 0 18px 36px -10px rgba(22, 59, 207, 0.5); }
+.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); transform: translateY(-1px); box-shadow: 0 12px 24px -10px rgba(22, 59, 207, 0.4); }
 .btn:active { transform: translateY(0); box-shadow: 0 8px 18px -8px rgba(17, 18, 22, 0.4); }
 .btn--outline { background: transparent; color: var(--ink); border: 2px solid var(--ink); box-shadow: none; }
-.btn--outline:hover { background: var(--ink); color: #fff; box-shadow: 0 14px 30px -10px rgba(17, 18, 22, 0.3); transform: translateY(-2px); }
+.btn--outline:hover { background: var(--ink); color: #fff; box-shadow: 0 10px 20px -10px rgba(17, 18, 22, 0.3); transform: translateY(-1px); }
 .btn--outline:active { transform: translateY(0); box-shadow: none; }
 .btn--sm { padding: 18px 36px; font-size: 1rem; }
 .btn--danger { background: #fff; color: #b3392c; border-color: #f3d4d1; box-shadow: var(--shadow-sm); }
@@ -212,7 +212,7 @@ button { font-family: inherit; cursor: pointer; }
 .home-hero h1 .line-accent { color: var(--blue); display: block; }
 .home-hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .btn--outline-light { background: transparent; border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
-.btn--outline-light:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+.btn--outline-light:hover { background: var(--ink); color: #fff; transform: translateY(-1px); }
 @media (max-width: 720px) {
   .home-hero { min-height: 480px; }
   .home-hero-inner { padding: 44px 24px 48px; }
