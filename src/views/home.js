@@ -20,10 +20,10 @@ function checkIcon() {
   return `<img class="why-choose-check" src="/img/figma2/icon-check.png" alt="" aria-hidden="true">`;
 }
 
-export function renderHome({ featured }) {
+export function renderHome({ featured, coverImage }) {
   return `
   <section class="home-hero" data-reveal>
-    <img class="home-hero-bg" src="/img/figma2/hero-bg.jpg" alt="" loading="eager">
+    <img class="home-hero-bg" src="${escapeHtml(coverImage || '/img/figma2/hero-bg.jpg')}" alt="" loading="eager">
     <div class="container home-hero-inner">
       <h1><span class="line-ink">Still holding onto that old phone?</span><span class="line-accent">Give it a wall, not a drawer</span></h1>
       <div class="home-hero-actions">
