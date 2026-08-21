@@ -235,6 +235,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ---------- Home: "Up for the challenge?" tier panels (Figma) ---------- */
+.tier-section-head { padding: 0 88px 0 120px; }
 .tier-challenge-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 .tier-challenge-panel { background: var(--surface-gray); border-radius: 0; padding: 60px 88px 60px 120px; display: flex; flex-direction: column; align-items: flex-start; }
 .tier-challenge-split .tier-challenge-panel:last-child { padding-left: 44px; }
@@ -243,6 +244,7 @@ button { font-family: inherit; cursor: pointer; }
 .tier-challenge-panel p { color: var(--ink-soft); font-size: 1.25rem; line-height: 1.6; margin: 0 0 30px; max-width: 46ch; text-wrap: pretty; }
 .tier-challenge-panel .btn { margin-top: auto; }
 @media (max-width: 720px) {
+  .tier-section-head { padding: 0 30px; }
   .tier-challenge-split { grid-template-columns: 1fr; gap: 4px; }
   .tier-challenge-panel, .tier-challenge-split .tier-challenge-panel:last-child { padding: 36px 30px; }
 }
