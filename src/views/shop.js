@@ -12,7 +12,6 @@ function productCard(frame, index = 0) {
       <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
-      <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
     </div>
     <div class="product-card-row">
       <div class="product-card-title">${escapeHtml(name)}</div>
