@@ -54,7 +54,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans), 'Inter', "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: var(--ink);
-  background: var(--paper-soft);
+  background: var(--paper);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -310,7 +310,7 @@ button { font-family: inherit; cursor: pointer; }
 .filters-bar--chip .filters-apply-inline.btn { border-radius: 8px; }
 
 /* ---------- Filters ---------- */
-.filters-bar { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; padding: 20px 0; background: var(--paper-soft); border-bottom: 1px solid var(--line); margin-bottom: 40px; position: sticky; top: 76px; z-index: 15; }
+.filters-bar { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; padding: 20px 0; background: var(--paper); border-bottom: 1px solid var(--line); margin-bottom: 40px; position: sticky; top: 76px; z-index: 15; }
 .filter-field { display: flex; flex-direction: column; gap: 6px; }
 .filter-field label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); padding-left: 14px; }
 .filter-field select, .filter-field input { border: 1px solid var(--line); padding: 10px 14px; font-size: 0.87rem; font-weight: 500; border-radius: var(--radius-full); background: #fff; min-width: 150px; height: 40px; box-sizing: border-box; transition: box-shadow .15s, border-color .15s; }
@@ -542,7 +542,7 @@ button { font-family: inherit; cursor: pointer; }
 .about-compare-card--expert p { color: var(--amber-ink); }
 .about-compare-card--expert .about-compare-flag { color: var(--amber-ink); }
 
-.about-cta-band { background: var(--paper-soft); border-top: 1px solid var(--line); margin-top: 64px; padding: 72px 0 84px; }
+.about-cta-band { background: var(--paper); border-top: 1px solid var(--line); margin-top: 64px; padding: 72px 0 84px; }
 .about-cta-inner { max-width: 620px; text-align: center; margin: 0 auto; }
 .about-cta-inner p { color: var(--ink-soft); margin: 14px auto 30px; max-width: 56ch; }
 .about-cta-actions { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; }
