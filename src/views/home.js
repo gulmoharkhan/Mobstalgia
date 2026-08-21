@@ -1,12 +1,14 @@
 import { escapeHtml, formatCurrency, splitTitle } from '../utils.js';
 
 function productCard(frame) {
-  const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
+  const cover = frame.images?.[0]?.url || '/img/figma2/product-placeholder.jpg';
   const { name, tagline } = splitTitle(frame.title);
   return `
   <a class="product-card" href="/piece/${frame.id}">
     <div class="product-card-media">
-      <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
+      <div class="product-card-media-inner">
+        <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
+      </div>
     </div>
     <div class="product-card-row">
       <span class="product-card-title">${escapeHtml(name)}</span>
@@ -51,14 +53,14 @@ export function renderHome({ featured }) {
     </div>
     <div class="tier-challenge-split">
       <div class="tier-challenge-panel" data-reveal style="--reveal-delay:60ms">
-        <h3><span class="tier-challenge-emoji" aria-hidden="true">🤓</span>Welcome starters</h3>
+        <h3>Welcome starters<span class="tier-challenge-emoji" aria-hidden="true">🤓</span></h3>
         <p>Don't have experience with opening tech toys? Fear not. There's always a first time. The starter kits are for first timers. Basic teardown and then mounting on the frame. Cakewalk!</p>
-        <a href="/shop?type=novice" class="btn btn--sm">Browse starter kits</a>
+        <a href="/shop?type=novice" class="btn">Browse starter kits</a>
       </div>
       <div class="tier-challenge-panel" data-reveal style="--reveal-delay:140ms">
-        <h3><span class="tier-challenge-emoji" aria-hidden="true">😈</span>Wassup experts!</h3>
+        <h3>Wassup experts!<span class="tier-challenge-emoji" aria-hidden="true">😈</span></h3>
         <p>Think you are good? Try our one of a kind, super detailed kits. They show magnets &amp; coils buried inside taptic engines, sensors &amp; lenses inside the camera. Not for the faint hearted!</p>
-        <a href="/shop?type=expert" class="btn btn--sm">Browse expert kits</a>
+        <a href="/shop?type=expert" class="btn">Browse expert kits</a>
       </div>
     </div>
   </section>

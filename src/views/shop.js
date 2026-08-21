@@ -3,13 +3,15 @@ import { escapeHtml, formatCurrency, splitTitle } from '../utils.js';
 const KIT_LABEL = { novice: 'Casual Kit', expert: 'Expert Kit' };
 
 function productCard(frame, index = 0) {
-  const cover = frame.images?.[0]?.url || '/img/placeholder.svg';
+  const cover = frame.images?.[0]?.url || '/img/figma2/product-placeholder.jpg';
   const delay = Math.min(index * 45, 360);
   const { name, tagline } = splitTitle(frame.title);
   return `
   <a class="product-card product-card--shop" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
     <div class="product-card-media">
-      <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
+      <div class="product-card-media-inner">
+        <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
+      </div>
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
       <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>
