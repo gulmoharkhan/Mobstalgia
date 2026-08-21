@@ -45,8 +45,8 @@ export function renderHome({ featured, coverImage }) {
     </div>
   </section>
 
-  <section class="section container tier-section">
-    <div class="section-head" data-reveal>
+  <section class="section tier-section">
+    <div class="section-head container" data-reveal>
       <h2>Up for the challenge?</h2>
     </div>
     <div class="tier-challenge-split">
