@@ -31,7 +31,6 @@ export function renderShop({ frames, brands, query }) {
   <div class="container">
     <div class="section-head" style="padding-top:44px;" data-reveal>
       <h1>Browse frames</h1>
-      <p>Every teardown we've framed, in one place — filter by brand, kit, or availability.</p>
     </div>
 
     <form class="filters-bar filters-bar--chip" method="GET" action="/shop" id="filters-form">
@@ -53,16 +52,16 @@ export function renderShop({ frames, brands, query }) {
           </button>
         </div>
         <div class="filter-field">
-          <label for="brand">Brand</label>
+          <label for="brand">Manufacturer</label>
           <select id="brand" name="brand">
-            ${opt('', 'All brands', query.brand)}
+            ${opt('', 'All manufacturers', query.brand)}
             ${brands.map((b) => opt(b, b, query.brand)).join('')}
           </select>
         </div>
         <div class="filter-field">
-          <label for="type">Style</label>
+          <label for="type">Skill level</label>
           <select id="type" name="type">
-            ${opt('', 'All styles', query.type)}
+            ${opt('', 'All levels', query.type)}
             ${opt('novice', 'Casual Kit', query.type)}
             ${opt('expert', 'Expert Kit', query.type)}
           </select>
@@ -77,7 +76,7 @@ export function renderShop({ frames, brands, query }) {
           </select>
         </div>
         <div class="filter-field">
-          <label for="sort">Sort by</label>
+          <label for="sort">Created</label>
           <select id="sort" name="sort">
             ${opt('newest', 'Newest', query.sort)}
             ${opt('price_asc', 'Price: Low to High', query.sort)}

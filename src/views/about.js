@@ -1,18 +1,18 @@
 import { SITE_NAME, INSTAGRAM_URL } from '../config.js';
 
 const STRIP_PHOTOS = [
-  '/img/seed/iphone-3gs-1.jpg',
-  '/img/seed/nokia-n73-1.jpg',
-  '/img/seed/iphone-4-1.jpg',
-  '/img/seed/apple-watch-series-3-2.jpg',
-  '/img/seed/iphone-4s-1.jpg',
-  '/img/seed/ipod-classic-2nd-gen-1.jpg',
+  '/img/figma2/about-photo-1.jpg',
+  '/img/figma2/about-photo-2.jpg',
+  '/img/figma2/about-photo-3.jpg',
+  '/img/figma2/about-photo-4.jpg',
+  '/img/figma2/about-photo-5.jpg',
+  '/img/figma2/about-photo-6.jpg',
+  '/img/figma2/about-photo-7.jpg',
 ];
 
-function storyBlock({ eyebrow, headlinePre, headlineStrong, headlineSuf, body, reverse }) {
+function storyBlock({ headlinePre, headlineStrong, headlineSuf, body }) {
   return `
-  <div class="about-story-block${reverse ? ' about-story-block--reverse' : ''}" data-reveal>
-    ${eyebrow ? `<span class="kicker">${eyebrow}</span>` : ''}
+  <div class="about-story-block" data-reveal>
     <h2 class="about-story-headline">${headlinePre}${headlineStrong ? `<span class="text-blue">${headlineStrong}</span>` : ''}${headlineSuf || ''}</h2>
     <p class="about-story-body">${body}</p>
   </div>`;
@@ -28,21 +28,17 @@ export function renderAbout() {
 
   <div class="container about-story">
     ${storyBlock({
-      eyebrow: 'The Mobstalgia story',
       headlinePre: "Aren't our phones a reflection of the ",
       headlineStrong: 'choices that we made in our lives',
       headlineSuf: '?',
       body: "At Mobstalgia we truly believe that phones are personal devices and a reflection of someone's financial position, character, and choices at different points in their lives. Think deeply and you will feel that phones are extension of a person's identity and choices.",
     })}
     ${storyBlock({
-      eyebrow: 'And...',
-      headlinePre: 'Why should such an important part of your past sit inside that drawer',
+      headlinePre: 'And... why should such an important part of your past sit inside that drawer',
       headlineSuf: '?',
       body: 'We wanted to give these phones an opportunity to rekindle those memories from the past within you. Your phone is an engineering and design marvel that reflects not just you but the pinnacle of what was possible at that time.',
-      reverse: true,
     })}
     ${storyBlock({
-      eyebrow: 'Our promise',
       headlinePre: 'Mobstalgia frames honour your deeply personal devices',
       body: 'Mobstalgia aims to be that conversation starter when you meet your college friend and relive those days when you used those phones. And boy those phones had a character back then... Slide, flip, keyboards, projectors, and what not.',
     })}

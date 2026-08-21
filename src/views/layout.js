@@ -24,7 +24,7 @@ ${extraHead}
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="brand">
-      <img src="/img/logo.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark" width="34" height="34">
+      <img src="/img/figma2/logo-mark.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark" width="34" height="34">
       <span class="brand-text">${escapeHtml(SITE_NAME)}</span>
     </a>
     <nav class="main-nav" id="main-nav">
@@ -35,13 +35,13 @@ ${extraHead}
       ${navItem('/feedback', 'Contact', 'feedback')}
     </nav>
     <div class="header-actions">
-      <a href="${INSTAGRAM_URL}" class="icon-link" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(SITE_NAME)} on Instagram" title="Follow us on Instagram">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
-      </a>
       <a href="/cart" class="cart-link" id="cart-link">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <img src="/img/figma2/icon-cart.png" alt="" width="18" height="20" class="icon-img">
         <span>Cart</span>
         <span class="cart-count" id="cart-count" hidden>0</span>
+      </a>
+      <a href="${INSTAGRAM_URL}" class="icon-link" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(SITE_NAME)} on Instagram" title="Follow us on Instagram">
+        <img src="/img/figma2/icon-instagram.png" alt="" width="19" height="19" class="icon-img">
       </a>
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -58,7 +58,7 @@ ${bodyHtml}
   <div class="container footer-inner">
     <div>
       <div class="footer-brand">
-        <img src="/img/logo.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark brand-mark--footer" width="30" height="30">
+        <img src="/img/figma2/logo-mark.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark brand-mark--footer" width="30" height="30">
         <span class="brand-text">${escapeHtml(SITE_NAME)}</span>
       </div>
       <p class="footer-tagline">${escapeHtml(SITE_TAGLINE)}</p>
