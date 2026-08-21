@@ -89,8 +89,8 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- Header ---------- */
 .site-header { border-bottom: 1px solid var(--line); position: sticky; top: 0; background: #ffffffcc; backdrop-filter: blur(10px); z-index: 20; }
-.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; padding: 14px 0; }
-.brand { display: flex; align-items: center; gap: 10px; font-size: 63.5px; font-weight: 500; letter-spacing: 0.01em; color: #4f4f4f; font-family: 'Futura', 'Century Gothic', 'Space Grotesk', sans-serif; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 26px; font-weight: 500; letter-spacing: 0.01em; color: #4f4f4f; font-family: 'Futura', 'Century Gothic', 'Space Grotesk', sans-serif; }
 .brand-mark { width: 34px; height: 34px; border-radius: 50%; position: relative; flex-shrink: 0; display: block; object-fit: cover; box-shadow: var(--shadow-sm); transition: box-shadow .18s var(--ease-standard), transform .18s var(--ease-standard); }
 .brand:hover .brand-mark { transform: scale(1.06); box-shadow: var(--shadow-md); }
 .footer-brand { display: flex; align-items: center; gap: 10px; }
