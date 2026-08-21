@@ -258,3 +258,14 @@ export function getDashboardStats() {
   const recentFeedback = db.prepare('SELECT * FROM feedback ORDER BY created_at DESC LIMIT 5').all();
   return { totalFrames, availableFrames, totalOrders, pendingOrders, revenue, unreadFeedback, recentOrders, recentFeedback };
 }
+
+/* ---------------------------- Site settings ---------------------------- */
+
+export function getSetting(key, fallback = null) {
+  const row = db.prepare('SELECT value FROM site_settings WHERE key = ?').get(key);
+  return row ? row.value : fallback;
+}
+
+export function setSetting(key, value) {
+  db.prepare('INSERT INTO site_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value').run(key, value);
+}
