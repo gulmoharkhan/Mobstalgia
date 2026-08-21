@@ -9,9 +9,7 @@ function productCard(frame, index = 0) {
   return `
   <a class="product-card product-card--shop" href="/piece/${frame.id}" data-reveal style="--reveal-delay:${delay}ms">
     <div class="product-card-media">
-      <div class="product-card-media-inner">
-        <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
-      </div>
+      <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
       ${frame.status === 'sold' ? '<span class="badge badge--sold">Sold</span>' : ''}
       ${frame.status === 'reserved' ? '<span class="badge badge--reserved">Reserved</span>' : ''}
       <span class="badge badge--type${frame.type === 'expert' ? ' badge--type--expert' : ''}">${KIT_LABEL[frame.type] || 'Frame Kit'}</span>

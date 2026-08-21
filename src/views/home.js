@@ -6,9 +6,7 @@ function productCard(frame) {
   return `
   <a class="product-card" href="/piece/${frame.id}">
     <div class="product-card-media">
-      <div class="product-card-media-inner">
-        <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
-      </div>
+      <img src="${cover}" alt="${escapeHtml(frame.title)}" loading="lazy">
     </div>
     <div class="product-card-row">
       <span class="product-card-title">${escapeHtml(name)}</span>
