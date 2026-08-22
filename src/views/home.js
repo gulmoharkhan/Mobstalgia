@@ -16,14 +16,18 @@ function productCard(frame) {
   </a>`;
 }
 
-function checkIcon() {
-  return `<svg class="why-choose-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <circle cx="12" cy="12" r="12" fill="#000"></circle>
-    <path d="M7 12.5L10.2 15.7L17 8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-  </svg>`;
+function whyChooseBlock(block) {
+  return `
+  <div class="why-choose-block" data-reveal>
+    <div class="why-choose-block-media">
+      <img src="${escapeHtml(block.image)}" alt="${escapeHtml(block.heading || '')}" loading="lazy">
+    </div>
+    <h3 class="why-choose-block-title">${escapeHtml(block.heading || '')}</h3>
+    <p class="why-choose-block-desc">${escapeHtml(block.description || '')}</p>
+  </div>`;
 }
 
-export function renderHome({ featured, coverImage }) {
+export function renderHome({ featured, coverImage, whyChooseBlocks = [] }) {
   return `
   <section class="home-hero" data-reveal>
     <img class="home-hero-bg" src="${escapeHtml(coverImage || '/img/figma2/hero-bg.jpg')}" alt="" loading="eager">
@@ -67,21 +71,12 @@ export function renderHome({ featured, coverImage }) {
   </section>
 
   <section class="section container why-choose-section">
-    <div class="why-choose-grid">
-      <div class="why-choose-media" data-reveal>
-        <img src="/img/figma2/why-choose.jpg" alt="Phone teardown parts laid out on a workbench">
-      </div>
-      <div class="why-choose-copy" data-reveal style="--reveal-delay:100ms">
-        <h2>Why choose Mobstalgia?</h2>
-        <p>Check out other frame providers. No one does as meticulous teardown as us. Not even YouTubers!</p>
-        <p>At Mobstalgia we don't cut corners for aesthetics. Every functional part finds a way into the frame. Every frame is crafted after tedious rearrangements to find the best possible composition showing connection between parts while looking cool as hell.</p>
-        <ul class="why-choose-list">
-          <li>${checkIcon()}All functional components are shown</li>
-          <li>${checkIcon()}Composition showing connections</li>
-          <li>${checkIcon()}Top tier aesthetics</li>
-          <li>${checkIcon()}Hand crafted pieces-truly one-of-a-kind</li>
-        </ul>
-      </div>
+    <div class="section-head" data-reveal>
+      <h2>Why choose Mobstalgia?</h2>
+      <p class="why-choose-intro">No one does as meticulous a teardown as us — not even YouTubers. Every frame is crafted after tedious rearrangement to find the best composition, showing off the connections between parts while looking cool as hell.</p>
+    </div>
+    <div class="why-choose-blocks">
+      ${whyChooseBlocks.map((b) => whyChooseBlock(b)).join('')}
     </div>
   </section>
   `;
