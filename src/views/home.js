@@ -16,14 +16,20 @@ function productCard(frame) {
   </a>`;
 }
 
-function whyChooseBlock(block) {
-  return `
-  <div class="why-choose-block" data-reveal>
+function whyChooseBlock(block, index) {
+  const imageFirst = index % 2 === 0;
+  const media = `
     <div class="why-choose-block-media">
       <img src="${escapeHtml(block.image)}" alt="${escapeHtml(block.heading || '')}" loading="lazy">
-    </div>
-    <h3 class="why-choose-block-title">${escapeHtml(block.heading || '')}</h3>
-    <p class="why-choose-block-desc">${escapeHtml(block.description || '')}</p>
+    </div>`;
+  const copy = `
+    <div class="why-choose-block-copy">
+      <h3 class="why-choose-block-title">${escapeHtml(block.heading || '')}</h3>
+      <p class="why-choose-block-desc">${escapeHtml(block.description || '')}</p>
+    </div>`;
+  return `
+  <div class="why-choose-block" data-reveal>
+    ${imageFirst ? media + copy : copy + media}
   </div>`;
 }
 
@@ -70,13 +76,17 @@ export function renderHome({ featured, coverImage, whyChooseBlocks = [] }) {
     </div>
   </section>
 
-  <section class="section container why-choose-section">
-    <div class="section-head" data-reveal>
-      <h2>Why choose Mobstalgia?</h2>
-      <p class="why-choose-intro">No one does as meticulous a teardown as us — not even YouTubers. Every frame is crafted after tedious rearrangement to find the best composition, showing off the connections between parts while looking cool as hell.</p>
-    </div>
-    <div class="why-choose-blocks">
-      ${whyChooseBlocks.map((b) => whyChooseBlock(b)).join('')}
+  <section class="section why-choose-section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Why choose Mobstalgia?</h2>
+        <p class="why-choose-intro">No one does as meticulous a teardown as us — not even YouTubers. Every frame is crafted after tedious rearrangement to find the best composition, showing off the connections between parts while looking cool as hell.</p>
+      </div>
+      <div class="why-choose-card">
+        <div class="why-choose-blocks">
+          ${whyChooseBlocks.map((b, i) => whyChooseBlock(b, i)).join('')}
+        </div>
+      </div>
     </div>
   </section>
   `;
