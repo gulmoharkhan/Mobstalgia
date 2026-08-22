@@ -15,9 +15,10 @@ export async function home(ctx) {
   let featured = models.listFrames({ status: 'available', featuredOnly: true, sort: 'newest' });
   if (featured.length === 0) featured = models.listFrames({ sort: 'newest', availableFirst: true }).slice(0, 8);
   const coverImage = models.getSetting('cover_image_url', '/img/figma2/hero-bg.jpg');
+  const whyChooseBlocks = models.getWhyChooseBlocks();
   const html = renderLayout({
     activeNav: 'home',
-    bodyHtml: renderHome({ featured, coverImage }),
+    bodyHtml: renderHome({ featured, coverImage, whyChooseBlocks }),
   });
   sendHtml(ctx.res, 200, html);
 }
