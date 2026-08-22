@@ -269,3 +269,30 @@ export function getSetting(key, fallback = null) {
 export function setSetting(key, value) {
   db.prepare('INSERT INTO site_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value').run(key, value);
 }
+
+const DEFAULT_WHY_CHOOSE_BLOCKS = [
+  { image: '/img/figma2/why-choose.jpg', heading: 'All functional components are shown', description: 'No one does as meticulous teardown as us. Not even YouTubers!' },
+  { image: '/img/figma2/why-choose.jpg', heading: 'Composition showing connections', description: 'Every frame is arranged to show how the parts actually connect.' },
+  { image: '/img/figma2/why-choose.jpg', heading: 'Top tier aesthetics', description: 'We don’t cut corners for looks — form and function, side by side.' },
+  { image: '/img/figma2/why-choose.jpg', heading: 'Hand crafted pieces', description: 'Truly one-of-a-kind — every frame is assembled by hand.' },
+];
+
+export function getWhyChooseBlocks() {
+  const raw = getSetting('why_choose_blocks', null);
+  if (!raw) return DEFAULT_WHY_CHOOSE_BLOCKS;
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length) return parsed;
+  } catch (err) {
+    /* fall through to default */
+  }
+  return DEFAULT_WHY_CHOOSE_BLOCKS;
+}
+
+export function setWhyChooseBlockImage(index, url) {
+  const blocks = getWhyChooseBlocks().map((b) => ({ ...b }));
+  if (!blocks[index]) return blocks;
+  blocks[index].image = url;
+  setSetting('why_choose_blocks', JSON.stringify(blocks));
+  return blocks;
+}
