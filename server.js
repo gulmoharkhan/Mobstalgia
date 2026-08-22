@@ -61,6 +61,7 @@ router.post('/admin/feedback/:id/read', admin.feedbackMarkReadPost);
 router.get('/admin/settings', admin.settingsPage);
 router.post('/admin/settings/password', admin.settingsPasswordPost);
 router.post('/admin/api/settings/cover-image', admin.settingsCoverImageApi);
+router.post('/admin/api/settings/why-choose-image', admin.settingsWhyChooseImageApi);
 
 const PROTECTED_PREFIX = '/admin';
 const PUBLIC_ADMIN_PATHS = new Set(['/admin/login']);
