@@ -1,16 +1,6 @@
 import { escapeHtml } from '../utils.js';
 import { INSTAGRAM_URL } from '../config.js';
 
-const STRIP_PHOTOS = [
-  '/img/figma2/about-photo-1.jpg',
-  '/img/figma2/about-photo-2.jpg',
-  '/img/figma2/about-photo-3.jpg',
-  '/img/figma2/about-photo-4.jpg',
-  '/img/figma2/about-photo-5.jpg',
-  '/img/figma2/about-photo-6.jpg',
-  '/img/figma2/about-photo-7.jpg',
-];
-
 function leaderboardList(leaderboard) {
   if (!leaderboard.length) {
     return `<p class="snake-leaderboard-empty">No scores yet — be the first on the board.</p>`;
@@ -32,15 +22,9 @@ function leaderboardList(leaderboard) {
 
 export function renderAbout({ customer = null, leaderboard = [] } = {}) {
   return `
-  <section class="about-strip about-strip--compact" data-reveal aria-hidden="true">
-    <div class="about-strip-track">
-      ${STRIP_PHOTOS.map((src) => `<img src="${src}" alt="" loading="lazy">`).join('')}
-    </div>
-  </section>
-
   <section class="about-hero-minimal container">
-    <h1 data-reveal>Old phone. New story.</h1>
-    <p data-reveal style="--reveal-delay:60ms">Take it apart with your own hands. Build something only you could've made.</p>
+    <h1 data-reveal>Every phone has one more story in it.</h1>
+    <p data-reveal style="--reveal-delay:60ms">We believe an old phone isn't waste — it's raw material for something that means more. Mobstalgia gives it a new life: off the shelf, onto your wall, into your everyday.</p>
   </section>
 
   <section class="about-arcade">
@@ -89,45 +73,29 @@ export function renderAbout({ customer = null, leaderboard = [] } = {}) {
     </div>
   </section>
 
-  <section class="about-why container">
-    <p data-reveal>No one does as meticulous a teardown as us — every frame is a few quiet hours with a screwdriver and a phone that actually means something to you. Not mass produced. Not somebody else's idea of nostalgia. Yours.</p>
+  <section class="about-philosophy container">
+    <p class="about-philosophy-lead" data-reveal>We don't think a phone's story ends the day a new one arrives. It just needs a new job — one where it gets to mean something again.</p>
   </section>
 
-  <section class="about-steps container">
-    <div class="about-steps-row">
-      ${[
-        ['Choose a kit', 'Casual to see it whole, Expert to go all the way in.'],
-        ['Take it apart', 'Screw by screw, at your own pace.'],
-        ['Hang it up', 'Something only you could have made.'],
-      ]
-        .map(
-          ([title, body], i) => `
-        <div class="about-step" data-reveal style="--reveal-delay:${i * 70}ms">
-          <span class="about-step-num">${String(i + 1).padStart(2, '0')}</span>
-          <h3>${title}</h3>
-          <p>${body}</p>
-        </div>`
-        )
-        .join('')}
-    </div>
+  <section class="about-beliefs container">
+    ${[
+      ['New life, not landfill.', 'Every kit is one fewer phone gathering dust in a drawer, or worse.'],
+      ['Made by your hands.', 'Not a factory. You choose the pace, you feel every screw come loose.'],
+      ['A reminder, every day.', 'Hang it where you\'ll see it — and remember the year it carried you through.'],
+    ]
+      .map(
+        ([title, body], i) => `
+      <div class="about-belief" data-reveal style="--reveal-delay:${i * 80}ms">
+        <h3>${title}</h3>
+        <p>${body}</p>
+      </div>`
+      )
+      .join('')}
   </section>
-
-  <div class="container about-body">
-    <div class="about-compare-grid">
-      <div class="about-compare-card" data-reveal>
-        <span class="about-compare-flag">Casual Kit</span>
-        <p>Open the phone, see every component laid out whole. No specialist tools required.</p>
-      </div>
-      <div class="about-compare-card about-compare-card--expert" data-reveal style="--reveal-delay:80ms">
-        <span class="about-compare-flag">Expert Kit</span>
-        <p>The components come apart too — camera lens assembly, Taptic Engine, the works. Bring patience.</p>
-      </div>
-    </div>
-  </div>
 
   <section class="about-cta-band">
     <div class="container about-cta-inner" data-reveal>
-      <h2>Ready to open yours up?</h2>
+      <h2>Give yours a new life.</h2>
       <div class="about-cta-actions">
         <a href="/shop" class="btn">Browse the shop</a>
         <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer" class="link-btn">@mobstalgia on Instagram →</a>
