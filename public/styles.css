@@ -425,8 +425,15 @@ button { font-family: inherit; cursor: pointer; }
 .product-detail h1 { font-size: clamp(2rem, 3vw, 2.7rem); line-height: 1.14; margin-bottom: 0.15em; }
 .detail-eyebrow { display: flex; align-items: center; gap: 9px; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.76rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
 .detail-eyebrow-sep { opacity: 0.45; }
-.detail-kit-tag { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: var(--radius-full); background: var(--sky); color: var(--sky-ink); font-size: 0.7rem; letter-spacing: 0.06em; }
+.detail-kit-tag { display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: var(--radius-full); background: var(--sky); color: var(--sky-ink); font-size: 0.7rem; letter-spacing: 0.06em; }
 .detail-kit-tag--expert { background: var(--amber); color: var(--amber-ink); }
+
+.kit-tag-details { position: relative; }
+.kit-tag-details summary { cursor: pointer; list-style: none; user-select: none; }
+.kit-tag-details summary::-webkit-details-marker { display: none; }
+.kit-tag-details .kit-tag-caret { transition: transform .15s var(--ease-out); }
+.kit-tag-details[open] .kit-tag-caret { transform: rotate(180deg); }
+.kit-tag-details .kit-tag-note { position: absolute; z-index: 5; top: calc(100% + 8px); left: 0; width: max-content; max-width: 280px; margin: 0; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow-md, 0 8px 24px rgba(0,0,0,0.08)); font-size: 0.8rem; font-weight: 400; line-height: 1.55; color: var(--ink-soft); text-transform: none; letter-spacing: normal; font-family: var(--font-sans); }
 .detail-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.15rem, 1.6vw, 1.4rem); color: var(--ink-soft); margin: 0 0 0.5em; line-height: 1.2; }
 .detail-price { font-size: 1.5rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; margin: 14px 0 20px; }
 .detail-desc { color: var(--ink-soft); margin-bottom: 26px; text-wrap: pretty; }
