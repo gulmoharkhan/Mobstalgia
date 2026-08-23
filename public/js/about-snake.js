@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('snake-start');
   const scoreEl = document.getElementById('snake-score');
   const dpadBtns = document.querySelectorAll('.nokia-dpad-btn[data-dir]');
+  const leaderboardRoot = document.querySelector('.snake-leaderboard');
+  const leaderboardListEl = document.getElementById('snake-leaderboard-list');
+  const accountPrompt = document.getElementById('snake-account-prompt');
+  const saveStatusEl = document.getElementById('snake-save-status');
+
+  const isLoggedIn = leaderboardRoot?.dataset.loggedIn === 'true';
 
   const GRID = 11;
   const CELL = canvas.width / GRID;
@@ -57,6 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
     snake.forEach((seg) => drawCell(seg.x, seg.y, true));
   }
 
+  function setOverlay(hidden) {
+    if (!overlay) return;
+    overlay.hidden = hidden;
+    // Belt-and-suspenders: some browsers/CSS specificity setups can let an
+    // author `display` rule beat the UA `[hidden]` rule, so also toggle a
+    // class the stylesheet gives higher priority.
+    overlay.classList.toggle('is-hidden', hidden);
+  }
+
   function step() {
     dir = nextDir;
     const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
@@ -79,24 +94,71 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
+  async function submitScore(finalScore) {
+    if (!isLoggedIn || finalScore <= 0) return;
+    if (saveStatusEl) {
+      saveStatusEl.hidden = false;
+      saveStatusEl.textContent = 'Saving your score…';
+    }
+    try {
+      const res = await fetch('/api/snake-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ score: finalScore }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Could not save your score.');
+      if (leaderboardListEl && Array.isArray(result.leaderboard)) {
+        renderLeaderboard(result.leaderboard);
+      }
+      if (saveStatusEl) saveStatusEl.textContent = `Saved — your best is ${result.best}.`;
+    } catch (err) {
+      if (saveStatusEl) saveStatusEl.textContent = err.message;
+    }
+  }
+
+  function renderLeaderboard(rows) {
+    if (!leaderboardListEl) return;
+    if (!rows.length) {
+      leaderboardListEl.innerHTML = '<p class="snake-leaderboard-empty">No scores yet — be the first on the board.</p>';
+      return;
+    }
+    leaderboardListEl.innerHTML = `<ol class="snake-leaderboard-list">${rows
+      .map(
+        (row, i) => `<li>
+          <span class="snake-leaderboard-rank">${i + 1}</span>
+          <span class="snake-leaderboard-name">${escapeHtml(row.displayName)}</span>
+          <span class="snake-leaderboard-score">${row.score}</span>
+        </li>`
+      )
+      .join('')}</ol>`;
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
   function gameOver() {
     running = false;
     clearInterval(timer);
+    const finalScore = score;
     if (overlay) {
-      overlay.hidden = false;
-      overlay.innerHTML = `<p class="nokia-overlay-title">GAME OVER</p><p class="nokia-overlay-hint">Score: ${score}</p><p class="nokia-overlay-hint">Press start to retry</p>`;
+      overlay.innerHTML = `<p class="nokia-overlay-title">GAME OVER</p><p class="nokia-overlay-hint">Score: ${finalScore}</p><p class="nokia-overlay-hint">Press start to retry</p>`;
     }
+    setOverlay(false);
     if (startBtn) startBtn.textContent = 'Start';
+    submitScore(finalScore);
   }
 
   function startGame() {
     resetState();
-    if (overlay) overlay.hidden = true;
+    setOverlay(true);
     running = true;
     clearInterval(timer);
     draw();
     timer = setInterval(step, TICK_MS);
     if (startBtn) startBtn.textContent = 'Reset';
+    if (saveStatusEl) saveStatusEl.hidden = true;
   }
 
   function setDirection(name) {
@@ -141,5 +203,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // Draw an idle frame so the screen isn't blank before the first Start press.
   resetState();
   draw();
-  if (overlay) overlay.hidden = false;
+  setOverlay(false);
 });
