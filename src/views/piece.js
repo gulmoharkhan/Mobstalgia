@@ -1,4 +1,5 @@
 import { escapeHtml, formatCurrency, splitTitle } from '../utils.js';
+import { AMAZON_SEARCH_BASE, SITE_NAME } from '../config.js';
 
 const KIT_LABEL = { novice: 'Casual Kit', expert: 'Expert Kit' };
 const TIER_COPY = {
@@ -49,17 +50,10 @@ export function renderPiece({ frame, related }) {
 
   let ctaHtml;
   if (isAvailable) {
+    const amazonUrl = `${AMAZON_SEARCH_BASE}${encodeURIComponent(`${SITE_NAME} ${frame.title}`)}`;
     ctaHtml = `
       <div class="detail-cta">
-        <span class="qty-row-label" id="qty-label">Qty</span>
-        <div class="detail-cta-row">
-          <div class="qty-stepper">
-            <button type="button" class="qty-step-btn" id="qty-dec" aria-label="Decrease quantity">−</button>
-            <input type="number" id="qty-input" class="qty-input" aria-labelledby="qty-label" min="1" max="${frame.stock}" value="1" inputmode="numeric">
-            <button type="button" class="qty-step-btn" id="qty-inc" aria-label="Increase quantity">+</button>
-          </div>
-          <button class="btn btn--block" id="add-to-cart-btn" data-frame-id="${frame.id}" data-original-label="Add to Cart">Add to Cart</button>
-        </div>
+        <a class="btn btn--block" href="${amazonUrl}" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
       </div>`;
   } else {
     ctaHtml = `<button class="btn btn--block" disabled>${frame.status === 'sold' ? 'Sold Out' : 'Reserved'}</button>`;

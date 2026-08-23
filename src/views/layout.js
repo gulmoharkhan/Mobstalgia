@@ -35,11 +35,6 @@ ${extraHead}
     </nav>
     <div class="header-actions">
       <div class="header-utility">
-        <a href="/cart" class="cart-link" id="cart-link">
-          <img src="/img/figma2/icon-cart.png" alt="" width="18" height="20" class="icon-img">
-          <span>Cart</span>
-          <span class="cart-count" id="cart-count" hidden>0</span>
-        </a>
         <a href="${INSTAGRAM_URL}" class="icon-link" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(SITE_NAME)} on Instagram" title="Follow us on Instagram">
           <img src="/img/figma2/icon-instagram.png" alt="" width="19" height="19" class="icon-img">
         </a>
@@ -80,7 +75,6 @@ ${bodyHtml}
     </div>
   </div>
 </footer>
-<script src="/js/cart.js"></script>
 <script src="/js/site-interactions.js"></script>
 </body>
 </html>`;
