@@ -20,3 +20,4 @@ export const FRAME_STATUSES = ['available', 'reserved', 'sold'];
 
 export const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 export const SESSION_COOKIE = 'tdf_session';
+export const CUSTOMER_SESSION_COOKIE = 'tdf_customer';

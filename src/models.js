@@ -296,3 +296,29 @@ export function setWhyChooseBlockImage(index, url) {
   setSetting('why_choose_blocks', JSON.stringify(blocks));
   return blocks;
 }
+
+/* ---------------------------- Snake leaderboard ---------------------------- */
+
+export function recordSnakeScore(customerId, score) {
+  if (!Number.isInteger(score) || score < 0) throw new Error('Invalid score.');
+  db.prepare('INSERT INTO snake_scores (customer_id, score) VALUES (?, ?)').run(customerId, score);
+}
+
+export function getSnakeLeaderboard(limit = 10) {
+  // Best single score per customer, ranked highest first.
+  return db
+    .prepare(
+      `SELECT c.display_name AS displayName, MAX(s.score) AS score
+       FROM snake_scores s
+       JOIN customers c ON c.id = s.customer_id
+       GROUP BY s.customer_id
+       ORDER BY score DESC
+       LIMIT ?`
+    )
+    .all(limit);
+}
+
+export function getCustomerBestScore(customerId) {
+  const row = db.prepare('SELECT MAX(score) AS best FROM snake_scores WHERE customer_id = ?').get(customerId);
+  return row?.best || 0;
+}
