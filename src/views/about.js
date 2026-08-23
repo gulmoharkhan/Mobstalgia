@@ -28,36 +28,37 @@ export function renderAbout() {
 
   <div class="container about-story">
     ${storyBlock({
-      headlinePre: "Aren't our phones a reflection of the ",
-      headlineStrong: 'choices that we made in our lives',
+      headlinePre: "Somewhere in a drawer, there's a phone that used to be your whole world. Isn't it strange how it became just ",
+      headlineStrong: 'another thing you forgot to throw away',
       headlineSuf: '?',
-      body: "At Mobstalgia we truly believe that phones are personal devices and a reflection of someone's financial position, character, and choices at different points in their lives. Think deeply and you will feel that phones are extension of a person's identity and choices.",
+      body: "It held your first messages, your worst selfies, songs you were embarrassed to admit you liked. It knew you before you figured yourself out. And now it just sits there, dead weight in a drawer, waiting for a decision you keep putting off.",
     })}
     ${storyBlock({
-      headlineLead: 'And...',
-      headlinePre: 'Why should such an important part of your past sit inside that drawer',
+      headlineLead: "We think there's a better ending.",
+      headlinePre: 'What if you could open it up, take it apart with your own two hands, and watch the whole ',
+      headlineStrong: 'machine reveal itself',
       headlineSuf: '?',
-      body: 'We wanted to to give these phones an opportunity to rekindle those memories from the past within you. Your phone is an engineering and design marvel that reflects not just you but the pinnacle of what was possible at that time.',
+      body: 'Every screw you remove is a small act of curiosity. Every layer you lift uncovers circuitry, sensors, and tiny feats of engineering that spent years hidden behind a screen. This is the part nobody tells you about old phones — they are genuinely beautiful once you let yourself look inside.',
     })}
     ${storyBlock({
-      headlinePre: 'Mobstalgia frames honour your deeply personal devices',
-      body: 'Mobstalgia aims to be that conversation starter when you meet your college friend and relive those days when you used those phones. And boy those phones had a character back then... Slide, flip, keyboards, projectors, and what not.',
+      headlinePre: "That's the whole idea behind a Mobstalgia frame",
+      body: "You don't buy a finished piece from us. You build one, screw by screw, on your own table, at your own pace — and then you hang up something that's unmistakably yours. Not mass produced. Not somebody else's idea of nostalgia. Yours.",
     })}
   </div>
 
   <section class="about-timeline-section">
     <div class="container">
       <div class="section-head" data-reveal>
-        <h2>How the frame kit works</h2>
-        <p>Five steps, from forgotten drawer to something on your wall.</p>
+        <h2>What it actually feels like to build one</h2>
+        <p>Five moments, from forgotten drawer to something worth looking at every day.</p>
       </div>
       <div class="about-timeline">
         ${[
-          ['Pick your style', 'Casual to open the phone and see every component, or Expert if you want to open those components too.'],
-          ['We ship the frame', 'Your kit arrives with the frame, mounting hardware, and a simple guide for taking your device apart safely.'],
-          ['You dismantle it', 'Screw by screw, layer by layer — your phone, in your hands. This is where you get to admire the work of the engineers who actually built it.'],
-          ['You arrange &amp; mount', "Lay the components into the frame however you like — there's no wrong way to tell your phone's story."],
-          ['Hang it up', 'What used to sit in a drawer now sits on your wall — a small, honest piece of inspiration instead of forgotten history.'],
+          ['You choose your path', "Casual, if you want to see every component sitting whole and proud. Expert, if 'that's a camera module' isn't a good enough answer for you."],
+          ['A box shows up at your door', 'Inside: your frame, the mounting hardware, a screwdriver set, and a guide written so you never feel like you need a second pair of hands.'],
+          ['You sit down and just start', 'No deadline, no manual you have to rush through. Just you, a screwdriver, and a phone giving up its secrets one screw at a time — this is the part people say is oddly meditative.'],
+          ['The reveal moment', "You lift the back panel and there it is — the board, the battery, the ribbon cables — laid out like nothing you expected from something that fit in your pocket for years."],
+          ['You arrange it your way', "There's no diagram to follow here. You decide what goes where, what gets the spotlight, what tells your version of this phone's story."],
         ]
           .map(
             ([title, body], i) => `
@@ -74,9 +75,42 @@ export function renderAbout() {
   <section class="about-manifesto">
     <div class="container">
       <div class="about-manifesto-inner" data-reveal>
-        <p class="about-manifesto-lead">We could tear phones apart for you and ship you a finished piece — plenty of places do exactly that.</p>
-        <p class="about-manifesto-body">But taking it apart yourself is the whole point. It's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made, not something you bought pre-made. Next time you spot an old phone lying around, you'll probably see it differently, too.</p>
+        <p class="about-manifesto-lead">We could tear the phone apart for you and just ship you a finished piece. Plenty of places do exactly that.</p>
+        <p class="about-manifesto-body">But taking it apart yourself is the whole point. It's a few quiet, satisfying hours with a screwdriver and a device that actually means something to you, and it ends with something you made — not something you bought pre-made. Next time you spot an old phone lying around, you'll probably see it differently, too.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="about-arcade">
+    <div class="container about-arcade-inner">
+      <div class="section-head about-arcade-head" data-reveal>
+        <h2>While you decide, take a break</h2>
+        <p>Before phones had cameras worth bragging about, they had this. Play a round the way it used to feel — on us.</p>
+      </div>
+      <div class="nokia-phone" data-reveal>
+        <div class="nokia-speaker" aria-hidden="true"></div>
+        <div class="nokia-screen-bezel">
+          <canvas id="snake-canvas" width="220" height="220" role="img" aria-label="Retro snake game"></canvas>
+          <div class="nokia-screen-overlay" id="snake-overlay">
+            <p class="nokia-overlay-title">SNAKE</p>
+            <p class="nokia-overlay-hint">Press start to play</p>
+          </div>
+        </div>
+        <div class="nokia-controls">
+          <div class="nokia-softkeys">
+            <button type="button" class="nokia-softkey" id="snake-start">Start</button>
+            <div class="nokia-score" id="snake-score" aria-live="polite">000</div>
+          </div>
+          <div class="nokia-dpad" role="group" aria-label="Snake direction controls">
+            <button type="button" class="nokia-dpad-btn nokia-dpad-up" data-dir="up" aria-label="Up">▲</button>
+            <button type="button" class="nokia-dpad-btn nokia-dpad-left" data-dir="left" aria-label="Left">◀</button>
+            <button type="button" class="nokia-dpad-btn nokia-dpad-center" aria-hidden="true"></button>
+            <button type="button" class="nokia-dpad-btn nokia-dpad-right" data-dir="right" aria-label="Right">▶</button>
+            <button type="button" class="nokia-dpad-btn nokia-dpad-down" data-dir="down" aria-label="Down">▼</button>
+          </div>
+        </div>
+      </div>
+      <p class="about-arcade-caption">Use arrow keys or WASD, or tap the pad. High score is bragging rights only — we don't save it.</p>
     </div>
   </section>
 
@@ -96,7 +130,7 @@ export function renderAbout() {
 
   <section class="about-cta-band">
     <div class="container about-cta-inner" data-reveal>
-      <h2>Not sure where to start?</h2>
+      <h2>Ready to open yours up?</h2>
       <p>Browse a few devices we've framed ourselves for inspiration — Nokia bricks, early iPhones, an iPod Classic and more — then order the kit that matches your phone. New teardowns and behind-the-scenes shots go up on Instagram first.</p>
       <div class="about-cta-actions">
         <a href="/shop" class="btn">Browse the shop</a>
@@ -104,5 +138,6 @@ export function renderAbout() {
       </div>
     </div>
   </section>
+  <script src="/js/about-snake.js"></script>
   `;
 }
