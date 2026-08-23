@@ -4,6 +4,10 @@ export const CURRENCY_SYMBOL = '₹';
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/mobstalgia?igsh=c2w4eW0xbXd5OW1w';
 
+// No real Amazon listings are wired up yet — this points to an Amazon search
+// for the piece's name until each frame has its own listing URL.
+export const AMAZON_SEARCH_BASE = 'https://www.amazon.in/s?k=';
+
 // Seeded on first run — CHANGE THIS PASSWORD after logging in via /admin/settings
 export const DEFAULT_ADMIN_EMAIL = 'gulmohar.khan@gmail.com';
 export const DEFAULT_ADMIN_PASSWORD = 'teardown-admin-2026';
