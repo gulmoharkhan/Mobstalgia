@@ -836,6 +836,9 @@ button { font-family: inherit; cursor: pointer; }
 .admin-empty { padding: 50px; text-align: center; color: #8a8a8a; }
 
 .admin-form-card { background: #fff; border: 1px solid #ececea; border-radius: 6px; padding: 30px; max-width: 760px; }
+.admin-form-section-head { font-size: 1.05rem; font-weight: 600; margin: 32px 0 4px; padding-top: 24px; border-top: 1px solid #ececea; }
+.admin-form-section-note { font-size: 0.82rem; color: #8a8a8a; margin: 0 0 18px; }
+.hl-image-upload { display: inline-block; padding: 10px 14px; font-size: 0.8rem; }
 .image-upload-zone { border: 1.5px dashed #d8d8d5; border-radius: 6px; padding: 20px; text-align: center; color: #8a8a8a; font-size: 0.85rem; cursor: pointer; }
 .image-preview-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 .image-preview { position: relative; width: 84px; height: 84px; border-radius: 4px; overflow: hidden; background: #f1f0ee; }
