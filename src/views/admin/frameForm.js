@@ -10,6 +10,8 @@ export function renderFrameForm({ frame, mode }) {
   const endpoint = isEdit ? `/admin/api/frames/${frame.id}` : '/admin/api/frames';
   const priceRupees = frame ? (frame.price / 100).toFixed(0) : '';
   const existingImages = isEdit ? frame.images.map((i) => ({ id: i.id, url: i.url })) : [];
+  const boxContentsText = isEdit && Array.isArray(frame.boxContents) ? frame.boxContents.join('\n') : '';
+  const existingHighlights = isEdit && Array.isArray(frame.highlights) ? frame.highlights : [];
 
   const opt = (options, current) =>
     options.map((o) => `<option value="${o}" ${o === current ? 'selected' : ''}>${o[0].toUpperCase() + o.slice(1)}</option>`).join('');
@@ -76,6 +78,34 @@ export function renderFrameForm({ frame, mode }) {
         <div class="image-preview-grid" id="image-preview-grid"></div>
       </div>
 
+      <h2 class="admin-form-section-head">Product page details</h2>
+      <p class="admin-form-section-note">These power the "What you're getting" and "What made it special" sections on the product page. All optional — leave blank to hide a section.</p>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="material">Material</label>
+          <input type="text" id="material" name="material" value="${escapeHtml(frame?.material || '')}" placeholder="Solid ash wood frame, anti-glare acrylic front">
+        </div>
+        <div class="form-field">
+          <label for="sizeLabel">Size</label>
+          <input type="text" id="sizeLabel" name="sizeLabel" value="${escapeHtml(frame?.size_label || '')}" placeholder="30 × 40 cm (12 × 16 in)">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="unitsLabel">Units</label>
+        <input type="text" id="unitsLabel" name="unitsLabel" value="${escapeHtml(frame?.units_label || '')}" placeholder="1 frame kit — enough for one device">
+      </div>
+      <div class="form-field">
+        <label for="boxContents">In the box</label>
+        <textarea id="boxContents" name="boxContentsText" placeholder="One item per line, e.g.&#10;Solid ash wood frame&#10;Anti-glare acrylic front panel&#10;Wall-hanging hardware">${escapeHtml(boxContentsText)}</textarea>
+      </div>
+
+      <div class="form-field">
+        <label>What made it special (highlights)</label>
+        <div id="highlight-list"></div>
+        <button type="button" id="add-highlight-btn" class="btn btn--outline" style="margin-top:8px;">+ Add highlight</button>
+      </div>
+
       <div class="form-actions">
         <button type="submit" class="btn">${isEdit ? 'Save Changes' : 'Create Frame'}</button>
         <a href="/admin/frames" class="btn btn--outline">Cancel</a>
@@ -83,7 +113,10 @@ export function renderFrameForm({ frame, mode }) {
     </form>
   </div>
 
-  <script>window.TDF_EXISTING_IMAGES = ${JSON.stringify(existingImages)};</script>
+  <script>
+    window.TDF_EXISTING_IMAGES = ${JSON.stringify(existingImages)};
+    window.TDF_EXISTING_HIGHLIGHTS = ${JSON.stringify(existingHighlights)};
+  </script>
   <script src="/js/admin-frame-form.js"></script>
   `;
 }
