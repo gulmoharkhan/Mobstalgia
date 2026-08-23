@@ -110,7 +110,7 @@ export function renderPiece({ frame, related }) {
           boxContents.length
             ? `<div class="specs-box-list" data-reveal style="--reveal-delay:80ms">
               <p class="specs-box-label">What's in the box</p>
-              ${boxContents.map((item) => `<div class="specs-box-row"><span></span><span>${escapeHtml(item)}</span></div>`).join('')}
+              ${boxContents.map((item) => `<div class="specs-box-row"><span>${escapeHtml(item)}</span></div>`).join('')}
             </div>`
             : ''
         }
