@@ -108,9 +108,9 @@ export function renderPiece({ frame, related }) {
         }
         ${
           boxContents.length
-            ? `<div class="specs-box" data-reveal style="--reveal-delay:80ms">
+            ? `<div class="specs-box-list" data-reveal style="--reveal-delay:80ms">
               <p class="specs-box-label">What's in the box</p>
-              <ul class="specs-box-list">${boxContents.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+              ${boxContents.map((item) => `<div class="specs-box-row"><span></span><span>${escapeHtml(item)}</span></div>`).join('')}
             </div>`
             : ''
         }
