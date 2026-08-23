@@ -445,11 +445,12 @@ button { font-family: inherit; cursor: pointer; }
 /* ---------- Product detail: specs + highlights ---------- */
 .specs-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
 .specs-list, .specs-box-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
-.specs-row, .specs-box-row { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.specs-row { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.specs-box-row { padding: 16px 0; border-bottom: 1px solid var(--line); }
 .specs-row:first-child, .specs-box-row:first-child { border-top: 1px solid var(--line); }
 .specs-row dt, .specs-box-label { color: var(--ink-soft); font-size: 0.92rem; }
 .specs-row dd, .specs-box-row span { color: var(--ink); font-weight: 500; }
-.specs-box-label { grid-column: 1 / -1; padding-bottom: 0; }
+.specs-box-label { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .specs-box-row:first-of-type { border-top: none; }
 @media (max-width: 800px) {
   .specs-grid { grid-template-columns: 1fr; gap: 8px; }
