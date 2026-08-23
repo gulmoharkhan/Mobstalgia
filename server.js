@@ -7,13 +7,15 @@ import { URL } from 'node:url';
 import { Router } from './src/router.js';
 import { readJson, readForm, sendHtml, redirect } from './src/utils.js';
 import { parseCookies, getSessionAdmin } from './src/auth.js';
-import { SESSION_COOKIE, PORT } from './src/config.js';
+import { getSessionCustomer } from './src/customerAuth.js';
+import { SESSION_COOKIE, CUSTOMER_SESSION_COOKIE, PORT } from './src/config.js';
 import { runSeed } from './src/seed.js';
 import { UPLOADS_DIR } from './src/images.js';
 
 import * as pub from './src/handlers/public.js';
 import * as api from './src/handlers/api.js';
 import * as admin from './src/handlers/admin.js';
+import * as account from './src/handlers/account.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -38,6 +40,15 @@ router.get('/about', pub.aboutPage);
 router.get('/api/frames', api.getFrames);
 router.post('/api/orders', api.createOrder);
 router.post('/api/feedback', api.submitFeedback);
+
+// ---- Customer accounts ----
+router.get('/account/signup', account.signupPageGet);
+router.post('/account/signup', account.signupPagePost);
+router.get('/account/login', account.loginPageGet);
+router.post('/account/login', account.loginPagePost);
+router.post('/account/logout', account.logoutPost);
+router.post('/api/snake-score', account.submitSnakeScore);
+router.get('/api/leaderboard', account.getLeaderboard);
 
 // ---- Admin auth ----
 router.get('/admin/login', admin.loginPageGet);
@@ -116,6 +127,7 @@ const server = http.createServer(async (req, res) => {
 
     const cookies = parseCookies(req);
     const ctx = { req, res, params: match.params, query, cookies };
+    ctx.customer = getSessionCustomer(cookies[CUSTOMER_SESSION_COOKIE]);
 
     if (pathname.startsWith(PROTECTED_PREFIX) && !PUBLIC_ADMIN_PATHS.has(pathname)) {
       const adminUser = getSessionAdmin(cookies[SESSION_COOKIE]);
