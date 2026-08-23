@@ -443,12 +443,12 @@ button { font-family: inherit; cursor: pointer; }
 .detail-meta dd { color: var(--ink); font-weight: 500; }
 
 /* ---------- Product detail: inline specs + highlights ---------- */
-.detail-specs-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; margin: 26px 0; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.detail-specs-inline dt { font-weight: 600; font-size: 0.95rem; margin: 0 0 4px; color: var(--ink); }
-.detail-specs-inline dd { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+.detail-specs-inline { display: grid; grid-template-columns: 1fr 1fr; row-gap: 28px; column-gap: 48px; margin: 32px 0; }
+.detail-specs-inline dt { font-weight: 600; font-size: 0.95rem; margin: 0 0 6px; color: var(--ink); }
+.detail-specs-inline dd { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.5; margin: 0; }
 .detail-specs-inline dd.spec-span { grid-column: 1 / -1; }
 @media (max-width: 480px) {
-  .detail-specs-inline { grid-template-columns: 1fr; gap: 18px; }
+  .detail-specs-inline { grid-template-columns: 1fr; row-gap: 20px; }
 }
 
 .highlight-list { display: grid; gap: 96px; }
