@@ -85,44 +85,31 @@ export function renderPiece({ frame, related }) {
     </section>`
     : '';
 
+  const boxContents = Array.isArray(frame.boxContents) ? frame.boxContents : [];
+
   const specRows = [
     ['Material', frame.material],
     ['Size', frame.size_label],
     ['Units', frame.units_label],
-  ].filter(([, value]) => value);
+    boxContents.length ? ['In the box', boxContents.join(', ')] : null,
+  ].filter((row) => row && row[1]);
 
-  const boxContents = Array.isArray(frame.boxContents) ? frame.boxContents : [];
-
-  const specsHtml =
-    specRows.length || boxContents.length
-      ? `
-    <section class="section container" style="border-top:1px solid var(--line);">
-      <div class="section-head" data-reveal><h2>What you're getting</h2></div>
-      <div class="specs-grid">
-        ${
-          specRows.length
-            ? `<dl class="specs-list" data-reveal>
-              ${specRows.map(([label, value]) => `<div class="specs-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}
-            </dl>`
-            : ''
-        }
-        ${
-          boxContents.length
-            ? `<div class="specs-box-list" data-reveal style="--reveal-delay:80ms">
-              <p class="specs-box-label">What's in the box</p>
-              ${boxContents.map((item) => `<div class="specs-box-row"><span>${escapeHtml(item)}</span></div>`).join('')}
-            </div>`
-            : ''
-        }
-      </div>
-    </section>`
-      : '';
+  const specsInlineHtml = specRows.length
+    ? `<dl class="detail-specs-inline" data-reveal>
+        ${specRows
+          .map(
+            ([label, value], i) =>
+              `<div${i === specRows.length - 1 && label === 'In the box' ? ' style="grid-column:1 / -1"' : ''}><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`
+          )
+          .join('')}
+      </dl>`
+    : '';
 
   const highlights = Array.isArray(frame.highlights) ? frame.highlights : [];
   const highlightsHtml = highlights.length
     ? `
     <section class="section container" style="border-top:1px solid var(--line);">
-      <div class="section-head" data-reveal><h2>Worth a closer look</h2></div>
+      <div class="section-head" data-reveal><h2>What made it special</h2></div>
       <div class="highlight-list">
         ${highlights
           .map(
@@ -163,6 +150,7 @@ export function renderPiece({ frame, related }) {
       <div class="detail-price">${formatCurrency(frame.price)}</div>
       <p class="detail-desc">${escapeHtml(frame.description)}</p>
       ${tierNote ? `<div class="detail-tier-note detail-tier-note--${frame.type}"><span class="tier-note-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="10.5" x2="12" y2="16"/><circle cx="12" cy="7.3" r="0.6" fill="currentColor" stroke="none"/></svg></span><p>${escapeHtml(tierNote)}</p></div>` : ''}
+      ${specsInlineHtml}
       ${ctaHtml}
       <div class="detail-meta">
         <dl>
@@ -172,7 +160,6 @@ export function renderPiece({ frame, related }) {
       </div>
     </div>
   </div>
-  ${specsHtml}
   ${highlightsHtml}
   ${relatedHtml}
   ${lightboxHtml}
