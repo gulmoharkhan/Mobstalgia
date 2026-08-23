@@ -85,6 +85,63 @@ export function renderPiece({ frame, related }) {
     </section>`
     : '';
 
+  const specRows = [
+    ['Material', frame.material],
+    ['Size', frame.size_label],
+    ['Units', frame.units_label],
+  ].filter(([, value]) => value);
+
+  const boxContents = Array.isArray(frame.boxContents) ? frame.boxContents : [];
+
+  const specsHtml =
+    specRows.length || boxContents.length
+      ? `
+    <section class="section container" style="border-top:1px solid var(--line);">
+      <div class="section-head" data-reveal><h2>What you're getting</h2></div>
+      <div class="specs-grid">
+        ${
+          specRows.length
+            ? `<dl class="specs-list" data-reveal>
+              ${specRows.map(([label, value]) => `<div class="specs-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}
+            </dl>`
+            : ''
+        }
+        ${
+          boxContents.length
+            ? `<div class="specs-box" data-reveal style="--reveal-delay:80ms">
+              <p class="specs-box-label">What's in the box</p>
+              <ul class="specs-box-list">${boxContents.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+            </div>`
+            : ''
+        }
+      </div>
+    </section>`
+      : '';
+
+  const highlights = Array.isArray(frame.highlights) ? frame.highlights : [];
+  const highlightsHtml = highlights.length
+    ? `
+    <section class="section container" style="border-top:1px solid var(--line);">
+      <div class="section-head" data-reveal><h2>Worth a closer look</h2></div>
+      <div class="highlight-list">
+        ${highlights
+          .map(
+            (h, i) => `
+          <div class="highlight-block${i % 2 === 1 ? ' highlight-block--reverse' : ''}" data-reveal style="--reveal-delay:${i * 80}ms">
+            <div class="highlight-media">
+              <img src="${h.image}" alt="${escapeHtml(h.title || '')}" loading="lazy">
+            </div>
+            <div class="highlight-copy">
+              <h3>${escapeHtml(h.title || '')}</h3>
+              <p>${escapeHtml(h.body || '')}</p>
+            </div>
+          </div>`
+          )
+          .join('')}
+      </div>
+    </section>`
+    : '';
+
   return `
   <div class="container product-detail">
     <div>
@@ -115,6 +172,8 @@ export function renderPiece({ frame, related }) {
       </div>
     </div>
   </div>
+  ${specsHtml}
+  ${highlightsHtml}
   ${relatedHtml}
   ${lightboxHtml}
   <script src="/js/product-page.js"></script>
