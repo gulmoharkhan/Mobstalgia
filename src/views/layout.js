@@ -35,14 +35,17 @@ ${extraHead}
       ${navItem('/feedback', 'Contact', 'feedback')}
     </nav>
     <div class="header-actions">
-      <a href="/cart" class="cart-link" id="cart-link">
-        <img src="/img/figma2/icon-cart.png" alt="" width="18" height="20" class="icon-img">
-        <span>Cart</span>
-        <span class="cart-count" id="cart-count" hidden>0</span>
-      </a>
-      <a href="${INSTAGRAM_URL}" class="icon-link" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(SITE_NAME)} on Instagram" title="Follow us on Instagram">
-        <img src="/img/figma2/icon-instagram.png" alt="" width="19" height="19" class="icon-img">
-      </a>
+      <div class="header-utility">
+        <a href="/cart" class="cart-link" id="cart-link">
+          <img src="/img/figma2/icon-cart.png" alt="" width="18" height="20" class="icon-img">
+          <span>Cart</span>
+          <span class="cart-count" id="cart-count" hidden>0</span>
+        </a>
+        <a href="${INSTAGRAM_URL}" class="icon-link" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(SITE_NAME)} on Instagram" title="Follow us on Instagram">
+          <img src="/img/figma2/icon-instagram.png" alt="" width="19" height="19" class="icon-img">
+        </a>
+      </div>
+      <span class="header-divider" aria-hidden="true"></span>
       ${customer
         ? `<form method="POST" action="/account/logout" class="account-inline">
              <span class="account-name">Hi, ${escapeHtml(customer.display_name)}</span>
@@ -64,7 +67,7 @@ ${bodyHtml}
   <div class="container footer-inner">
     <div>
       <div class="footer-brand">
-        <img src="/img/figma2/logo-mark.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark brand-mark--footer" width="30" height="30">
+        <img src="/img/figma2/logo-mark-dark.png" alt="${escapeHtml(SITE_NAME)}" class="brand-mark brand-mark--footer" width="30" height="30">
         <span class="brand-text">${escapeHtml(SITE_NAME)}</span>
       </div>
       <p class="footer-tagline">${escapeHtml(SITE_TAGLINE)}</p>
