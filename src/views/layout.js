@@ -31,7 +31,6 @@ ${extraHead}
       ${navItem('/', 'Home', 'home')}
       ${navItem('/shop', 'Shop', 'shop')}
       ${navItem('/about', 'About', 'about')}
-      ${navItem('/track', 'Track Order', 'track')}
       ${navItem('/feedback', 'Contact', 'feedback')}
     </nav>
     <div class="header-actions">
@@ -75,7 +74,6 @@ ${bodyHtml}
     <div class="footer-links">
       <a href="/shop">Shop</a>
       <a href="/about">About</a>
-      <a href="/track">Track Order</a>
       <a href="/feedback">Contact</a>
       <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
       <a href="/admin" class="footer-admin-link">Admin</a>
