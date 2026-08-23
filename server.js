@@ -28,9 +28,6 @@ const router = new Router();
 router.get('/', pub.home);
 router.get('/shop', pub.shop);
 router.get('/piece/:id', pub.piece);
-router.get('/cart', pub.cartPage);
-router.get('/checkout', pub.checkoutPage);
-router.get('/order-confirmation', pub.orderConfirmPage);
 router.get('/track', pub.trackPageGet);
 router.get('/feedback', pub.feedbackPageGet);
 router.post('/feedback', pub.feedbackPagePost);
@@ -38,7 +35,6 @@ router.get('/about', pub.aboutPage);
 
 // ---- Public JSON API ----
 router.get('/api/frames', api.getFrames);
-router.post('/api/orders', api.createOrder);
 router.post('/api/feedback', api.submitFeedback);
 
 // ---- Customer accounts ----
