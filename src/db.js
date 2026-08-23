@@ -121,6 +121,24 @@ db.exec(`
   );
 `);
 
+// Product-detail spec fields, added after the original schema shipped — guard
+// each with a column-existence check since SQLite has no
+// "ADD COLUMN IF NOT EXISTS". box_contents and highlights are stored as JSON
+// text (an array of strings, and an array of {title, body, image} respectively).
+const existingFrameColumns = new Set(db.prepare('PRAGMA table_info(frames)').all().map((c) => c.name));
+const FRAME_SPEC_COLUMNS = {
+  material: `TEXT NOT NULL DEFAULT ''`,
+  size_label: `TEXT NOT NULL DEFAULT ''`,
+  units_label: `TEXT NOT NULL DEFAULT ''`,
+  box_contents: `TEXT NOT NULL DEFAULT '[]'`,
+  highlights: `TEXT NOT NULL DEFAULT '[]'`,
+};
+for (const [column, def] of Object.entries(FRAME_SPEC_COLUMNS)) {
+  if (!existingFrameColumns.has(column)) {
+    db.exec(`ALTER TABLE frames ADD COLUMN ${column} ${def}`);
+  }
+}
+
 // One-time data migration: the "type" column used to encode a kit-size tier
 // ('handcrafted' = Classic Kit, 'printed' = Compact Kit). It now encodes a
 // teardown-difficulty tier instead ('novice' = main board & battery,

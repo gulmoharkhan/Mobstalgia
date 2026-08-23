@@ -3,7 +3,79 @@
 import { db } from './db.js';
 import { createAdminIfMissing } from './auth.js';
 import { DEFAULT_ADMIN_EMAIL, DEFAULT_ADMIN_PASSWORD } from './config.js';
-import { createFrame, setFrameImages } from './models.js';
+import { createFrame, setFrameImages, setFrameSpecs } from './models.js';
+
+// Shared physical specs for the frame *kit* itself (not the phone) — the
+// product is the same wooden frame + mounting hardware regardless of which
+// device goes inside, so these stay constant apart from size, which follows
+// the rough footprint of what's being mounted.
+const MATERIAL = 'Solid ash wood frame, anti-glare acrylic front, archival mounting board';
+const UNITS = '1 frame kit — enough for one device';
+const SIZE_BY_CATEGORY = {
+  watch: '20 × 20 cm (8 × 8 in)',
+  ipod: '30 × 40 cm (12 × 16 in)',
+  phone: '30 × 40 cm (12 × 16 in)',
+};
+const BOX_CONTENTS = {
+  novice: ['Solid ash wood frame', 'Anti-glare acrylic front panel', 'Archival mounting board with device cut-out', 'Wall-hanging hardware', 'Step-by-step teardown guide'],
+  expert: ['Solid ash wood frame', 'Anti-glare acrylic front panel', 'Archival mounting board with device cut-out', 'Wall-hanging hardware', 'Step-by-step teardown guide', 'Precision screwdriver & spudger set', 'Anti-static wrist strap'],
+};
+
+function specsFor(slug, category, tier, highlights) {
+  return {
+    material: MATERIAL,
+    sizeLabel: SIZE_BY_CATEGORY[category] || SIZE_BY_CATEGORY.phone,
+    unitsLabel: UNITS,
+    boxContents: BOX_CONTENTS[tier] || BOX_CONTENTS.novice,
+    highlights: highlights.map((h, i) => ({ ...h, image: `/img/seed/${slug}-${i + 2}.jpg` })),
+  };
+}
+
+// Two highlights per piece, each paired with one of that device's existing
+// product photos (images 2 and 3 in the seed set) — the specific detail worth
+// slowing down on before you take it apart.
+const SAMPLE_SPECS = {
+  'apple-watch-series-3': [
+    { title: 'A computer smaller than a coin', body: "The S3 chip, Taptic Engine, and battery are all in there — packed into a case you could lose in a coat pocket." },
+    { title: 'A battery bent to fit your wrist', body: 'Instead of a flat cell, the battery is curved to follow the case — a shape most teardown kits never get to show off.' },
+  ],
+  'nokia-n91': [
+    { title: 'A real hard disk, inside a phone', body: 'Long before flash storage took over, the N91 carried a genuine spinning 4GB disk drive in your pocket.' },
+    { title: 'Built for one job: music', body: 'Dedicated media keys and a 3.5mm jack made this the phone you handed to someone just to show off your playlist.' },
+  ],
+  'nokia-n73': [
+    { title: 'The lens that started a rivalry', body: "Carl Zeiss optics on a phone camera was a genuinely big deal in 2006 — this is the module that made it happen." },
+    { title: 'A board built for balance', body: 'Open it up and the camera module, keypad flex, and speaker sit in near-perfect symmetry.' },
+  ],
+  'nokia-n8': [
+    { title: 'Aluminium before it was cool', body: 'A machined unibody shell years before "unibody" became a marketing word every other phone used.' },
+    { title: 'A flash most phones still skip', body: 'A genuine Xenon flash sits behind that 12-megapixel lens — brighter and faster than any LED.' },
+  ],
+  'iphone-5s': [
+    { title: "Where your fingerprint became your password", body: 'The Touch ID sensor and its ribbon cable are the whole reason this build is Expert-tier — get it wrong and the sensor never works again.' },
+    { title: 'The chip that changed phones', body: 'The A7 was the first 64-bit processor in a phone, quietly setting the pace every phone since has followed.' },
+  ],
+  'iphone-4s': [
+    { title: 'The first phone that talked back', body: "Siri launched right here — press and hold, and a phone answered you back for the first time." },
+    { title: 'Glass on both sides', body: 'A glass-and-steel sandwich that opens to reveal one of the most tightly packed boards Apple ever shipped.' },
+  ],
+  'iphone-4': [
+    { title: 'The design Steve Jobs called his best', body: 'Stainless steel band, glass front and back — a shape every phone since has been compared to.' },
+    { title: 'The display that reset expectations', body: "Retina made pixels disappear for the first time — this is the panel that did it." },
+  ],
+  'iphone-3gs': [
+    { title: 'Where the App Store took off', body: 'Faster and smarter than what came before, this is the phone that convinced a generation to switch for good.' },
+    { title: 'A simple board with a big legacy', body: "Underneath the curved plastic shell is a layout so straightforward it's a genuinely approachable first teardown." },
+  ],
+  'ipod-classic-2nd-gen': [
+    { title: '1,000 songs in your pocket', body: 'A click wheel and a real spinning hard drive — the combination that changed how the world carried music.' },
+    { title: 'Mechanical parts you won\'t see again', body: "Its hard drive assembly is larger and more mechanical than anything inside a modern phone — a genuinely striking thing to frame." },
+  ],
+  'iphone-6': [
+    { title: 'The phone that broke sales records', body: 'Bigger screen, thinner body — the iPhone 6 sold in numbers no phone before it had reached.' },
+    { title: "Probably the one in your drawer right now", body: "If any device on this page is sitting in a drawer somewhere, statistically, it's this one." },
+  ],
+};
 
 // Mobstalgia is a DIY frame-kit business: we send a frame, you dismantle your
 // own device and mount it yourself. These ten pieces are the inspiration
@@ -144,6 +216,17 @@ const SAMPLE_FRAMES = [
   },
 ];
 
+const CATEGORY_BY_SLUG = {
+  'apple-watch-series-3': 'watch',
+  'ipod-classic-2nd-gen': 'ipod',
+};
+
+function specsForItem(item) {
+  const category = CATEGORY_BY_SLUG[item.slug] || 'phone';
+  const highlights = SAMPLE_SPECS[item.slug] || [];
+  return specsFor(item.slug, category, item.type, highlights);
+}
+
 export function runSeed() {
   createAdminIfMissing(DEFAULT_ADMIN_EMAIL.toLowerCase(), DEFAULT_ADMIN_PASSWORD);
 
@@ -153,21 +236,25 @@ export function runSeed() {
       const id = createFrame(item);
       const images = [1, 2, 3].map((n) => `/img/seed/${item.slug}-${n}.jpg`);
       setFrameImages(id, images);
+      setFrameSpecs(id, specsForItem(item));
     }
     console.log(`Seeded ${SAMPLE_FRAMES.length} sample frames and admin account (${DEFAULT_ADMIN_EMAIL}).`);
     return;
   }
 
   // Already seeded on a prior boot. SAMPLE_FRAMES is the source of truth for
-  // this sample gallery's copy — keep each row's description and type in
-  // sync with it (by title) on every boot, so copy edits here actually reach
-  // the live site instead of being silently ignored. Deliberately leaves
-  // price/stock/status/featured alone since those may be hand-edited via admin.
+  // this sample gallery's copy — keep each row's description, type, and
+  // product-detail specs in sync with it (by title) on every boot, so copy
+  // edits here actually reach the live site instead of being silently
+  // ignored. Deliberately leaves price/stock/status/featured alone since
+  // those may be hand-edited via admin.
   const syncStmt = db.prepare('UPDATE frames SET description = ?, type = ? WHERE title = ? AND (description != ? OR type != ?)');
   let synced = 0;
   for (const item of SAMPLE_FRAMES) {
     const result = syncStmt.run(item.description, item.type, item.title, item.description, item.type);
     if (result.changes) synced++;
+    const row = db.prepare('SELECT id FROM frames WHERE title = ?').get(item.title);
+    if (row) setFrameSpecs(row.id, specsForItem(item));
   }
   if (synced) console.log(`Synced copy for ${synced} sample frame(s) from seed.js.`);
 }

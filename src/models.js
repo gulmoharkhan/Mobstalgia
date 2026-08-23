@@ -12,6 +12,27 @@ function attachImages(frame) {
   return { ...frame, images };
 }
 
+function parseJsonArray(raw) {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    return [];
+  }
+}
+
+// box_contents/highlights are stored as JSON text on the row — give callers
+// the parsed shape instead of making every view do it.
+function parseSpecs(frame) {
+  if (!frame) return frame;
+  return {
+    ...frame,
+    boxContents: parseJsonArray(frame.box_contents),
+    highlights: parseJsonArray(frame.highlights),
+  };
+}
+
 export function listFrames({ type, brand, status, q, sort = 'newest', featuredOnly = false, availableFirst = false } = {}) {
   const clauses = [];
   const params = [];
@@ -69,7 +90,7 @@ export function listBrands() {
 
 export function getFrameById(id) {
   const frame = db.prepare('SELECT * FROM frames WHERE id = ?').get(id);
-  return attachImages(frame);
+  return parseSpecs(attachImages(frame));
 }
 
 export function getFramesByIds(ids) {
@@ -104,6 +125,15 @@ export function updateFrame(id, data) {
     `UPDATE frames SET title=?, brand=?, phone_model=?, description=?, price=?, type=?, status=?, stock=?, featured=?, updated_at=datetime('now')
      WHERE id=?`
   ).run(data.title, data.brand, data.phoneModel, data.description, data.price, data.type, data.status, data.stock, data.featured ? 1 : 0, id);
+}
+
+// Product-detail spec fields (material/size/units/box contents/highlights)
+// are curated in seed.js rather than the admin UI for now — same pattern as
+// description/type syncing below. This just persists that seed data.
+export function setFrameSpecs(frameId, { material = '', sizeLabel = '', unitsLabel = '', boxContents = [], highlights = [] } = {}) {
+  db.prepare(
+    `UPDATE frames SET material=?, size_label=?, units_label=?, box_contents=?, highlights=? WHERE id=?`
+  ).run(material, sizeLabel, unitsLabel, JSON.stringify(boxContents), JSON.stringify(highlights), frameId);
 }
 
 export function setFrameImages(frameId, orderedUrls) {
