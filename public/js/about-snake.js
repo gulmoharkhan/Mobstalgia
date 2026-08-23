@@ -28,7 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
       { x: 4, y: 5 },
       { x: 3, y: 5 },
     ];
-    dir = { x: 1, y: 0 };
+    // No movement until the player makes their first move — starting the
+    // snake off already sliding toward the wall meant it could die before
+    // someone had a chance to react.
+    dir = { x: 0, y: 0 };
     nextDir = dir;
     score = 0;
     placeFood();
@@ -74,6 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function step() {
     dir = nextDir;
+    if (dir.x === 0 && dir.y === 0) {
+      // Waiting for the player's first direction — hold still instead of
+      // ticking toward a wall with no input.
+      return;
+    }
     const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
 
     const hitWall = head.x < 0 || head.x >= GRID || head.y < 0 || head.y >= GRID;
