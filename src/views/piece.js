@@ -143,13 +143,19 @@ export function renderPiece({ frame, related }) {
       <div class="detail-eyebrow">
         <span>${escapeHtml(frame.brand)}</span>
         <span class="detail-eyebrow-sep">·</span>
-        <span class="detail-kit-tag detail-kit-tag--${frame.type}">${kitLabel}</span>
+        ${
+          tierNote
+            ? `<details class="kit-tag-details">
+                <summary class="detail-kit-tag detail-kit-tag--${frame.type}">${kitLabel}<svg class="kit-tag-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+                <p class="kit-tag-note">${escapeHtml(tierNote)}</p>
+              </details>`
+            : `<span class="detail-kit-tag detail-kit-tag--${frame.type}">${kitLabel}</span>`
+        }
       </div>
       <h1>${escapeHtml(name)}</h1>
       ${tagline ? `<p class="detail-tagline">${escapeHtml(tagline)}</p>` : ''}
       <div class="detail-price">${formatCurrency(frame.price)}</div>
       <p class="detail-desc">${escapeHtml(frame.description)}</p>
-      ${tierNote ? `<div class="detail-tier-note detail-tier-note--${frame.type}"><span class="tier-note-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="10.5" x2="12" y2="16"/><circle cx="12" cy="7.3" r="0.6" fill="currentColor" stroke="none"/></svg></span><p>${escapeHtml(tierNote)}</p></div>` : ''}
       ${specsInlineHtml}
       ${ctaHtml}
       <div class="detail-meta">
