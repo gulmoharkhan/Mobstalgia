@@ -1,7 +1,7 @@
 import { SITE_NAME, SITE_TAGLINE, INSTAGRAM_URL } from '../config.js';
 import { escapeHtml } from '../utils.js';
 
-export function renderLayout({ title, activeNav = '', bodyHtml = '', extraHead = '', flash = null }) {
+export function renderLayout({ title, activeNav = '', bodyHtml = '', extraHead = '', flash = null, customer = null }) {
   const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} — ${SITE_TAGLINE}`;
   const navItem = (href, label, key) =>
     `<a href="${href}" class="nav-link${activeNav === key ? ' nav-link--active' : ''}">${label}</a>`;
@@ -43,6 +43,12 @@ ${extraHead}
       <a href="${INSTAGRAM_URL}" class="icon-link" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(SITE_NAME)} on Instagram" title="Follow us on Instagram">
         <img src="/img/figma2/icon-instagram.png" alt="" width="19" height="19" class="icon-img">
       </a>
+      ${customer
+        ? `<form method="POST" action="/account/logout" class="account-inline">
+             <span class="account-name">Hi, ${escapeHtml(customer.display_name)}</span>
+             <button type="submit" class="link-btn">Log out</button>
+           </form>`
+        : `<a href="/account/login" class="nav-link account-signin">Sign in</a>`}
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
