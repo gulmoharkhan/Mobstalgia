@@ -18,6 +18,7 @@ export async function home(ctx) {
   const whyChooseBlocks = models.getWhyChooseBlocks();
   const html = renderLayout({
     activeNav: 'home',
+    customer: ctx.customer,
     bodyHtml: renderHome({ featured, coverImage, whyChooseBlocks }),
   });
   sendHtml(ctx.res, 200, html);
@@ -33,6 +34,7 @@ export async function shop(ctx) {
   const html = renderLayout({
     title: 'Shop',
     activeNav: 'shop',
+    customer: ctx.customer,
     bodyHtml: renderShop({ frames, brands, query: { q, brand, type, sort, availability } }),
   });
   sendHtml(ctx.res, 200, html);
@@ -42,7 +44,7 @@ export async function piece(ctx) {
   const id = Number(ctx.params.id);
   const frame = models.getFrameById(id);
   if (!frame) {
-    return sendHtml(ctx.res, 404, renderLayout({ title: 'Not found', bodyHtml: '<div class="narrow container"><h1>Piece not found</h1><a href="/shop" class="btn">Back to Shop</a></div>' }));
+    return sendHtml(ctx.res, 404, renderLayout({ title: 'Not found', customer: ctx.customer, bodyHtml: '<div class="narrow container"><h1>Piece not found</h1><a href="/shop" class="btn">Back to Shop</a></div>' }));
   }
   const related = models
     .listFrames({ brand: frame.brand, status: 'available' })
@@ -50,23 +52,24 @@ export async function piece(ctx) {
     .slice(0, 4);
   const html = renderLayout({
     title: frame.title,
+    customer: ctx.customer,
     bodyHtml: renderPiece({ frame, related }),
   });
   sendHtml(ctx.res, 200, html);
 }
 
 export async function cartPage(ctx) {
-  sendHtml(ctx.res, 200, renderLayout({ title: 'Cart', activeNav: 'cart', bodyHtml: renderCart() }));
+  sendHtml(ctx.res, 200, renderLayout({ title: 'Cart', activeNav: 'cart', customer: ctx.customer, bodyHtml: renderCart() }));
 }
 
 export async function checkoutPage(ctx) {
-  sendHtml(ctx.res, 200, renderLayout({ title: 'Checkout', bodyHtml: renderCheckout() }));
+  sendHtml(ctx.res, 200, renderLayout({ title: 'Checkout', customer: ctx.customer, bodyHtml: renderCheckout() }));
 }
 
 export async function orderConfirmPage(ctx) {
   const orderNumber = ctx.query.order;
   const order = orderNumber ? models.getOrderByNumber(orderNumber) : null;
-  sendHtml(ctx.res, 200, renderLayout({ title: 'Order Confirmed', bodyHtml: renderOrderConfirm({ order }) }));
+  sendHtml(ctx.res, 200, renderLayout({ title: 'Order Confirmed', customer: ctx.customer, bodyHtml: renderOrderConfirm({ order }) }));
 }
 
 export async function trackPageGet(ctx) {
@@ -83,13 +86,14 @@ export async function trackPageGet(ctx) {
     renderLayout({
       title: 'Track Order',
       activeNav: 'track',
+      customer: ctx.customer,
       bodyHtml: renderTrack({ order, submitted, prefill: { order: orderNumber, email } }),
     })
   );
 }
 
 export async function feedbackPageGet(ctx) {
-  sendHtml(ctx.res, 200, renderLayout({ title: 'Feedback', activeNav: 'feedback', bodyHtml: renderFeedback({ submitted: false }) }));
+  sendHtml(ctx.res, 200, renderLayout({ title: 'Feedback', activeNav: 'feedback', customer: ctx.customer, bodyHtml: renderFeedback({ submitted: false }) }));
 }
 
 export async function feedbackPagePost(ctx) {
@@ -100,7 +104,7 @@ export async function feedbackPagePost(ctx) {
       message: ctx.form.message,
       rating: ctx.form.rating ? Number(ctx.form.rating) : null,
     });
-    sendHtml(ctx.res, 200, renderLayout({ title: 'Feedback', activeNav: 'feedback', bodyHtml: renderFeedback({ submitted: true }) }));
+    sendHtml(ctx.res, 200, renderLayout({ title: 'Feedback', activeNav: 'feedback', customer: ctx.customer, bodyHtml: renderFeedback({ submitted: true }) }));
   } catch (err) {
     sendHtml(
       ctx.res,
@@ -108,6 +112,7 @@ export async function feedbackPagePost(ctx) {
       renderLayout({
         title: 'Feedback',
         activeNav: 'feedback',
+        customer: ctx.customer,
         flash: { type: 'error', message: err.message },
         bodyHtml: renderFeedback({ submitted: false }),
       })
@@ -116,5 +121,15 @@ export async function feedbackPagePost(ctx) {
 }
 
 export async function aboutPage(ctx) {
-  sendHtml(ctx.res, 200, renderLayout({ title: 'About', activeNav: 'about', bodyHtml: renderAbout() }));
+  const leaderboard = models.getSnakeLeaderboard();
+  sendHtml(
+    ctx.res,
+    200,
+    renderLayout({
+      title: 'About',
+      activeNav: 'about',
+      customer: ctx.customer,
+      bodyHtml: renderAbout({ customer: ctx.customer, leaderboard }),
+    })
+  );
 }
