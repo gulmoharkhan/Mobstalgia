@@ -100,7 +100,9 @@ button { font-family: inherit; cursor: pointer; }
 .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: var(--blue); transform: scaleX(0); transform-origin: right; transition: transform .25s var(--ease-out); }
 .nav-link:hover, .nav-link--active { color: var(--ink); }
 .nav-link:hover::after, .nav-link--active::after { transform: scaleX(1); transform-origin: left; }
-.header-actions { display: flex; align-items: center; gap: 20px; }
+.header-actions { display: flex; align-items: center; gap: 18px; }
+.header-utility { display: flex; align-items: center; gap: 16px; }
+.header-divider { width: 1px; height: 20px; background: var(--line); flex-shrink: 0; }
 .icon-link { display: flex; align-items: center; color: var(--ink); opacity: 0.6; transition: opacity .15s, color .15s; }
 .icon-link:hover { opacity: 1; color: var(--accent); }
 .icon-img { display: block; object-fit: contain; }
@@ -741,8 +743,8 @@ button { font-family: inherit; cursor: pointer; }
 .rating-select input:checked + span { font-weight: 600; }
 
 /* ---------- Footer ---------- */
-.site-footer { position: relative; padding: 48px 0 40px; margin-top: 70px; background: var(--ink); color: #b7b8bf; border-radius: var(--radius) var(--radius) 0 0; }
-.site-footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: var(--radius) var(--radius) 0 0; background: linear-gradient(90deg, transparent, var(--accent-glow), transparent); opacity: 0.6; }
+.site-footer { position: relative; padding: 48px 0 40px; margin-top: 70px; background: var(--ink); color: #b7b8bf; }
+.site-footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-glow), transparent); opacity: 0.6; }
 .site-footer .brand-text { display: block; color: #fff; font-weight: 600; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.01em; font-size: 1.02rem; }
 .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
 .footer-tagline { color: #9a9a97; font-size: 0.85rem; margin: 6px 0 0; }
