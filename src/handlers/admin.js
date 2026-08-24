@@ -110,6 +110,31 @@ function validateFramePayload(body) {
   };
 }
 
+// Product-detail spec fields (material/size/units/box contents/highlights) are
+// optional and edited from the admin form. Highlight images arrive either as an
+// existing image URL (unchanged) or a fresh data: URL from a file upload, which
+// gets saved to disk here just like the main product images.
+function extractSpecsPayload(body) {
+  const material = body.material ? String(body.material).trim() : '';
+  const sizeLabel = body.sizeLabel ? String(body.sizeLabel).trim() : '';
+  const unitsLabel = body.unitsLabel ? String(body.unitsLabel).trim() : '';
+  const boxContents = Array.isArray(body.boxContents)
+    ? body.boxContents.map((s) => String(s).trim()).filter(Boolean)
+    : [];
+  const highlights = (Array.isArray(body.highlights) ? body.highlights : [])
+    .map((h, i) => {
+      const title = h?.title ? String(h.title).trim() : '';
+      const hBody = h?.body ? String(h.body).trim() : '';
+      let image = h?.image ? String(h.image) : '';
+      if (image.startsWith('data:')) {
+        image = saveBase64Image(image, h.filename || `highlight-${i}`);
+      }
+      return { title, body: hBody, image };
+    })
+    .filter((h) => h.title || h.body || h.image);
+  return { material, sizeLabel, unitsLabel, boxContents, highlights };
+}
+
 export async function frameCreateApi(ctx) {
   try {
     const body = ctx.json;
@@ -121,6 +146,8 @@ export async function frameCreateApi(ctx) {
       urls.push(saveBase64Image(img.dataBase64, img.filename));
     }
     if (urls.length) models.setFrameImages(id, urls);
+
+    models.setFrameSpecs(id, extractSpecsPayload(body));
 
     sendJson(ctx.res, 200, { id });
   } catch (err) {
@@ -148,6 +175,8 @@ export async function frameUpdateApi(ctx) {
       orderedUrls.push(saveBase64Image(img.dataBase64, img.filename));
     }
     models.setFrameImages(id, orderedUrls);
+
+    models.setFrameSpecs(id, extractSpecsPayload(body));
 
     sendJson(ctx.res, 200, { id });
   } catch (err) {
