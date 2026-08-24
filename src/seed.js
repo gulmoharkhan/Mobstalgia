@@ -243,18 +243,23 @@ export function runSeed() {
   }
 
   // Already seeded on a prior boot. SAMPLE_FRAMES is the source of truth for
-  // this sample gallery's copy — keep each row's description, type, and
-  // product-detail specs in sync with it (by title) on every boot, so copy
-  // edits here actually reach the live site instead of being silently
-  // ignored. Deliberately leaves price/stock/status/featured alone since
-  // those may be hand-edited via admin.
+  // this sample gallery's copy — keep each row's description and type in
+  // sync with it (by title) on every boot, so copy edits here actually
+  // reach the live site instead of being silently ignored. Deliberately
+  // leaves price/stock/status/featured alone since those may be hand-edited
+  // via admin.
   const syncStmt = db.prepare('UPDATE frames SET description = ?, type = ? WHERE title = ? AND (description != ? OR type != ?)');
   let synced = 0;
   for (const item of SAMPLE_FRAMES) {
     const result = syncStmt.run(item.description, item.type, item.title, item.description, item.type);
     if (result.changes) synced++;
-    const row = db.prepare('SELECT id FROM frames WHERE title = ?').get(item.title);
-    if (row) setFrameSpecs(row.id, specsForItem(item));
+    // Product-detail specs (material/size/units/box contents/highlights) are
+    // now editable from the admin form, so only seed them here the first
+    // time a row has none — never overwrite specs someone has since edited.
+    const row = db.prepare('SELECT id, material, size_label, units_label, box_contents, highlights FROM frames WHERE title = ?').get(item.title);
+    const hasNoSpecs =
+      row && !row.material && !row.size_label && !row.units_label && row.box_contents === '[]' && row.highlights === '[]';
+    if (hasNoSpecs) setFrameSpecs(row.id, specsForItem(item));
   }
   if (synced) console.log(`Synced copy for ${synced} sample frame(s) from seed.js.`);
 }
