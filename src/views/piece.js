@@ -48,9 +48,9 @@ export function renderPiece({ frame, related }) {
   const tierNote = TIER_COPY[frame.type];
   const { name, tagline } = splitTitle(frame.title);
 
+  const amazonUrl = `${AMAZON_SEARCH_BASE}${encodeURIComponent(`${SITE_NAME} ${frame.title}`)}`;
   let ctaHtml;
   if (isAvailable) {
-    const amazonUrl = `${AMAZON_SEARCH_BASE}${encodeURIComponent(`${SITE_NAME} ${frame.title}`)}`;
     ctaHtml = `
       <div class="detail-cta">
         <a class="btn btn--block" href="${amazonUrl}" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
@@ -106,8 +106,46 @@ export function renderPiece({ frame, related }) {
     : '';
 
   const highlights = Array.isArray(frame.highlights) ? frame.highlights : [];
-  const highlightsHtml = highlights.length
-    ? `
+
+  // With 3+ highlights, use the bento grid: highlight 1 becomes the large hero
+  // card (with a buy CTA), 2 & 3 become the top-right pair, and a 4th (if
+  // present) becomes the wide closing card. With fewer than 3, fall back to
+  // a simple alternating list so partially-filled products still look right.
+  let highlightsHtml = '';
+  if (highlights.length >= 3) {
+    const [hero, card1, card2, card3] = highlights;
+    highlightsHtml = `
+    <section class="section container" style="border-top:1px solid var(--line);">
+      <div class="section-head" data-reveal><h2>What made it special</h2></div>
+      <div class="highlight-bento" data-reveal>
+        <div class="bento-card bento-hero">
+          ${hero.image ? `<div class="bento-hero-media"><img src="${hero.image}" alt="" loading="lazy"></div>` : ''}
+          <p class="bento-hero-caption">${escapeHtml(hero.title || '')}${hero.body ? ` ${escapeHtml(hero.body)}` : ''}</p>
+          <a class="bento-hero-cta" href="${isAvailable ? amazonUrl : '/shop'}" ${isAvailable ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+            Explore Collection
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+        <div class="bento-card bento-photo" ${card1.image ? `style="background-image:url('${card1.image}')"` : ''}>
+          <p class="bento-photo-caption"><strong>${escapeHtml(card1.title || '')}</strong> ${escapeHtml(card1.body || '')}</p>
+        </div>
+        <div class="bento-card bento-stat">
+          ${card2.image ? `<div class="bento-stat-media"><img src="${card2.image}" alt="" loading="lazy"></div>` : ''}
+          <div class="bento-stat-number">${escapeHtml(card2.title || '')}</div>
+          <p class="bento-stat-caption">${escapeHtml(card2.body || '')}</p>
+        </div>
+        ${
+          card3
+            ? `<div class="bento-card bento-wide">
+                <p class="bento-wide-caption"><strong>${escapeHtml(card3.title || '')}</strong> ${escapeHtml(card3.body || '')}</p>
+                ${card3.image ? `<div class="bento-wide-media"><img src="${card3.image}" alt="" loading="lazy"></div>` : ''}
+              </div>`
+            : ''
+        }
+      </div>
+    </section>`;
+  } else if (highlights.length) {
+    highlightsHtml = `
     <section class="section container" style="border-top:1px solid var(--line);">
       <div class="section-head" data-reveal><h2>What made it special</h2></div>
       <div class="highlight-list">
@@ -126,8 +164,8 @@ export function renderPiece({ frame, related }) {
           )
           .join('')}
       </div>
-    </section>`
-    : '';
+    </section>`;
+  }
 
   return `
   <div class="container product-detail">
