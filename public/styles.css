@@ -472,97 +472,67 @@ button { font-family: inherit; cursor: pointer; }
   .highlight-block--reverse .highlight-media, .highlight-block--reverse .highlight-copy { order: initial; }
 }
 
-/* "What made it special" bento grid — used when a product has 3+ highlights */
+/* "What made it special" bento grid — used when a product has 3+ highlights.
+   Matches the shared Figma reference (node 160:4660): a 3-equal-column grid,
+   flat #f5f6f8 cards with square corners, a large hero card on the left
+   (product photo on top, title/body below), two stacked small cards top
+   right (title/body top-left, photo peeking from the bottom-right corner),
+   and a wide card along the bottom (title/body left, photo peeking right). */
 .highlight-bento {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
-    "hero photo stat"
+    "hero card1 card2"
     "hero wide wide";
-  gap: 20px;
-  min-height: 560px;
+  gap: 12px;
 }
 .bento-card {
   position: relative;
-  border-radius: var(--radius);
   overflow: hidden;
-  background: var(--paper-soft);
+  background: #f5f6f8;
   display: flex;
   flex-direction: column;
 }
+.bento-card h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.5rem; line-height: 1.25; color: var(--ink); margin: 0 0 8px; }
+.bento-card p { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+.bento-card img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
-.bento-hero { grid-area: hero; padding: 28px; justify-content: flex-end; color: #fff; min-height: 400px; }
-.bento-hero-media { position: absolute; inset: 0; z-index: 0; }
-.bento-hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.bento-hero::after {
-  content: '';
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%);
+/* Hero: image fills the top of the card, text sits below it */
+.bento-hero { grid-area: hero; min-height: 452px; }
+.bento-hero-media { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.bento-hero-media img {
+  position: absolute; top: 50%; right: 8%; width: 46%; height: auto; max-height: 88%;
+  transform: translateY(-50%) rotate(-28deg);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
 }
-.bento-hero-caption, .bento-hero-cta { position: relative; z-index: 2; }
-.bento-hero-caption { font-size: 1rem; line-height: 1.55; margin: 0 0 18px; max-width: 34ch; }
-.bento-hero-cta {
-  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
-  background: #fff; color: var(--ink); padding: 11px 20px; border-radius: var(--radius-full);
-  font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: transform .15s var(--ease-out);
-}
-.bento-hero-cta:hover { transform: translateY(-1px); }
+.bento-hero-text { padding: 24px 28px 28px; }
 
-.bento-photo {
-  grid-area: photo;
-  min-height: 190px;
-  background-size: cover;
-  background-position: center;
-  justify-content: flex-end;
-  padding: 20px;
-  color: #fff;
-}
-.bento-photo::after {
-  content: '';
-  position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.6) 100%);
-}
-.bento-photo-caption { position: relative; z-index: 1; font-size: 0.85rem; line-height: 1.5; margin: 0; }
-.bento-photo-caption strong { display: block; font-weight: 600; margin-bottom: 2px; }
+/* Small top-right pair: text pinned top-left, photo peeking out the bottom-right corner */
+.bento-small { min-height: 220px; padding: 24px 28px; justify-content: flex-start; }
+.bento-small h3, .bento-small p { max-width: 78%; }
+.bento-small--1 { grid-area: card1; }
+.bento-small--2 { grid-area: card2; }
+.bento-small-media { position: absolute; bottom: -12%; right: -6%; width: 38%; }
+.bento-small-media img { transform: rotate(-28deg); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.22)); }
 
-.bento-stat {
-  grid-area: stat;
-  padding: 20px;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 190px;
-}
-.bento-stat-media { width: 40px; height: 40px; margin-bottom: 10px; }
-.bento-stat-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.bento-stat-number {
-  font-family: var(--font-serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1; margin-bottom: 8px;
-}
-.bento-stat-caption { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; margin: 0; }
-
-.bento-wide {
-  grid-area: wide;
-  flex-direction: row;
-  align-items: center;
-  gap: 24px;
-  padding: 24px 28px;
-  min-height: 150px;
-}
-.bento-wide-caption { flex: 1; font-size: 0.95rem; line-height: 1.6; margin: 0; }
-.bento-wide-caption strong { display: block; font-weight: 600; margin-bottom: 4px; }
-.bento-wide-media { width: 120px; height: 100px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden; }
-.bento-wide-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Wide bottom card: text on the left, photo peeking out on the right */
+.bento-wide { grid-area: wide; flex-direction: row; align-items: flex-start; min-height: 220px; padding: 24px 28px; }
+.bento-wide-text { flex: 1; max-width: 56%; padding-right: 16px; }
+.bento-wide-media { position: absolute; top: 50%; right: 4%; width: 22%; }
+.bento-wide-media img { transform: translateY(-50%) rotate(-28deg); position: static; filter: drop-shadow(0 4px 9px rgba(0,0,0,0.22)); }
+.bento-wide .bento-wide-media { transform: translateY(-50%); }
 
 @media (max-width: 900px) {
   .highlight-bento {
     grid-template-columns: 1fr;
-    grid-template-areas: "hero" "photo" "stat" "wide";
-    min-height: 0;
+    grid-template-areas: "hero" "card1" "card2" "wide";
   }
-  .bento-hero { min-height: 320px; }
-  .bento-wide { flex-direction: column; align-items: flex-start; }
-  .bento-wide-media { width: 100%; height: 160px; }
+  .bento-hero { min-height: 340px; }
+  .bento-small { grid-area: unset; }
+  .bento-wide { flex-direction: column; }
+  .bento-wide-text { max-width: 100%; padding-right: 0; margin-bottom: 16px; }
+  .bento-wide-media { position: relative; top: auto; right: auto; width: 140px; align-self: flex-end; }
+  .bento-wide-media img { transform: rotate(-28deg); }
 }
 
 .detail-cta { margin: 28px 0 24px; }
