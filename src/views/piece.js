@@ -107,10 +107,13 @@ export function renderPiece({ frame, related }) {
 
   const highlights = Array.isArray(frame.highlights) ? frame.highlights : [];
 
-  // With 3+ highlights, use the bento grid: highlight 1 becomes the large hero
-  // card (with a buy CTA), 2 & 3 become the top-right pair, and a 4th (if
-  // present) becomes the wide closing card. With fewer than 3, fall back to
-  // a simple alternating list so partially-filled products still look right.
+  // With 3+ highlights, use the bento grid (matches the shared Figma reference,
+  // node 160:4660): highlight 1 becomes the large hero card (photo on top,
+  // text below), 2 & 3 become the top-right pair (text top-left, photo
+  // peeking from the bottom-right corner), and a 4th (if present) becomes the
+  // wide closing card (text left, photo peeking right). With fewer than 3,
+  // fall back to a simple alternating list so partially-filled products
+  // still look right.
   let highlightsHtml = '';
   if (highlights.length >= 3) {
     const [hero, card1, card2, card3] = highlights;
@@ -120,24 +123,28 @@ export function renderPiece({ frame, related }) {
       <div class="highlight-bento" data-reveal>
         <div class="bento-card bento-hero">
           ${hero.image ? `<div class="bento-hero-media"><img src="${hero.image}" alt="" loading="lazy"></div>` : ''}
-          <p class="bento-hero-caption">${escapeHtml(hero.title || '')}${hero.body ? ` ${escapeHtml(hero.body)}` : ''}</p>
-          <a class="bento-hero-cta" href="${isAvailable ? amazonUrl : '/shop'}" ${isAvailable ? 'target="_blank" rel="noopener noreferrer"' : ''}>
-            Explore Collection
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
+          <div class="bento-hero-text">
+            <h3>${escapeHtml(hero.title || '')}</h3>
+            <p>${escapeHtml(hero.body || '')}</p>
+          </div>
         </div>
-        <div class="bento-card bento-photo" ${card1.image ? `style="background-image:url('${card1.image}')"` : ''}>
-          <p class="bento-photo-caption"><strong>${escapeHtml(card1.title || '')}</strong> ${escapeHtml(card1.body || '')}</p>
+        <div class="bento-card bento-small bento-small--1">
+          <h3>${escapeHtml(card1.title || '')}</h3>
+          <p>${escapeHtml(card1.body || '')}</p>
+          ${card1.image ? `<div class="bento-small-media"><img src="${card1.image}" alt="" loading="lazy"></div>` : ''}
         </div>
-        <div class="bento-card bento-stat">
-          ${card2.image ? `<div class="bento-stat-media"><img src="${card2.image}" alt="" loading="lazy"></div>` : ''}
-          <div class="bento-stat-number">${escapeHtml(card2.title || '')}</div>
-          <p class="bento-stat-caption">${escapeHtml(card2.body || '')}</p>
+        <div class="bento-card bento-small bento-small--2">
+          <h3>${escapeHtml(card2.title || '')}</h3>
+          <p>${escapeHtml(card2.body || '')}</p>
+          ${card2.image ? `<div class="bento-small-media"><img src="${card2.image}" alt="" loading="lazy"></div>` : ''}
         </div>
         ${
           card3
             ? `<div class="bento-card bento-wide">
-                <p class="bento-wide-caption"><strong>${escapeHtml(card3.title || '')}</strong> ${escapeHtml(card3.body || '')}</p>
+                <div class="bento-wide-text">
+                  <h3>${escapeHtml(card3.title || '')}</h3>
+                  <p>${escapeHtml(card3.body || '')}</p>
+                </div>
                 ${card3.image ? `<div class="bento-wide-media"><img src="${card3.image}" alt="" loading="lazy"></div>` : ''}
               </div>`
             : ''
