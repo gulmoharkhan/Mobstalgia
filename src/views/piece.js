@@ -185,9 +185,8 @@ export function renderPiece({ frame, related }) {
       <div class="gallery-thumbs">${thumbs}</div>
     </div>
     <div>
-      <div class="detail-eyebrow">
-        <span>${escapeHtml(frame.brand)}</span>
-        <span class="detail-eyebrow-sep">·</span>
+      <div class="detail-title-row">
+        <h1>${escapeHtml(name)}</h1>
         ${
           tierNote
             ? `<details class="kit-tag-details">
@@ -197,7 +196,6 @@ export function renderPiece({ frame, related }) {
             : `<span class="detail-kit-tag detail-kit-tag--${frame.type}">${kitLabel}</span>`
         }
       </div>
-      <h1>${escapeHtml(name)}</h1>
       ${tagline ? `<p class="detail-tagline">${escapeHtml(tagline)}</p>` : ''}
       <div class="detail-price">${formatCurrency(frame.price)}</div>
       <p class="detail-desc">${escapeHtml(frame.description)}</p>
