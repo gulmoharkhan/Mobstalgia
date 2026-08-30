@@ -69,6 +69,12 @@ router.get('/admin/settings', admin.settingsPage);
 router.post('/admin/settings/password', admin.settingsPasswordPost);
 router.post('/admin/api/settings/cover-image', admin.settingsCoverImageApi);
 router.post('/admin/api/settings/why-choose-image', admin.settingsWhyChooseImageApi);
+router.get('/admin/walls', admin.wallsListPage);
+router.get('/admin/walls/new', admin.wallNewPage);
+router.get('/admin/walls/:id/edit', admin.wallEditPage);
+router.post('/admin/api/walls', admin.wallCreateApi);
+router.post('/admin/api/walls/:id', admin.wallUpdateApi);
+router.post('/admin/walls/:id/delete', admin.wallDeletePost);
 
 const PROTECTED_PREFIX = '/admin';
 const PUBLIC_ADMIN_PATHS = new Set(['/admin/login']);
