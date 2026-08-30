@@ -327,6 +327,113 @@ export function setWhyChooseBlockImage(index, url) {
   return blocks;
 }
 
+/* ---------------------------- Wall compositions ---------------------------- */
+
+// The homepage's "wall carousel" shows a handful of room-photo backgrounds with
+// up to 4 existing frames composited on top (see admin/walls). Compositions are
+// stored the same way as why_choose_blocks: one JSON blob under site_settings,
+// keyed by a stable string id (not array index) so deletes never shift ids out
+// from under an in-progress edit.
+//
+// If nothing has been saved yet (or the saved data references frames that no
+// longer exist), we build a default straight from whatever frames are actually
+// in the database right now — so the carousel always shows real, working
+// pieces even right after a fresh seed or a data reset.
+const WALL_BACKGROUNDS = [
+  'https://images.pexels.com/photos/6970077/pexels-photo-6970077.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/5824815/pexels-photo-5824815.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/28744513/pexels-photo-28744513.jpeg?auto=compress&cs=tinysrgb&w=1600',
+];
+
+const WALL_PLACEMENT_SETS = [
+  [
+    { x: 12, y: 24, width: 15, rotation: -3 },
+    { x: 33, y: 12, width: 13, rotation: 2 },
+    { x: 53, y: 30, width: 16, rotation: -1 },
+    { x: 76, y: 16, width: 14, rotation: 3 },
+  ],
+  [
+    { x: 15, y: 32, width: 14, rotation: 2 },
+    { x: 38, y: 10, width: 16, rotation: -2 },
+    { x: 60, y: 26, width: 13, rotation: 1 },
+    { x: 80, y: 14, width: 15, rotation: -3 },
+  ],
+  [
+    { x: 10, y: 16, width: 16, rotation: 1 },
+    { x: 34, y: 34, width: 14, rotation: -2 },
+    { x: 56, y: 14, width: 15, rotation: 2 },
+    { x: 78, y: 30, width: 13, rotation: -1 },
+  ],
+];
+
+function buildDefaultWallCompositions() {
+  const ids = db.prepare('SELECT id FROM frames ORDER BY id ASC').all().map((r) => r.id);
+  if (!ids.length) return [];
+  return WALL_BACKGROUNDS.map((background, wi) => ({
+    id: `wall-${wi + 1}`,
+    background,
+    frames: WALL_PLACEMENT_SETS[wi].map((p, fi) => ({
+      frameId: ids[(wi * 4 + fi) % ids.length],
+      ...p,
+      z: fi + 1,
+    })),
+  }));
+}
+
+export function getWallCompositions() {
+  const raw = getSetting('wall_compositions', null);
+  if (raw) {
+    try {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    } catch (err) {
+      /* fall through to default */
+    }
+  }
+  return buildDefaultWallCompositions();
+}
+
+export function setWallCompositions(compositions) {
+  setSetting('wall_compositions', JSON.stringify(compositions));
+}
+
+function sanitizeWallFrames(frames) {
+  return (Array.isArray(frames) ? frames : [])
+    .map((f) => ({
+      frameId: Number(f.frameId),
+      x: Number(f.x) || 0,
+      y: Number(f.y) || 0,
+      width: Number(f.width) || 15,
+      rotation: Number(f.rotation) || 0,
+      z: Number(f.z) || 1,
+    }))
+    .filter((f) => Number.isInteger(f.frameId))
+    .slice(0, 4);
+}
+
+export function addWallComposition({ background, frames }) {
+  const list = getWallCompositions().map((w) => ({ ...w }));
+  const id = `wall-${Date.now().toString(36)}`;
+  list.push({ id, background: background || '', frames: sanitizeWallFrames(frames) });
+  setWallCompositions(list);
+  return id;
+}
+
+export function updateWallComposition(id, { background, frames }) {
+  const list = getWallCompositions().map((w) =>
+    w.id === id ? { ...w, background: background || '', frames: sanitizeWallFrames(frames) } : w
+  );
+  setWallCompositions(list);
+}
+
+export function deleteWallComposition(id) {
+  setWallCompositions(getWallCompositions().filter((w) => w.id !== id));
+}
+
+export function getWallCompositionById(id) {
+  return getWallCompositions().find((w) => w.id === id) || null;
+}
+
 /* ---------------------------- Snake leaderboard ---------------------------- */
 
 export function recordSnakeScore(customerId, score) {
