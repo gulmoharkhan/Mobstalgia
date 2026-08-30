@@ -223,6 +223,144 @@ button { font-family: inherit; cursor: pointer; }
   .home-hero-inner { padding: 44px 24px 48px; }
 }
 
+/* ---------- Home: wall carousel (replaces the hero) ---------- */
+/* A swipeable set of "wall" photos, each with up to 4 existing frame images
+   composited on top (positioned/managed from admin). Frames get a heavy
+   drop-shadow so they read as physically hanging on the wall rather than
+   pasted flat onto the photo. */
+.wall-carousel-section { padding: 56px 0 72px; background: #fff; }
+.wall-carousel-head { text-align: center; max-width: 640px; margin: 0 auto 36px; }
+.wall-carousel-head h1 {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: clamp(2.1rem, 4.4vw, 3.2rem); line-height: 1.15; margin: 0 0 16px; text-wrap: balance;
+}
+.wall-carousel-head h1 .line-ink { color: var(--ink); display: block; }
+.wall-carousel-head h1 .line-accent { color: var(--blue); display: block; }
+.wall-carousel-sub { color: #6f6f6f; font-size: 1.05rem; line-height: 1.55; margin: 0; }
+.wall-carousel-cta {
+  display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 40px;
+}
+.wall-carousel { position: relative; background: #111; overflow: hidden; }
+.wall-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.wall-track::-webkit-scrollbar { display: none; }
+.wall-slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  aspect-ratio: 16 / 10;
+  min-height: 460px;
+  max-height: 82vh;
+  overflow: hidden;
+}
+.wall-slide-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wall-slide-shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(100deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 32%, rgba(0,0,0,0) 55%),
+    linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 22%);
+}
+.wall-slide-frames { position: absolute; inset: 0; }
+.wall-frame {
+  position: absolute;
+  display: block;
+  transform-origin: center;
+  filter: drop-shadow(0 20px 26px rgba(0,0,0,0.5)) drop-shadow(0 4px 8px rgba(0,0,0,0.35));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.wall-frame img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.wall-frame:hover {
+  transform: scale(1.05) !important;
+  filter: drop-shadow(0 26px 32px rgba(0,0,0,0.55)) drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+  z-index: 60 !important;
+}
+.wall-frame-tag {
+  position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%);
+  background: rgba(255,255,255,0.95); color: #111;
+  font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600;
+  padding: 5px 11px; border-radius: var(--radius-full); white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s ease, bottom 0.2s ease;
+}
+.wall-frame:hover .wall-frame-tag { opacity: 1; bottom: -24px; }
+
+.wall-controls {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  z-index: 6; display: flex; align-items: center; gap: 14px;
+}
+.wall-dots { display: flex; gap: 8px; }
+.wall-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4);
+  border: none; padding: 0; cursor: pointer; transition: background 0.2s, transform 0.2s;
+}
+.wall-dot.active { background: #fff; transform: scale(1.35); }
+.wall-arrow {
+  width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.4); color: #fff; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; backdrop-filter: blur(4px); flex-shrink: 0;
+}
+.wall-arrow:hover { background: rgba(255,255,255,0.3); }
+
+@media (max-width: 720px) {
+  .wall-carousel-section { padding: 40px 0 52px; }
+  .wall-slide { min-height: 380px; aspect-ratio: 3 / 4; }
+  .wall-frame-tag { display: none; }
+}
+
+/* ---------- Admin: wall composition editor ---------- */
+.wall-editor-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr); gap: 24px; align-items: start; }
+.wall-editor-canvas-wrap { min-width: 0; }
+.wall-editor-canvas {
+  position: relative; width: 100%; aspect-ratio: 16 / 10; background: #222 center/cover no-repeat;
+  border-radius: 8px; overflow: hidden; user-select: none; border: 1px solid var(--line);
+}
+.wall-editor-empty {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7); font-size: 0.85rem; text-align: center; padding: 20px; pointer-events: none;
+}
+.wall-editor-hint { color: #8a8a8a; font-size: 0.82rem; margin: 10px 0 0; }
+.wall-placement {
+  position: absolute; cursor: move; touch-action: none;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.45));
+}
+.wall-placement img { display: block; width: 100%; height: auto; pointer-events: none; border-radius: 2px; }
+.wall-placement.selected { outline: 2px dashed #fff; outline-offset: 4px; }
+.wall-placement-remove {
+  position: absolute; top: -10px; right: -10px; width: 22px; height: 22px; border-radius: 50%;
+  background: #d64545; color: #fff; border: 2px solid #fff; font-size: 13px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5;
+}
+.wall-placement-resize {
+  position: absolute; right: -8px; bottom: -8px; width: 16px; height: 16px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--ink); cursor: nwse-resize; z-index: 5;
+}
+.wall-placement-rotate {
+  position: absolute; left: 50%; top: -26px; transform: translateX(-50%); width: 14px; height: 14px;
+  border-radius: 50%; background: #fff; border: 2px solid var(--ink); cursor: grab; z-index: 5;
+}
+.wall-palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; max-height: 320px; overflow-y: auto; padding: 4px; }
+.wall-palette-item {
+  cursor: grab; border: 1px solid var(--line); border-radius: 6px; padding: 6px; text-align: center;
+  background: #fafafa;
+}
+.wall-palette-item.disabled { opacity: 0.35; cursor: not-allowed; }
+.wall-palette-item img { width: 100%; aspect-ratio: 1/1; object-fit: contain; display: block; margin-bottom: 4px; background: #f0f0f0; }
+.wall-palette-item span { font-size: 0.7rem; color: var(--ink-soft); display: block; line-height: 1.2; }
+.wall-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+.wall-list-card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+.wall-list-card-media { position: relative; aspect-ratio: 16/10; background: #eee; }
+.wall-list-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wall-list-card-body { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.wall-list-card-body span { font-size: 0.82rem; color: var(--ink-soft); }
+.wall-list-card-actions { display: flex; gap: 8px; }
+@media (max-width: 860px) {
+  .wall-editor-layout { grid-template-columns: 1fr; }
+}
+
 /* ---------- Home: featured strip (single row) ---------- */
 .masonry-scroll { margin: 0 -28px; padding: 10px 28px 26px; overflow-x: auto; overflow-y: visible; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
 .masonry-scroll-track { display: flex; gap: 24px; align-items: stretch; }
