@@ -16,12 +16,29 @@ export async function home(ctx) {
   if (featured.length === 0) featured = models.listFrames({ sort: 'newest', availableFirst: true }).slice(0, 8);
   const coverImage = models.getSetting('cover_image_url', '/img/figma2/hero-bg.jpg');
   const whyChooseBlocks = models.getWhyChooseBlocks();
+  const wallCompositions = resolveWallCompositions();
   const html = renderLayout({
     activeNav: 'home',
     customer: ctx.customer,
-    bodyHtml: renderHome({ featured, coverImage, whyChooseBlocks }),
+    bodyHtml: renderHome({ featured, coverImage, whyChooseBlocks, wallCompositions }),
   });
   sendHtml(ctx.res, 200, html);
+}
+
+// The wall carousel is stored as bare {frameId, x, y, width, rotation, z}
+// placements — attach the actual frame (title + cover image) here so the view
+// never has to know about the storage shape, and silently drop any placement
+// whose frame has since been deleted.
+function resolveWallCompositions() {
+  const raw = models.getWallCompositions();
+  const frameIds = [...new Set(raw.flatMap((w) => w.frames.map((f) => f.frameId)))];
+  const framesById = new Map(models.getFramesByIds(frameIds).map((f) => [f.id, f]));
+  return raw
+    .map((w) => ({
+      ...w,
+      frames: w.frames.map((p) => (framesById.has(p.frameId) ? { ...p, frame: framesById.get(p.frameId) } : null)).filter(Boolean),
+    }))
+    .filter((w) => w.background && w.frames.length);
 }
 
 export async function shop(ctx) {

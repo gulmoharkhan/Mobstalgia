@@ -7,6 +7,8 @@ import { renderOrdersList } from '../views/admin/ordersList.js';
 import { renderOrderDetail } from '../views/admin/orderDetail.js';
 import { renderFeedbackList } from '../views/admin/feedbackList.js';
 import { renderSettings } from '../views/admin/settings.js';
+import { renderWallsList } from '../views/admin/wallsList.js';
+import { renderWallEditor } from '../views/admin/wallEditor.js';
 import { sendHtml, sendJson, redirect, rupeesToPaise } from '../utils.js';
 import { findAdminByEmail, verifyPassword, createSession, destroySession, hashPassword } from '../auth.js';
 import { SESSION_COOKIE, ORDER_STATUSES, PAYMENT_STATUSES, FRAME_TYPES, FRAME_STATUSES } from '../config.js';
@@ -319,4 +321,86 @@ export async function settingsPasswordPost(ctx) {
       bodyHtml: renderSettings({ adminEmail: ctx.admin.email, success: 'Password updated successfully.' }),
     })
   );
+}
+
+/* ---------------------------- Homepage walls ---------------------------- */
+
+export async function wallsListPage(ctx) {
+  const walls = models.getWallCompositions();
+  sendHtml(
+    ctx.res,
+    200,
+    renderAdminLayout({ title: 'Walls', activeNav: 'walls', adminEmail: ctx.admin.email, bodyHtml: renderWallsList({ walls }) })
+  );
+}
+
+export async function wallNewPage(ctx) {
+  const allFrames = models.listFrames();
+  sendHtml(
+    ctx.res,
+    200,
+    renderAdminLayout({ title: 'Add Wall', activeNav: 'walls', adminEmail: ctx.admin.email, bodyHtml: renderWallEditor({ wall: null, allFrames }) })
+  );
+}
+
+export async function wallEditPage(ctx) {
+  const wall = models.getWallCompositionById(ctx.params.id);
+  if (!wall) return sendHtml(ctx.res, 404, 'Wall not found');
+  const frameIds = wall.frames.map((f) => f.frameId);
+  const framesById = new Map(models.getFramesByIds(frameIds).map((f) => [f.id, f]));
+  const wallWithFrames = { ...wall, frames: wall.frames.map((p) => ({ ...p, frame: framesById.get(p.frameId) || null })) };
+  const allFrames = models.listFrames();
+  sendHtml(
+    ctx.res,
+    200,
+    renderAdminLayout({
+      title: 'Edit Wall',
+      activeNav: 'walls',
+      adminEmail: ctx.admin.email,
+      bodyHtml: renderWallEditor({ wall: wallWithFrames, allFrames }),
+    })
+  );
+}
+
+// Background arrives either as a plain URL (stock photo, typed/pasted) or a
+// fresh data: URL from a file upload, which gets saved to disk the same way
+// frame/highlight images are.
+function extractWallPayload(body) {
+  let background = body?.background ? String(body.background).trim() : '';
+  if (background.startsWith('data:')) {
+    background = saveBase64Image(background, body.backgroundFilename || 'wall');
+  }
+  const frames = (Array.isArray(body?.frames) ? body.frames : []).slice(0, 4);
+  return { background, frames };
+}
+
+export async function wallCreateApi(ctx) {
+  try {
+    const payload = extractWallPayload(ctx.json);
+    if (!payload.background) throw new Error('Add a background photo first.');
+    if (!payload.frames.length) throw new Error('Place at least one frame on the wall.');
+    const id = models.addWallComposition(payload);
+    sendJson(ctx.res, 200, { id });
+  } catch (err) {
+    sendJson(ctx.res, 400, { error: err.message });
+  }
+}
+
+export async function wallUpdateApi(ctx) {
+  try {
+    const id = ctx.params.id;
+    if (!models.getWallCompositionById(id)) throw new Error('Wall not found.');
+    const payload = extractWallPayload(ctx.json);
+    if (!payload.background) throw new Error('Add a background photo first.');
+    if (!payload.frames.length) throw new Error('Place at least one frame on the wall.');
+    models.updateWallComposition(id, payload);
+    sendJson(ctx.res, 200, { id });
+  } catch (err) {
+    sendJson(ctx.res, 400, { error: err.message });
+  }
+}
+
+export async function wallDeletePost(ctx) {
+  models.deleteWallComposition(ctx.params.id);
+  redirect(ctx.res, '/admin/walls');
 }
