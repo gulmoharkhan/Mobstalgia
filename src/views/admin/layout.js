@@ -20,6 +20,7 @@ export function renderAdminLayout({ title, activeNav = '', bodyHtml = '', adminE
     <nav class="admin-nav">
       ${item('/admin', 'Dashboard', 'dashboard')}
       ${item('/admin/frames', 'Frames', 'frames')}
+      ${item('/admin/walls', 'Walls', 'walls')}
       ${item('/admin/orders', 'Orders', 'orders')}
       ${item('/admin/feedback', 'Feedback', 'feedback')}
       ${item('/admin/settings', 'Settings', 'settings')}
